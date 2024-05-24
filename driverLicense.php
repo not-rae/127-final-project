@@ -83,6 +83,7 @@
     <div class="add-record-container">
         <button class="add-record-button" onclick="window.location.href='addRecord.php'">Add Record</button>
     </div>
+    
     <div class="button-container">
         <button onclick="window.location.href='index.php'">Back to Menu</button>
     </div>

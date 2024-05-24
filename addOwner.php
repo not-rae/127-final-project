@@ -85,7 +85,7 @@
     </style>
 </head>
 <body>
-    <h1>Vehicle Form</h1>
+    <h1>Owner Form</h1>
     <div class="add-record-container">
         <form class="add-record-form" action="addRecord.php" method="post">
             <label for="name">Name:</label>

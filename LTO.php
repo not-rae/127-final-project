@@ -78,6 +78,7 @@
             <th>Actions</th>
         </tr>
     </table>
+    
     <div class="button-container">
         <button onclick="window.location.href='index.php'">Back to Menu</button>
     </div>

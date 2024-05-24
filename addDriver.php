@@ -18,6 +18,7 @@
         }
         .navbar {
             width: 100%;
+            background-color: #333;
             display: flex;
             justify-content: center;
         }
@@ -29,24 +30,6 @@
             color: white;
             margin: 0 5px;
             transition: background-color 0.3s, color 0.3s;
-            border-radius: 30px;
-            margin-top: 15px;
-            margin-bottom: 20px;
-        }
-        .navbar a.owner {
-            background-color: #9C27B0; 
-        }
-        .navbar a.driver {
-            background-color: #FF5722; 
-        }
-        .navbar a.vehicle {
-            background-color: #4CAF50; 
-        }
-        .navbar a.driver_license {
-            background-color: #2196F3; 
-        }
-        .navbar a.history {
-            background-color: #FF9800; 
         }
         .navbar a:hover,
         .navbar a.active {
@@ -123,11 +106,12 @@
 </head>
 <body>
     <div class="navbar">
-        <a href="addVehicle.php" class="vehicle">Vehicle Form</a>
-        <a href="addOwner.php" class="owner">Owner Form</a>
-        <a href="addDriver.php" class="driver">Driver Form</a>
-        <a href="driver_license.php" class="driver_license">Driver License Form</a>
-        <a href="history.php" class="history">History Form</a>
+        <a href="addOwner.php">Forms: </a>
+        <a href="addOwner.php">Owner</a>
+        <a href="addDriver.php">Driver</a>
+        <a href="addVehicle.php">Vehicle</a>
+        <a href="addDriverLicense.php">Driver License</a>
+        <a href="addHistory.php">History</a>
     </div>
 
     <h1>Vehicle Form</h1>
@@ -200,7 +184,7 @@
         const menuLength = menuItem.length;
         for (let i = 0; i < menuLength; i++) {
             if (menuItem[i].href === currentLocation) {
-                menuItem[i].className += ' active';
+                menuItem[i].className = 'active';
             }
         }
     </script>

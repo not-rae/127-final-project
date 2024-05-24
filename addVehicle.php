@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>DriVerify: Add Record</title>
+    
     <style>
         body {
             font-family: Arial, sans-serif;

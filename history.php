@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>DriVerify Records: History</title>
+    
     <style>
         body {
             font-family: Arial, sans-serif;

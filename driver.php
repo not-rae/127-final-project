@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>DriVerify Records: Driver</title>
+    
     <style>
         body {
             font-family: Arial, sans-serif;

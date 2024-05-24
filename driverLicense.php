@@ -2,7 +2,6 @@
 <html>
 <head>
     <title>DriVerify Records: Driver License</title>
-    
     <style>
         body {
             font-family: Arial, sans-serif;

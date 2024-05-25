@@ -14,9 +14,15 @@
             height: 100vh;
             margin: 0;
             background-color: #f0f0f0;
+            background-image: url("pic.jpg");
+            background-repeat: no-repeat;
+            background-size: cover; 
+            background-position: center; 
+            max-width: 100%;
         }
         h1 {
             margin-bottom: 20px;
+            font-size:70px;
         }
         .button-container {
             display: flex;

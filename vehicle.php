@@ -81,6 +81,40 @@
             <th>Fuel</th>
             <th>Actions</th>
         </tr>
+        <?php
+        include 'DBConnector.php';
+
+            $sqlVehicle ="SELECT * FROM Vehicle";
+            $resultVehicle = $conn->query($sqlVehicle);
+
+
+            if($resultVehicle->num_rows > 0){
+                    while($rowVehicle = $resultVehicle->fetch_assoc()) {
+
+                echo 
+
+                    "<tr>". 
+                    "<td align = 'center' >".$rowVehicle["plateNumber"]."</td>". 
+                    "<td align = 'center' >".$rowVehicle["registrationDate"]."</td>". 
+                    "<td align = 'center' >".$rowVehicle["expirationDate"]."</td>". 
+                    "<td align = 'center' >".$rowVehicle["ownerNameV"]."</td>".
+                    "<td align = 'center' >".$rowVehicle["driverNameV"]."</td>". 
+                    "<td align = 'center' >".$rowVehicle["model"]."</td>". 
+                    "<td align = 'center' >".$rowVehicle["color"]."</td>".
+                    "<td align = 'center' >".$rowVehicle["manufacturer"]."</td>".  
+                    "<td align = 'center' >".$rowVehicle["yearProduced"]."</td>".
+                    "<td align = 'center' >".$rowVehicle["fuel"]."</td>". 
+                    "</tr>";
+
+                    
+            }
+        }
+
+        else {
+            echo "0 results";
+
+        }
+    ?>
     </table>
     <div class="add-record-container">
         <button class="add-record-button" onclick="window.location.href='addVehicle.php'">Add Record</button>

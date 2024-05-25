@@ -85,20 +85,20 @@
     </style>
 </head>
 <body>
-    <h1>Owner Form</h1>
+    <h1>Driver Form</h1>
     <div class="add-record-container">
         <form class="add-record-form" action="addRecord.php" method="post">
             <label for="name">Name:</label>
-            <input type="text" id="name" name="ownerName" required>
+            <input type="text" id="name" name="driverName" required>
 
             <div class="flex-container">
                 <div>
                     <label for="dateOfBirth">Date of Birth:</label>
-                    <input type="date" id="dateOfBirth" name="ownerDateOfBirth" required>
+                    <input type="date" id="dateOfBirth" name="driverDateOfBirth" required>
                 </div>
                 <div>
                     <label for="sex">Sex:</label>
-                    <select id="sex" name="ownerSex" required>
+                    <select id="sex" name="driverSex" required>
                         <option value="" disabled selected>Select below</option>
                         <option value="M">Male</option>
                         <option value="F">Female</option>
@@ -107,7 +107,7 @@
                 </div>
                 <div>
                 <label for="bloodType">Blood Type:</label>
-                    <select id="bloodType" name="ownerBloodType" required>
+                    <select id="bloodType" name="driverBloodType" required>
                         <option value="" disabled selected>Select below</option>
                         <option value="AB+">AB+</option>
                         <option value="AB-">AB-</option>
@@ -122,41 +122,38 @@
                 </div>
                 <div>
                     <label for="contact">Contact Number:</label>
-                    <input type="tel" id="contact" name="ownerContact" required>
+                    <input type="tel" id="contact" name="driverContact" required>
                 </div>
             </div>
 
             <div class="flex-container">
                 <div>
                     <label for="nationality">Nationality:</label>
-                    <input type="text" id="nationality" name="ownerNationality" required>
+                    <input type="text" id="nationality" name="driverNationality" required>
                 </div>
                 <div>
                     <label for="weight">Weight (kg):</label>
-                    <input type="number" id="weight" name="ownerWeight" required>
+                    <input type="number" id="weight" name="driverWeight" required>
                 </div>
                 <div>
                     <label for="height">Height (cm):</label>
-                    <input type="number" id="height" name="ownerHeight" required>
+                    <input type="number" id="height" name="driverHeight" required>
 
                 </div>
-                 <div>
-                 <label for="noOfVehiclesOwned">Number of Vehicles Owned:</label>
-                <input type="number" id="noOfVehiclesOwned" name="noOfVehiclesOwned" required>
-                </div>
+
             </div>
 
             <label for="address">Address:</label>
-            <input type="text" id="address" name="ownerAddress" required>
+            <input type="text" id="address" name="driverAddress" required>
 
          
 
             <br><br>
-            <input type="submit" value="SubmitOwner" name = "SubmitOwner">
+            <input type="submit" value="SubmitDriver" name = "SubmitDriver">
         </form>
     </div>
     <div class="button-container">
-        <button onclick="window.location.href='owner.php'">Back to Owner Records</button>
+        <button onclick="window.location.href='driver.php'">Back to Driver Records</button>
         <button onclick="window.location.href='index.php'">Back to Menu</button>
     </div>
 </body>

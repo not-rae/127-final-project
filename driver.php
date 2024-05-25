@@ -71,8 +71,6 @@
         <tr>
             <th>Driver ID</th>
             <th>Name</th>
-            <th>License Number</th>
-            <th>Application Type</th>
             <th>Sex</th>
             <th>Date of Birth</th>
             <th>Address</th>
@@ -83,9 +81,47 @@
             <th>Height (cm)</th>
             <th>Actions</th>
         </tr>
+        <?php
+    include 'DBConnector.php';
+
+    $sqlDriver = "SELECT * FROM carDriver";
+    $resultDriver = $conn->query($sqlDriver);
+    
+    
+    if($resultDriver->num_rows > 0){
+            while($rowDriver = $resultDriver->fetch_assoc()) {
+    
+                echo 
+    
+                    "<tr>". 
+                    "<td align = 'center' >".$rowDriver["driverID"]."</td>". 
+                    "<td align = 'center' >".$rowDriver["driverName"]."</td>". 
+                    "<td align = 'center' >".$rowDriver["sex"]."</td>". 
+                    "<td align = 'center' >".$rowDriver["dateOfBirth"]."</td>".
+                    "<td align = 'center' >".$rowDriver["driverAddress"]."</td>". 
+                    "<td align = 'center' >".$rowDriver["contactNumber"]."</td>". 
+                    "<td align = 'center' >".$rowDriver["nationality"]."</td>".
+                    "<td align = 'center' >".$rowDriver["bloodType"]."</td>".  
+                    "<td align = 'center' >".$rowDriver["heightInCM"]."</td>". 
+                    "<td align = 'center' >".$rowDriver["weightInKG"]."</td>". 
+                     
+       
+                    "</tr>";
+    
+
+                     
+            }
+        }
+    
+        else {
+            echo "0 results";
+    
+        }
+
+    ?>
     </table>
     <div class="add-record-container">
-        <button class="add-record-button" onclick="window.location.href='addRecord.php'">Add Record</button>
+        <button class="add-record-button" onclick="window.location.href='addDriver.php'">Add Record</button>
     </div>
     <div class="button-container">
         <button onclick="window.location.href='index.php'">Back to Menu</button>

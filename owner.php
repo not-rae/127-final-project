@@ -82,6 +82,41 @@
             <th>No. of Vehicles Own</th>
             <th>Actions</th>
         </tr>
+        <?php
+        include 'DBConnector.php';
+
+            $sqlOwner = "SELECT * FROM carOwner";
+            $resultOwner = $conn->query($sqlOwner);
+
+
+            if($resultOwner->num_rows > 0){
+                    while($rowOwner = $resultOwner->fetch_assoc()) {
+
+                echo 
+
+                    "<tr>". 
+                    "<td align = 'center' >".$rowOwner["ownerID"]."</td>". 
+                    "<td align = 'center' >".$rowOwner["ownerName"]."</td>". 
+                    "<td align = 'center' >".$rowOwner["sex"]."</td>". 
+                    "<td align = 'center' >".$rowOwner["dateOfBirth"]."</td>".
+                    "<td align = 'center' >".$rowOwner["ownerAddress"]."</td>". 
+                    "<td align = 'center' >".$rowOwner["contactNumber"]."</td>". 
+                    "<td align = 'center' >".$rowOwner["nationality"]."</td>".
+                    "<td align = 'center' >".$rowOwner["bloodType"]."</td>".  
+                    "<td align = 'center' >".$rowOwner["weightInKG"]."</td>".
+                    "<td align = 'center' >".$rowOwner["heightInCM"]."</td>". 
+                    "<td align = 'center' >".$rowOwner["noOfVehiclesOwned"]."</td>". 
+                    "</tr>";
+
+                    
+            }
+        }
+
+        else {
+            echo "0 results";
+
+        }
+    ?>
     </table>
     <div class="add-record-container">
         <button class="add-record-button" onclick="window.location.href='addOwner.php'">Add Record</button>

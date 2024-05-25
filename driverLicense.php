@@ -73,6 +73,7 @@
             <th>Name</th>
             <th>License Number</th>
             <th>Agency Code</th>
+            <th>Application Type</th>
             <th>Issue Date</th>
             <th>Expiration Date</th>
             <th>Condition Code</th>

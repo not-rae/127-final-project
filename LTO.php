@@ -5,16 +5,18 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            display: flex;
+            /* display: flex; */
             flex-direction: column;
             align-items: center;
             justify-content: center;
             height: 100vh;
             margin: 0;
             background-color: #f0f0f0;
+            margin-left: 10%;
         }
         h1 {
-            margin-bottom: 20px;
+            margin-bottom: 40px;
+            margin-left: 35%;
         }
         table {
             border-collapse: collapse;
@@ -23,6 +25,7 @@
         }
         table, th, td {
             border: 1px solid #ddd;
+            margin-bottom: 2%;
         }
         th, td {
             padding: 12px;
@@ -35,6 +38,7 @@
             display: flex;
             gap: 10px;
             margin-top: 20px;
+            margin-left: 40%;
         }
         .button-container button {
             padding: 10px 20px;
@@ -70,13 +74,50 @@
     <table>
         <tr>
             <th>Agency Code</th>
-            <th>Name</th>
+            <th>Agency Name</th>
             <th>Location</th>
-            <th>Operating Hours</th>
-            <th>Contact Information</th>
+            <th>Email Address</th>
+            <th>Contact Number</th>
+            <th>Starting Hour</th>
+            <th>Ending Hour</th>
             <th>No. of Cars Registered</th>
             <th>Actions</th>
         </tr>
+    <?php
+    include 'DBConnector.php';
+
+    $sqlLTO = "SELECT * FROM LTO";
+    $resultLTO = $conn->query($sqlLTO);
+    
+    
+    if($resultLTO->num_rows > 0){
+            while($rowLTO = $resultLTO->fetch_assoc()) {
+    
+                echo 
+    
+                    "<tr>". 
+                    "<td align = 'center' >".$rowLTO["agencyCode"]."</td>". 
+                    "<td align = 'center' >".$rowLTO["agencyName"]."</td>". 
+                    "<td align = 'center' >".$rowLTO["LTOaddress"]."</td>". 
+                    "<td align = 'center' >".$rowLTO["emailAddress"]."</td>". 
+                    "<td align = 'center' >".$rowLTO["contactNumber"]."</td>". 
+                    "<td align = 'center' >".$rowLTO["startingHour"]."</td>". 
+                    "<td align = 'center' >".$rowLTO["endingHour"]."</td>". 
+                    "<td align = 'center' >".$rowLTO["noOfCarsRegistered"]."</td>". 
+       
+                    "</tr>";
+    
+
+                     
+            }
+        }
+    
+        else {
+            echo "0 results";
+    
+        }
+
+    ?>
     </table>
     <div class="button-container">
         <button onclick="window.location.href='index.php'">Back to Menu</button>

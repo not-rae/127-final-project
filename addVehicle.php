@@ -95,21 +95,21 @@
                 </div>
                 <div>
                     <label for="owner">Owner Name:</label>
-                    <input type="text" id="owner" name="owner" required>
+                    <input type="text" id="owner" name="ownerNameV" required>
                 </div>
                 <div>
                     <label for="driver">Driver Name:</label>
-                    <input type="text" id="driver" name="driver" required>
+                    <input type="text" id="driver" name="driverNameV" required>
                 </div>
             </div>
             <div class="flex-container">
                 <div>
                     <label for="registrationDate">Registration Date:</label>
-                    <input type="date" id="registrationDate" name="registrationDate" required>
+                    <input type="date" id="registrationDate" name="registrationDateV" required>
                 </div>
                 <div>
                     <label for="expirationDate">Expiration Date:</label>
-                    <input type="date" id="expirationDate" name="expirationDate" required>
+                    <input type="date" id="expirationDate" name="expirationDateV" required>
                 </div>
                 <div>
                     <label for="model">Vehicle Model:</label>
@@ -137,10 +137,11 @@
                         <option value="diesel">Diesel</option>
                         <option value="electric">Electric</option>
                         <option value="hybrid">Hybrid</option>
+                        <option value= "UKNWN"> Unknown </option>
                     </select>
                 </div>
             </div>
-            <input type="submit" value="Submit">
+            <input type="submit" value="SubmitVehicle" name ="SubmitVehicle">
         </form>
     </div>
     <div class="button-container">

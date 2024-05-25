@@ -74,11 +74,9 @@
             <th>Driver</th>
             <th>License Number</th>
             <th>Agency Code</th>
-            <th>No. of Accidents</th>
-            <th>No. of Apprehensions</th>
+            <th>No. of Violation/s</th>
+            <th>Recent Date of Violation/s</th>
             <th>DL Code</th>
-            <th>Description</th>
-            <th>Date</th>
             <th>Actions</th>
         </tr>
     </table>

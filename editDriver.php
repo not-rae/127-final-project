@@ -104,7 +104,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 <body>
     <h2>Update Driver Information</h2>
-    <form action="editRecord.php" method="POST">
+    <form action="editDriver.php" method="POST">
         <div class="flex-container">
             <div>
                 <label for="driverID">Driver ID:</label>

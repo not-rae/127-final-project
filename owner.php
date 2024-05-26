@@ -106,6 +106,16 @@
                     "<td align = 'center' >".$rowOwner["weightInKG"]."</td>".
                     "<td align = 'center' >".$rowOwner["heightInCM"]."</td>". 
                     "<td align = 'center' >".$rowOwner["noOfVehiclesOwned"]."</td>". 
+                    "<td align='center'>" .
+                            "<form action='deleteOwner.php' method='post' style='display:inline;'>" .
+                                "<input type='hidden' name='ownerID' value='".$rowOwner['ownerID']."'>" .
+                                "<button type='submit'>Delete</button>" .
+                            "</form>" .
+                            "<form action='editOwner.php' method='post' style='display:inline;'>" .
+                                "<input type='hidden' name='ownerID' value='".$rowOwner['ownerID']."'>" .
+                                "<button type='submit'>Edit</button>" .
+                            "</form>" .
+                    "</td>" .
                     "</tr>";
 
                     

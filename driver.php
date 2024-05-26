@@ -119,7 +119,7 @@
                                 "<input type='hidden' name='driverID' value='".$rowDriver['driverID']."'>" .
                                 "<button type='submit'>Delete</button>" .
                             "</form>" .
-                            "<form action='editRecord.php' method='post' style='display:inline;'>" .
+                            "<form action='editDriver.php' method='post' style='display:inline;'>" .
                                 "<input type='hidden' name='driverID' value='".$rowDriver['driverID']."'>" .
                                 "<button type='submit'>Edit</button>" .
                             "</form>" .

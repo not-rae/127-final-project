@@ -101,6 +101,16 @@
                     "<td align = 'center' >".$rowtDriverLicense["expirationDate"]."</td>". 
                     "<td align = 'center' >".$rowtDriverLicense["conditionCode"]."</td>".
                     "<td align = 'center' >".$rowtDriverLicense["DLCode"]."</td>".  
+                    "<td align='center'>" .
+                        "<form action='deleteOwner.php' method='post' style='display:inline;'>" .
+                            "<input type='hidden' name='driverID' value='".$rowtDriverLicense['driverID']."'>" .
+                            "<button type='submit'>Delete</button>" .
+                        "</form>" .
+                        "<form action='editDriverLicense.php' method='post' style='display:inline;'>" .
+                            "<input type='hidden' name='driverID' value='".$rowtDriverLicense['driverID']."'>" .
+                            "<button type='submit'>Edit</button>" .
+                        "</form>" .
+                    "</td>" .
                     "</tr>";
 
                     

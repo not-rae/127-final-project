@@ -57,7 +57,9 @@
 
 // $sql = "CREATE TABLE Vehicle(
 //     plateNumber VARCHAR(6) NOT NULL UNIQUE PRIMARY KEY,
+//     ownerID VARCHAR(6) NOT NULL,
 //     ownerNameV VARCHAR(100) NOT NULL,
+//     driverID VARCHAR(10) NOT NULL,
 //     driverNameV VARCHAR(100) NOT NULL,
 //     registrationDate DATE NOT NULL,
 //     expirationDate DATE NOT NULL,
@@ -69,6 +71,13 @@
 //     fuel CHAR(10) NOT NULL
 
 // )";
+
+$sql = "ALTER TABLE vehicle
+ADD FOREIGN KEY (driverID) REFERENCES carDriver(driverID);";
+
+// $sql = "ALTER TABLE vehicle
+// ADD FOREIGN KEY (ownerID) REFERENCES carOwner(ownerID);";
+
 
 
 // $sql = "CREATE TABLE driverLicense(
@@ -105,8 +114,8 @@
 // $sql = "ALTER TABLE history
 // ADD FOREIGN KEY (plateNumber) REFERENCES Vehicle(plateNumber);";
 
-// $sql = "ALTER TABLE history
-// ADD FOREIGN KEY (agencyCode) REFERENCES LTO(agencyCode);";
+$sql = "ALTER TABLE history
+ADD FOREIGN KEY (agencyCode) REFERENCES LTO(agencyCode);";
 
 
 // $sql = "CREATE TABLE owns(
@@ -189,7 +198,7 @@
 
 
  if ($conn->query($sql) === TRUE) {
-    echo "OKS 2";
+    echo "OKS 8";
     
     } else {
     echo "Error creating database: " . $conn->error;

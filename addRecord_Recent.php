@@ -122,8 +122,8 @@ if(isset($_POST['SubmitRecord'])) {
     $yearProduced = $_POST["yearProduced"];
     $fuel = $_POST["fuel"];
 
-    $insertVehicle = "INSERT INTO vehicle (plateNumber, ownerNameV, driverNameV, registrationDate, expirationDate, manufacturer, model, color, yearProduced, fuel)
-    VALUES ('$vehiclePlateNumber', '$ownerName', '$driverName', '$registrationDateV', '$expirationDateV', '$manufacturer', '$model', '$color', '$yearProduced', '$fuel');";
+    $insertVehicle = "INSERT INTO vehicle (plateNumber, ownerID, ownerNameV, driverID, driverNameV, registrationDate, expirationDate, manufacturer, model, color, yearProduced, fuel)
+    VALUES ('$vehiclePlateNumber', '$ownerID', '$ownerName', '$driverID', '$driverName', '$registrationDateV', '$expirationDateV', '$manufacturer', '$model', '$color', '$yearProduced', '$fuel');";
     
     if ($conn->query($insertVehicle) === TRUE) {
         echo "Vehicle added into the database.";

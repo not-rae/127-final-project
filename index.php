@@ -75,6 +75,7 @@
         <button class="driver-license" onclick="window.location.href='driverLicense.php'">Driver License Records</button>
         <button class="lto" onclick="window.location.href='LTO.php'">LTO Records</button>
         <button class="history" onclick="window.location.href='history.php'">History Records</button>
+        <button class="insertRecord" onclick="window.location.href='recordForm.php'">Add Record</button>
         <br><br>
     </div>
 </body>

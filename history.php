@@ -79,10 +79,39 @@
             <th>DL Code</th>
             <th>Actions</th>
         </tr>
+        <?php
+        include 'DBConnector.php';
+
+            $sqlHistory ="SELECT * FROM history";
+            $resultHistory = $conn->query($sqlHistory);
+
+
+            if($resultHistory->num_rows > 0){
+                    while($rowtHistory = $resultHistory->fetch_assoc()) {
+
+                echo 
+
+                    "<tr>". 
+                    "<td align = 'center' >".$rowtHistory["plateNumber"]."</td>". 
+                    "<td align = 'center' >".$rowtHistory["ownerNameH"]."</td>". 
+                    "<td align = 'center' >".$rowtHistory["driverNameH"]."</td>". 
+                    "<td align = 'center' >".$rowtHistory["licenseNumber"]."</td>".
+                    "<td align = 'center' >".$rowtHistory["agencyCode"]."</td>". 
+                    "<td align = 'center' >".$rowtHistory["noOfViolations"]."</td>". 
+                    "<td align = 'center' >".$rowtHistory["recentViolationDate"]."</td>".
+                    "<td align = 'center' >".$rowtHistory["DLCode"]."</td>".  
+                    "</tr>";
+
+                    
+            }
+        }
+
+        else {
+            echo "0 results";
+
+        }
+    ?>
     </table>
-    <div class="add-record-container">
-        <button class="add-record-button" onclick="window.location.href='addRecord.php'">Add Record</button>
-    </div>
     <div class="button-container">
         <button onclick="window.location.href='index.php'">Back to Menu</button>
     </div>

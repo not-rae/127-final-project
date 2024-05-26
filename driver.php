@@ -16,10 +16,16 @@
         h1 {
             margin-bottom: 20px;
         }
+        .table-container {
+            width: 95%; /* Adjust as needed */
+            max-height: 400px; /* Set a fixed height for the scrollable area */
+            overflow-y: auto; /* Enable vertical scrolling */
+            margin: 20px 0;
+        }
         table {
             border-collapse: collapse;
-            width: 95%;
-            margin: 20px 0;
+            width: 100%;
+            table-layout: fixed; /* Ensure table takes full width */
         }
         table, th, td {
             border: 1px solid #ddd;
@@ -30,6 +36,9 @@
         }
         th {
             background-color: #f2f2f2;
+            position: sticky;
+            top: 0; /* Stick the header to the top */
+            z-index: 1; /* Ensure header is above the table body */
         }
         .button-container {
             display: flex;
@@ -67,61 +76,62 @@
 </head>
 <body>
     <h1>Driver Record</h1>
-    <table>
-        <tr>
-            <th>Driver ID</th>
-            <th>Name</th>
-            <th>Sex</th>
-            <th>Date of Birth</th>
-            <th>Address</th>
-            <th>Contact Number</th>
-            <th>Nationality</th>
-            <th>Blood Type</th>
-            <th>Weight (kg)</th>
-            <th>Height (cm)</th>
-            <th>Actions</th>
-        </tr>
-        <?php
-    include 'DBConnector.php';
+    <div class="table-container">
+        <table>
+            <thead>
+            <tr>
+                <th>Driver ID</th>
+                <th>Name</th>
+                <th>Sex</th>
+                <th>Date of Birth</th>
+                <th>Address</th>
+                <th>Contact Number</th>
+                <th>Nationality</th>
+                <th>Blood Type</th>
+                <th>Weight (kg)</th>
+                <th>Height (cm)</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody class="table-content">
+            <?php
+            include 'DBConnector.php';
 
-    $sqlDriver = "SELECT * FROM carDriver";
-    $resultDriver = $conn->query($sqlDriver);
-    
-    
-    if($resultDriver->num_rows > 0){
-            while($rowDriver = $resultDriver->fetch_assoc()) {
-    
-                echo 
-    
-                    "<tr>". 
-                    "<td align = 'center' >".$rowDriver["driverID"]."</td>". 
-                    "<td align = 'center' >".$rowDriver["driverName"]."</td>". 
-                    "<td align = 'center' >".$rowDriver["sex"]."</td>". 
-                    "<td align = 'center' >".$rowDriver["dateOfBirth"]."</td>".
-                    "<td align = 'center' >".$rowDriver["driverAddress"]."</td>". 
-                    "<td align = 'center' >".$rowDriver["contactNumber"]."</td>". 
-                    "<td align = 'center' >".$rowDriver["nationality"]."</td>".
-                    "<td align = 'center' >".$rowDriver["bloodType"]."</td>".  
-                    "<td align = 'center' >".$rowDriver["heightInCM"]."</td>". 
-                    "<td align = 'center' >".$rowDriver["weightInKG"]."</td>". 
-                     
-       
-                    "</tr>";
-    
-
-                     
+            $sqlDriver = "SELECT * FROM carDriver";
+            $resultDriver = $conn->query($sqlDriver);
+            
+            if($resultDriver->num_rows > 0){
+                while($rowDriver = $resultDriver->fetch_assoc()) {
+                    echo 
+                        "<tr>". 
+                        "<td align='center'>".$rowDriver["driverID"]."</td>". 
+                        "<td align='center'>".$rowDriver["driverName"]."</td>". 
+                        "<td align='center'>".$rowDriver["sex"]."</td>". 
+                        "<td align='center'>".$rowDriver["dateOfBirth"]."</td>".
+                        "<td align='center'>".$rowDriver["driverAddress"]."</td>". 
+                        "<td align='center'>".$rowDriver["contactNumber"]."</td>". 
+                        "<td align='center'>".$rowDriver["nationality"]."</td>".
+                        "<td align='center'>".$rowDriver["bloodType"]."</td>".  
+                        "<td align='center'>".$rowDriver["weightInKG"]."</td>". 
+                        "<td align='center'>".$rowDriver["heightInCM"]."</td>". 
+                        "<td align='center'>" .
+                            "<form action='deleteEmployee.php' method='post' style='display:inline;'>" .
+                                "<input type='hidden' name='driverID' value='".$rowDriver['driverID']."'>" .
+                                "<button type='submit'>Delete</button>" .
+                            "</form>" .
+                            "<form action='editEmployee.php' method='post' style='display:inline;'>" .
+                                "<input type='hidden' name='driverID' value='".$rowDriver['driverID']."'>" .
+                                "<button type='submit'>Edit</button>" .
+                            "</form>" .
+                        "</td>" .
+                        "</tr>";
+                }
+            } else {
+                echo "<tr><td colspan='11'>0 results</td></tr>";
             }
-        }
-    
-        else {
-            echo "0 results";
-    
-        }
-
-    ?>
-    </table>
-    <div class="add-record-container">
-        <button class="add-record-button" onclick="window.location.href='addDriver.php'">Add Record</button>
+            ?>
+            </tbody>
+        </table>
     </div>
     <div class="button-container">
         <button onclick="window.location.href='index.php'">Back to Menu</button>

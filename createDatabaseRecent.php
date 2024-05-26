@@ -1,14 +1,13 @@
-<<<<<<< HEAD
 <?php
     
     include 'DBConnector.php';
     
     // $sql = "CREATE DATABASE driverify";
     // if ($conn->query($sql) === TRUE) {
-    // echo "Database created successfully";
+    //     echo "Database created successfully";
     
     // } else {
-    // echo "Error creating database: " . $conn->error;
+    //     echo "Error creating database: " . $conn->error;
     // }
 
 // $sql = "CREATE TABLE LTO(
@@ -72,7 +71,7 @@
 // )";
 
 
-// $sql = "CREATE TABLE driverLicense{
+// $sql = "CREATE TABLE driverLicense(
 //     driverID VARCHAR(10) NOT NULL,
 //     driverNameDL VARCHAR(100) NOT NULL,
 //     licenseNumber VARCHAR(11) NOT NULL UNIQUE PRIMARY KEY,
@@ -125,10 +124,10 @@
 //         agencyCode VARCHAR(4) NOT NULL,
 //         licenseNumber VARCHAR(11) NOT NULL,
 //         registrationDate DATE NOT NULL,
-//         expiryDate DATE NOT NULL,
-//         foreign key(agencyCode, licenseNumber) references LTO, driverLicense
+//         expiryDate DATE NOT NULL
+//         -- foreign key(agencyCode, licenseNumber) references LTO, driverLicense
     
-//     )";
+// )";
 
 // $sql = "ALTER TABLE record
 // ADD FOREIGN KEY (agencyCode) REFERENCES LTO(agencyCode);";
@@ -141,8 +140,8 @@
 //         driverID VARCHAR(10) NOT NULL,
 //         licenseNumber VARCHAR(11) NOT NULL,
 //         applicationDate DATE NOT NULL,
-//         applicationType VARCHAR(70) NOT NULL,
-//         foreign key(driverID, licenseNumber) references carDriver, driverLicense
+//         applicationType VARCHAR(70) NOT NULL
+//         -- foreign key(driverID, licenseNumber) references carDriver, driverLicense
     
 // )";
 
@@ -156,8 +155,8 @@
 //     agencyCode VARCHAR(4) NOT NULL,
 //     plateNumber VARCHAR(6) NOT NULL,
 //     registrationDate DATE NOT NULL,
-//     expiryDate DATE NOT NULL,
-//     foreign key(agencyCode, plateNumber) references LTO, Vehicle
+//     expiryDate DATE NOT NULL
+//     -- foreign key(agencyCode, plateNumber) references LTO, Vehicle
 
 // )";
 
@@ -170,7 +169,7 @@
 
 // $sql = "CREATE TABLE drive(
 //     driverID VARCHAR(10) NOT NULL,
-//     plateNumber VARCHAR(6) NOT NULL,
+//     plateNumber VARCHAR(6) NOT NULL
 
 
 // )";
@@ -190,42 +189,9 @@
 
 
  if ($conn->query($sql) === TRUE) {
-    echo "Table LTO created successfully";
+    echo "OKS 2";
     
     } else {
     echo "Error creating database: " . $conn->error;
     }
-
-// ";
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ?>
-=======
->>>>>>> 1166c64b04063dc604aceb006580e96e03db4e43

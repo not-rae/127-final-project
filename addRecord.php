@@ -112,6 +112,38 @@ if(isset($_POST['SubmitVehicle'])) {
 
 
 // HISTORY:
+if (isset($_POST['SubmitHistory'])) {
+    $plateNumber = $_POST["plateNumber"];
+    $ownerV = $_POST["ownerNameV"];
+    $driverV = $_POST["driverNameV"];
+    $licenseNumber = $_POST["licenseNumber"];
+    $agencyCode = $_POST["agencyCode"];
+    $noOfViolations = $_POST["noOfViolations"];
+    $violationDate = $_POST["violationDate"];
+    $dlCode = $_POST["dlCode"];
+
+    // Check if licenseNumber exists in driverlicense table
+    $checkLicense = "SELECT * FROM driverlicense WHERE licenseNumber = '$licenseNumber'";
+    $result = $conn->query($checkLicense);
+
+    if ($result->num_rows > 0) {
+        // License number exists, proceed with insertion
+        $insertHistory = "INSERT INTO history (plateNumber, ownerNameH, driverNameH, licenseNumber, agencyCode, noOfViolations,
+            recentViolationDate, DLCode) 
+            VALUES('$plateNumber', '$ownerV', '$driverV', '$licenseNumber', '$agencyCode',
+            '$noOfViolations','$violationDate', '$dlCode');";
+
+        if ($conn->query($insertHistory) === TRUE) {
+            echo "History added into the database.";
+            header("Location: history.php");
+        } else {
+            echo "Error inserting values: " . $conn->error;
+        }
+    } else {
+        // License number does not exist
+        echo "Error: licenseNumber does not exist in driverlicense table.";
+    }
+}
 
 
 
@@ -119,6 +151,39 @@ if(isset($_POST['SubmitVehicle'])) {
 
 
 // DRIVERS LICENSE:
+
+if(isset($_POST['SubmitDriverLicense'])) {
+    $driverName = $_POST["name"];
+    $licenseNumber = $_POST["licenseNumber"];
+    $agencyCode = $_POST["agencyCode"];
+    $issueDate = $_POST["issueDate"];
+    $expirationDate = $_POST["expirationDate"];
+    $conditionCode = $_POST["conditionCode"];
+    $dlCode = $_POST["dlCode"];
+    $driverID = $_POST["driverID"];  // Assuming driverID is passed from the form
+
+    // Check if driverID exists in cardriver table
+    $checkDriverID = "SELECT * FROM cardriver WHERE driverID = '$driverID'";
+    $result = $conn->query($checkDriverID);
+
+    if ($result->num_rows > 0) {
+        // driverID exists, proceed with insertion
+        $insertDriverLicense = "INSERT INTO driverLicense (driverNameDL, licenseNumber, agencyCode, issueDate, expirationDate, conditionCode, DLCode, driverID) 
+        VALUES('$driverName', '$licenseNumber', '$agencyCode', '$issueDate', '$expirationDate', '$conditionCode', '$dlCode', '$driverID');";
+
+        if($conn->query($insertDriverLicense) === TRUE){
+            echo "Driver License added into the database.";
+            header("Location: driverLicense.php");
+        } else {
+            echo "Error inserting values: " . $conn->error;
+        }
+    } else {
+        // driverID does not exist
+        echo "Error: driverID does not exist in cardriver table.";
+    }
+}
+
+
 
 
 
@@ -169,55 +234,4 @@ if ($conn->query($sqlNoCarsReg) === TRUE) {
 }
 
 $conn->close();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ?>

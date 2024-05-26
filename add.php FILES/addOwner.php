@@ -8,13 +8,50 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start;
             height: 100vh;
             margin: 0;
             background-color: #f0f0f0;
         }
         h1 {
             margin-bottom: 20px;
+        }
+        .navbar {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+        .navbar a {
+            padding: 14px 20px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 17px;
+            color: white;
+            margin: 0 5px;
+            transition: background-color 0.3s, color 0.3s;
+            border-radius: 30px;
+            margin-top: 15px;
+            margin-bottom: 20px;
+        }
+        .navbar a.owner {
+            background-color: #9C27B0; 
+        }
+        .navbar a.driver {
+            background-color: #FF5722; 
+        }
+        .navbar a.vehicle {
+            background-color: #4CAF50; 
+        }
+        .navbar a.driver_license {
+            background-color: #2196F3; 
+        }
+        .navbar a.history {
+            background-color: #FF9800; 
+        }
+        .navbar a:hover,
+        .navbar a.active {
+            background-color: #ddd;
+            color: black;
         }
         .button-container {
             display: flex;
@@ -85,6 +122,14 @@
     </style>
 </head>
 <body>
+    <div class="navbar">
+        <a href="addVehicle.php" class="vehicle">Vehicle Form</a>
+        <a href="addOwner.php" class="owner">Owner Form</a>
+        <a href="addDriver.php" class="driver">Driver Form</a>
+        <a href="addDriverLicense.php" class="driver_license">Driver License Form</a>
+        <a href="addHistory.php" class="history">History Form</a>
+    </div>
+
     <h1>Owner Form</h1>
     <div class="add-record-container">
         <form class="add-record-form" action="addRecord.php" method="post">

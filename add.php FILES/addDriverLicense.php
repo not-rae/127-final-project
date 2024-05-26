@@ -126,71 +126,56 @@
         <a href="addVehicle.php" class="vehicle">Vehicle Form</a>
         <a href="addOwner.php" class="owner">Owner Form</a>
         <a href="addDriver.php" class="driver">Driver Form</a>
-        <a href="driver_license.php" class="driver_license">Driver License Form</a>
-        <a href="history.php" class="history">History Form</a>
+        <a href="addDriverLicense.php" class="driver_license">Driver License Form</a>
+        <a href="addHistory.php" class="history">History Form</a>
     </div>
 
-    <h1>Vehicle Form</h1>
+    <h1>Driver License Form</h1>
     <div class="add-record-container">
         <form class="add-record-form" action="addRecord.php" method="post">
             <div class="flex-container">
                 <div>
-                    <label for="plateNumber">Plate Number:</label>
-                    <input type="text" id="plateNumber" name="plateNumber" required>
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required>
                 </div>
                 <div>
-                    <label for="owner">Owner Name:</label>
-                    <input type="text" id="owner" name="ownerNameV" required>
+                    <label for="licenseNumber">License Number:</label>
+                    <input type="text" id="licenseNumber" name="licenseNumber" required>
                 </div>
                 <div>
-                    <label for="driver">Driver Name:</label>
-                    <input type="text" id="driver" name="driverNameV" required>
+                    <label for="agencyCode">Agency Code:</label>
+                    <input type="text" id="agencyCode" name="agencyCode" required>
                 </div>
             </div>
             <div class="flex-container">
                 <div>
-                    <label for="registrationDate">Registration Date:</label>
-                    <input type="date" id="registrationDate" name="registrationDateV" required>
+                    <label for="applicationType">Application Type:</label>
+                    <input type="text" id="applicationType" name="applicationType" required>
+                </div>
+                <div>
+                    <label for="issueDate">Issue Date:</label>
+                    <input type="date" id="issueDate" name="issueDate" required>
                 </div>
                 <div>
                     <label for="expirationDate">Expiration Date:</label>
-                    <input type="date" id="expirationDate" name="expirationDateV" required>
+                    <input type="date" id="expirationDate" name="expirationDate" required>
                 </div>
                 <div>
-                    <label for="model">Vehicle Model:</label>
-                    <input type="text" id="model" name="model" required>
-                </div>
-                <div>
-                    <label for="color">Vehicle Color:</label>
-                    <input type="text" id="color" name="color" required>
+                    <label for="conditionCode">Condition Code:</label>
+                    <input type="text" id="conditionCode" name="conditionCode" required>
                 </div>
             </div>
             <div class="flex-container">
                 <div>
-                    <label for="manufacturer">Vehicle Manufacturer:</label>
-                    <input type="text" id="manufacturer" name="manufacturer" required>
-                </div>
-                <div>
-                    <label for="yearProduced">Year Produced:</label>
-                    <input type="number" id="yearProduced" name="yearProduced" required>
-                </div>
-                <div>
-                    <label for="fuel">Fuel Type: </label>
-                    <select id="fuel" name="fuel" required>
-                        <option value="" disabled selected>Select below</option>
-                        <option value="petrol">Petrol</option>
-                        <option value="diesel">Diesel</option>
-                        <option value="electric">Electric</option>
-                        <option value="hybrid">Hybrid</option>
-                        <option value= "UKNWN"> Unknown </option>
-                    </select>
+                    <label for="dlCode">DL Code:</label>
+                    <input type="text" id="dlCode" name="dlCode" required>
                 </div>
             </div>
-            <input type="submit" value="SubmitVehicle" name ="SubmitVehicle">
+            <input type="submit" value="SubmitDriverLicense" name ="SubmitDriverLicense">
         </form>
     </div>
     <div class="button-container">
-        <button onclick="window.location.href='vehicle.php'">Back to Vehicle Records</button>
+        <button onclick="window.location.href='driverLicense.php'">Back to Driver License Records</button>
         <button onclick="window.location.href='index.php'">Back to Menu</button>
     </div>
     

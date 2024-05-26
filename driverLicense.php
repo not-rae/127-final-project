@@ -73,17 +73,46 @@
             <th>Name</th>
             <th>License Number</th>
             <th>Agency Code</th>
-            <th>Application Type</th>
+            <!-- <th>Application Type</th> -->
             <th>Issue Date</th>
             <th>Expiration Date</th>
             <th>Condition Code</th>
             <th>DL Code</th>
             <th>Actions</th>
         </tr>
+        <?php
+        include 'DBConnector.php';
+
+            $sqlDriverLicense ="SELECT * FROM driverLicense";
+            $resultDriverLicense = $conn->query($sqlDriverLicense);
+
+
+            if($resultDriverLicense->num_rows > 0){
+                    while($rowtDriverLicense = $resultDriverLicense->fetch_assoc()) {
+
+                echo 
+
+                    "<tr>". 
+                    "<td align = 'center' >".$rowtDriverLicense["driverID"]."</td>". 
+                    "<td align = 'center' >".$rowtDriverLicense["driverNameDL"]."</td>". 
+                    "<td align = 'center' >".$rowtDriverLicense["licenseNumber"]."</td>". 
+                    "<td align = 'center' >".$rowtDriverLicense["agencyCode"]."</td>".
+                    "<td align = 'center' >".$rowtDriverLicense["issueDate"]."</td>". 
+                    "<td align = 'center' >".$rowtDriverLicense["expirationDate"]."</td>". 
+                    "<td align = 'center' >".$rowtDriverLicense["conditionCode"]."</td>".
+                    "<td align = 'center' >".$rowtDriverLicense["DLCode"]."</td>".  
+                    "</tr>";
+
+                    
+            }
+        }
+
+        else {
+            echo "0 results";
+
+        }
+    ?>
     </table>
-    <div class="add-record-container">
-        <button class="add-record-button" onclick="window.location.href='addRecord.php'">Add Record</button>
-    </div>
     <div class="button-container">
         <button onclick="window.location.href='index.php'">Back to Menu</button>
     </div>

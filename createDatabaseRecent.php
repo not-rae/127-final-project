@@ -10,18 +10,18 @@
     //     echo "Error creating database: " . $conn->error;
     // }
 
-// $sql = "CREATE TABLE LTO(
-//     agencyCode VARCHAR(4) NOT NULL UNIQUE PRIMARY KEY,
-//     agencyName VARCHAR(100) NOT NULL,
-//     LTOaddress VARCHAR(1000) NOT NULL,
-//     emailAddress VARCHAR(60),
-//     contactNumber VARCHAR(20) UNIQUE, 
-//     startingHour VARCHAR(20) NOT NULL,
-//     endingHour VARCHAR(20) NOT NULL,
-//     noOfCarsRegistered BIGINT UNSIGNED
+$sql = "CREATE TABLE LTO(
+    agencyCode VARCHAR(4) NOT NULL UNIQUE PRIMARY KEY,
+    agencyName VARCHAR(100) NOT NULL,
+    LTOaddress VARCHAR(1000) NOT NULL,
+    emailAddress VARCHAR(60),
+    contactNumber VARCHAR(20) UNIQUE, 
+    startingHour VARCHAR(20) NOT NULL,
+    endingHour VARCHAR(20) NOT NULL,
+    noOfDriversRegistered BIGINT UNSIGNED
 
 
-// )";
+)";
     
 
 // $sql = "CREATE TABLE carOwner(
@@ -78,7 +78,7 @@
 // $sql = "ALTER TABLE vehicle
 // ADD FOREIGN KEY (ownerID) REFERENCES carOwner(ownerID);";
 
-$sql = "ALTER TABLE vehicle DROP FOREIGN KEY vehicle_ibfk_2;";
+// $sql = "ALTER TABLE vehicle DROP FOREIGN KEY vehicle_ibfk_2;";
 
 
 

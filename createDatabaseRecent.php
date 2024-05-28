@@ -72,11 +72,15 @@
 
 // )";
 
-$sql = "ALTER TABLE vehicle
-ADD FOREIGN KEY (driverID) REFERENCES carDriver(driverID);";
+// $sql = "ALTER TABLE vehicle
+// ADD FOREIGN KEY (driverID) REFERENCES carDriver(driverID);";
 
 // $sql = "ALTER TABLE vehicle
 // ADD FOREIGN KEY (ownerID) REFERENCES carOwner(ownerID);";
+
+$sql = "ALTER TABLE vehicle DROP FOREIGN KEY vehicle_ibfk_2;";
+
+
 
 
 
@@ -98,10 +102,10 @@ ADD FOREIGN KEY (driverID) REFERENCES carDriver(driverID);";
 // ADD FOREIGN KEY (agencyCode) REFERENCES LTO(agencyCode);";
 
 // $sql = "CREATE TABLE history(
-//     plateNumber VARCHAR(6) NOT NULL,
+//     plateNumber VARCHAR(6) NOT NULL UNIQUE,
 //     ownerNameH VARCHAR(100) NOT NULL,
 //     driverNameH VARCHAR(100) NOT NULL, 
-//     licenseNumber VARCHAR(11) NOT NULL,
+//     licenseNumber VARCHAR(11) NOT NULL UNIQUE,
 //     agencyCode VARCHAR(4) NOT NULL,
 //     noOfViolations INT NOT NULL,
 //     recentViolationDate DATE,
@@ -114,8 +118,8 @@ ADD FOREIGN KEY (driverID) REFERENCES carDriver(driverID);";
 // $sql = "ALTER TABLE history
 // ADD FOREIGN KEY (plateNumber) REFERENCES Vehicle(plateNumber);";
 
-$sql = "ALTER TABLE history
-ADD FOREIGN KEY (agencyCode) REFERENCES LTO(agencyCode);";
+// $sql = "ALTER TABLE history
+// ADD FOREIGN KEY (agencyCode) REFERENCES LTO(agencyCode);";
 
 
 // $sql = "CREATE TABLE owns(

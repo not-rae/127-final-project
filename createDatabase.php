@@ -88,6 +88,9 @@
 // $sql = "ALTER TABLE driverLicense
 // ADD FOREIGN KEY (agencyCode) REFERENCES LTO(agencyCode);";
 
+$sql = "ALTER TABLE driverLicense
+DROP FOREIGN KEY driverID;";
+
 // $sql = "CREATE TABLE history(
 //     plateNumber VARCHAR(6) NOT NULL,
 //     ownerNameH VARCHAR(100) NOT NULL,

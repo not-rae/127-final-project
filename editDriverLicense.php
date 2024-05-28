@@ -134,4 +134,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <button name ="submit" type="submit">Update Driver License</button>
     </form>
 </body>
+<<<<<<< HEAD
 </html>
+=======
+</html>
+>>>>>>> 69d7af889dbfece1d90ec5d682645e938b7e01c3

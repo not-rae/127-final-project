@@ -272,12 +272,34 @@
                 <input type="date" id="expirationDate" name="expirationDate" required>
             </div>
             <div>
-                <label for="conditionCode">Condition Code:</label>
-                <input type="text" id="conditionCode" name="conditionCode" required>
+            <label for="conditionCode">Condition Code:</label>
+                <select id="conditionCode" name="conditionCode" required>
+                    <option value="">Select Type</option>
+                    <option value="A/1">Condition A/1</option>
+                    <option value="B/2">Condition B/2</option>
+                    <option value="C/2">Condition C/2</option>
+                    <option value="3">Condition 3</option>
+                    <option value="D/4">Condition D/4</option>
+                    <option value="E/5">Condition E/5</option>
+                    <option value="None">None</option>
+                </select>
             </div>
             <div>
-                <label for="dlCode">DL Code:</label>
-                <input type="text" id="dlCode" name="dlCode" required>
+            <label for="DLCode">DL Code:</label>
+                <select id="dlCode" name="dlCode" required>
+                    <option value="">Select DL Code</option>
+                    <option value="R1">Motorbikes or motorized tricycles</option>
+                    <option value="R2">Motor vehicle up to 4500 kg GVW</option>
+                    <option value="R3">Motor vehicle above 4500 kg GVW</option>
+                    <option value="R4">Automatic transmission up to 4500 kg GVW</option>
+                    <option value="R5">Automatic transmission above 4500 kg GVW</option>
+                    <option value="R6">Articulated Vehicle 1600 kg GVW & below</option>
+                    <option value="R7">Articulated Vehicle 1601 kg up to 4500 kg GVW</option>
+                    <option value="R8">Articulated Vehicle 4501 kg & above GVW</option>
+
+
+
+                </select>
             </div>
         </div>
     </div>

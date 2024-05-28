@@ -37,6 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             WHERE ownerID = '$ownerID'";
 
         // Execute the query
+        // update vehicle records
         if ($conn->query($updateOwner) === TRUE) {
             $updateOwnerV = "UPDATE Vehicle SET 
                 ownerNameV = '$ownerName'

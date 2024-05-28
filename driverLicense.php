@@ -102,7 +102,6 @@
                     "<td align = 'center' >".$rowtDriverLicense["conditionCode"]."</td>".
                     "<td align = 'center' >".$rowtDriverLicense["DLCode"]."</td>".  
                     "<td align='center'>" .
-<<<<<<< HEAD
                         "<form action='deleteOwner.php' method='post' style='display:inline;'>" .
                             "<input type='hidden' name='driverID' value='".$rowtDriverLicense['driverID']."'>" .
                             "<button type='submit'>Delete</button>" .
@@ -111,15 +110,12 @@
                             "<input type='hidden' name='driverID' value='".$rowtDriverLicense['driverID']."'>" .
                             "<button type='submit'>Edit</button>" .
                         "</form>" .
-=======
-                    "<form action='editDriverLicense.php' method='post' style='display:inline;'>" .
-                    "<input type='hidden' name='driverID' value='".$rowtDriverLicense['driverID']."'>" .
-                    "<input type='hidden' name='driverName' value='".$rowtDriverLicense['driverNameDL']."'>" .
-                    "<input type='hidden' name='agencyCode' value='".$rowtDriverLicense['agencyCode']."'>" .
-                    "<input type='hidden' name='licenseNumber' value='".$rowtDriverLicense['licenseNumber']."'>" .
-                    "<button type='submit'>Edit</button>" .
-                    "</form>" .
->>>>>>> 69d7af889dbfece1d90ec5d682645e938b7e01c3
+                        "<form action='editDriverLicense.php' method='post' style='display:inline;'>" .
+                            "<input type='hidden' name='driverID' value='".$rowtDriverLicense['driverID']."'>" .
+                            "<input type='hidden' name='driverName' value='".$rowtDriverLicense['driverNameDL']."'>" .
+                            "<input type='hidden' name='agencyCode' value='".$rowtDriverLicense['agencyCode']."'>" .
+                            "<input type='hidden' name='licenseNumber' value='".$rowtDriverLicense['licenseNumber']."'>" .
+                        "</form>" .
                     "</td>" .
                     "</tr>";
             }

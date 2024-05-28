@@ -115,7 +115,7 @@
                         "<td align='center'>".$rowDriver["weightInKG"]."</td>". 
                         "<td align='center'>".$rowDriver["heightInCM"]."</td>". 
                         "<td align='center'>" .
-                            "<form action='deleteEmployee.php' method='post' style='display:inline;'>" .
+                            "<form action='deleteDriver.php' method='post' style='display:inline;'>" .
                                 "<input type='hidden' name='driverID' value='".$rowDriver['driverID']."'>" .
                                 "<button type='submit'>Delete</button>" .
                             "</form>" .

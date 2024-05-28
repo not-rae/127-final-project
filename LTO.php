@@ -80,7 +80,7 @@
             <th>Contact Number</th>
             <th>Starting Hour</th>
             <th>Ending Hour</th>
-            <th>No. of Cars Registered</th>
+            <th>No. of Drivers Registered</th>
             <th>Actions</th>
         </tr>
     <?php
@@ -103,7 +103,7 @@
                     "<td align = 'center' >".$rowLTO["contactNumber"]."</td>". 
                     "<td align = 'center' >".$rowLTO["startingHour"]."</td>". 
                     "<td align = 'center' >".$rowLTO["endingHour"]."</td>". 
-                    "<td align = 'center' >".$rowLTO["noOfCarsRegistered"]."</td>". 
+                    "<td align = 'center' >".$rowLTO["noOfDriversRegistered"]."</td>". 
        
                     "</tr>";
     

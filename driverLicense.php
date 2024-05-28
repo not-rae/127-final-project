@@ -101,9 +101,16 @@
                     "<td align = 'center' >".$rowtDriverLicense["expirationDate"]."</td>". 
                     "<td align = 'center' >".$rowtDriverLicense["conditionCode"]."</td>".
                     "<td align = 'center' >".$rowtDriverLicense["DLCode"]."</td>".  
+                    "<td align='center'>" .
+                    "<form action='editDriverLicense.php' method='post' style='display:inline;'>" .
+                    "<input type='hidden' name='driverID' value='".$rowtDriverLicense['driverID']."'>" .
+                    "<input type='hidden' name='driverName' value='".$rowtDriverLicense['driverNameDL']."'>" .
+                    "<input type='hidden' name='agencyCode' value='".$rowtDriverLicense['agencyCode']."'>" .
+                    "<input type='hidden' name='licenseNumber' value='".$rowtDriverLicense['licenseNumber']."'>" .
+                    "<button type='submit'>Edit</button>" .
+                    "</form>" .
+                    "</td>" .
                     "</tr>";
-
-                    
             }
         }
 

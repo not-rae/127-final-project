@@ -23,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Start transaction
         $conn->begin_transaction();
 
-        // Update carDriver table
+        // Update carOwner table
         $updateOwner = "UPDATE carOwner SET 
             ownerName = '$ownerName', 
             dateOfBirth = '$ownerDateOfBirth', 
@@ -37,36 +37,44 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             WHERE ownerID = '$ownerID'";
 
         // Execute the query
-        // update vehicle records
         if ($conn->query($updateOwner) === TRUE) {
+            // Update vehicle records
             $updateOwnerV = "UPDATE Vehicle SET 
                 ownerNameV = '$ownerName'
                 WHERE ownerID = '$ownerID'";
 
-            // Execute the query
             if ($conn->query($updateOwnerV) === TRUE) {
-                // Commit the transaction
-                $conn->commit();
-                echo "Owner information updated successfully.";
-                header("Location: owner.php");
-                exit;
+                // Update history records
+                $updateOwnerH = "UPDATE history SET 
+                    ownerNameH = '$ownerName'
+                    WHERE ownerID = '$ownerID'";
+
+                if ($conn->query($updateOwnerH) === TRUE) {
+                    // Commit the transaction
+                    $conn->commit();
+                    echo "Owner information updated successfully.";
+                    header("Location: owner.php");
+                    exit;
+                } else {
+                    // Rollback the transaction if there was an error
+                    $conn->rollback();
+                    echo "Error updating history information: " . $conn->error;
+                }
             } else {
                 // Rollback the transaction if there was an error
                 $conn->rollback();
-                echo "Error updating driverlicense information: " . $conn->error;
+                echo "Error updating vehicle information: " . $conn->error;
             }
         } else {
             // Rollback the transaction if there was an error
             $conn->rollback();
-            echo "Error updating carDriver information: " . $conn->error;
+            echo "Error updating owner information: " . $conn->error;
         }
-
     } else {
         echo "Error: All fields are required.";
     }
 
     $conn->close();
-
 } else {
     echo "Error: Invalid request method.";
 }
@@ -82,15 +90,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
     <h2>Update Owner Information</h2>
     <form action="editOwner.php" method="POST">
-    <div class="flex-container">
+        <div class="flex-container">
             <div>
                 <label for="ownerID">Owner ID:</label>
                 <input type="text" id="ownerID" name="ownerID" value="<?php echo htmlspecialchars($ownerID); ?>" readonly required>
             </div>
-                <div>
+            <div>
                 <label for="ownerName">Name:</label>
                 <input type="text" id="ownerName" name="ownerName" required>
-                </div>
+            </div>
             <div>
                 <label for="ownerDateOfBirth">Date of Birth:</label>
                 <input type="date" id="ownerDateOfBirth" name="ownerDateOfBirth" required>
@@ -146,8 +154,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         <label for="ownerAddress">Address:</label>
         <input type="text" id="ownerAddress" name="ownerAddress" required>
-    </div>   
-        <button name ="submit" type="submit">Update Owner</button>
+        
+        <button name="submit" type="submit">Update Owner</button>
     </form>
 </body>
 </html>

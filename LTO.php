@@ -104,7 +104,6 @@
                     "<td align = 'center' >".$rowLTO["startingHour"]."</td>". 
                     "<td align = 'center' >".$rowLTO["endingHour"]."</td>". 
                     "<td align = 'center' >".$rowLTO["noOfDriversRegistered"]."</td>". 
-       
                     "</tr>";
     
 

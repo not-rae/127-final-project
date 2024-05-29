@@ -103,7 +103,6 @@
                     "<td align = 'center' >".$rowVehicle["manufacturer"]."</td>".  
                     "<td align = 'center' >".$rowVehicle["yearProduced"]."</td>".
                     "<td align = 'center' >".$rowVehicle["fuel"]."</td>". 
-                    "<td align='center'>" .
                 "</tr>";
             }
         }

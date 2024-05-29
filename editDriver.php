@@ -37,14 +37,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             WHERE driverID = '$driverID'";
 
         // Execute the query
+        // Update driverLicense table
         if ($conn->query($updateDriver) === TRUE) {
-            // Update driverDetails table
-            $updateDriverDetails = "UPDATE driverlicense SET 
+            $updateDriverDL = "UPDATE driverlicense SET 
                 driverNameDL = '$driverName'
                 WHERE driverID = '$driverID'";
 
             // Execute the query
-            if ($conn->query($updateDriverDetails) === TRUE) {
+            if ($conn->query($updateDriverDL) === TRUE) {
                 // Commit the transaction
                 $conn->commit();
                 echo "Driver information updated successfully.";
@@ -60,14 +60,36 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         // Execute the query
+        // update vehicle records
         if ($conn->query($updateDriver) === TRUE) {
-            // Update driverDetails table
             $updateDriverV = "UPDATE Vehicle SET 
                 driverNameV = '$driverName'
                 WHERE driverID = '$driverID'";
 
             // Execute the query
             if ($conn->query($updateDriverV) === TRUE) {
+                // Commit the transaction
+                $conn->commit();
+                echo "Driver information updated successfully.";
+            } else {
+                // Rollback the transaction if there was an error
+                $conn->rollback();
+                echo "Error updating driverlicense information: " . $conn->error;
+            }
+        } else {
+            // Rollback the transaction if there was an error
+            $conn->rollback();
+            echo "Error updating carDriver information: " . $conn->error;
+        }
+
+        // update histoy records
+        if ($conn->query($updateDriver) === TRUE) {
+            $updateDriverH = "UPDATE history SET 
+                driverNameH = '$driverName'
+                WHERE driverID = '$driverID'";
+
+            // Execute the query
+            if ($conn->query($updateDriverH) === TRUE) {
                 // Commit the transaction
                 $conn->commit();
                 echo "Driver information updated successfully.";

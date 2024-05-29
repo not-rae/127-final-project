@@ -100,6 +100,19 @@
                     "<td align = 'center' >".$rowtHistory["noOfViolations"]."</td>". 
                     "<td align = 'center' >".$rowtHistory["recentViolationDate"]."</td>".
                     "<td align = 'center' >".$rowtHistory["DLCode"]."</td>".  
+                    "<td align='center'>" .
+                        "<form action='editHistory.php' method='post' style='display:inline;'>" .
+                            "<input type='hidden' name='plateNumber' value='".$rowtHistory['plateNumber']."'>" .
+                            "<input type='hidden' name='ownerNameH' value='".$rowtHistory['ownerNameH']."'>" .
+                            "<input type='hidden' name='driverNameH' value='".$rowtHistory['driverNameH']."'>" .
+                            "<input type='hidden' name='licenseNumber' value='".$rowtHistory['licenseNumber']."'>" .
+                            "<input type='hidden' name='agencyCode' value='".$rowtHistory['agencyCode']."'>" .
+                            "<input type='hidden' name='noOfViolations' value='".$rowtHistory['noOfViolations']."'>" .
+                            "<input type='hidden' name='recentViolationDate' value='".$rowtHistory['recentViolationDate']."'>" .
+                            "<input type='hidden' name='DLCode' value='".$rowtHistory['DLCode']."'>" .
+                            "<button type='submit'>Edit</button>" .
+                        "</form>" .
+                    "</td>" .
                     "</tr>";
 
                     

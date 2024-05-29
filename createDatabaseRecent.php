@@ -72,11 +72,15 @@
 
 // )";
 
-$sql = "ALTER TABLE vehicle
-ADD FOREIGN KEY (driverID) REFERENCES carDriver(driverID);";
+// $sql = "ALTER TABLE vehicle
+// ADD FOREIGN KEY (driverID) REFERENCES carDriver(driverID);";
 
 // $sql = "ALTER TABLE vehicle
 // ADD FOREIGN KEY (ownerID) REFERENCES carOwner(ownerID);";
+
+// $sql = "ALTER TABLE vehicle DROP FOREIGN KEY vehicle_ibfk_2;";
+
+
 
 
 
@@ -98,10 +102,10 @@ ADD FOREIGN KEY (driverID) REFERENCES carDriver(driverID);";
 // ADD FOREIGN KEY (agencyCode) REFERENCES LTO(agencyCode);";
 
 // $sql = "CREATE TABLE history(
-//     plateNumber VARCHAR(6) NOT NULL,
+//     plateNumber VARCHAR(6) NOT NULL UNIQUE,
 //     ownerNameH VARCHAR(100) NOT NULL,
 //     driverNameH VARCHAR(100) NOT NULL, 
-//     licenseNumber VARCHAR(11) NOT NULL,
+//     licenseNumber VARCHAR(11) NOT NULL UNIQUE,
 //     agencyCode VARCHAR(4) NOT NULL,
 //     noOfViolations INT NOT NULL,
 //     recentViolationDate DATE,
@@ -114,93 +118,51 @@ ADD FOREIGN KEY (driverID) REFERENCES carDriver(driverID);";
 // $sql = "ALTER TABLE history
 // ADD FOREIGN KEY (plateNumber) REFERENCES Vehicle(plateNumber);";
 
-$sql = "ALTER TABLE history
+// $sql = "ALTER TABLE history
+// ADD FOREIGN KEY (agencyCode) REFERENCES LTO(agencyCode);";
+
+// create history table
+$sql_history = "CREATE TABLE history(
+    plateNumber VARCHAR(6) NOT NULL UNIQUE,
+    ownerID VARCHAR(6) NOT NULL,
+    ownerNameH VARCHAR(100) NOT NULL,
+    driverID VARCHAR(10) NOT NULL,
+    driverNameH VARCHAR(100) NOT NULL, 
+    licenseNumber VARCHAR(11) NOT NULL UNIQUE,
+    agencyCode VARCHAR(4) NOT NULL,
+    noOfViolations INT NOT NULL,
+    recentViolationDate DATE,
+    DLCode VARCHAR(5) NOT NULL
+)";
+
+if ($conn->query($sql_history) === TRUE) {
+    echo "OKS history";
+    
+} else {
+    echo "Error creating database: " . $conn->error;
+}
+
+
+$sql_plateNo = "ALTER TABLE history
+ADD FOREIGN KEY (plateNumber) REFERENCES Vehicle(plateNumber);";
+
+if ($conn->query($sql_plateNo) === TRUE) {
+    echo "OKS history 2";
+    
+} else {
+    echo "Error creating database: " . $conn->error;
+}
+
+$sql_AC = "ALTER TABLE history
 ADD FOREIGN KEY (agencyCode) REFERENCES LTO(agencyCode);";
 
-
-// $sql = "CREATE TABLE owns(
-//     plateNumber VARCHAR(6) NOT NULL,
-//     ownerID VARCHAR(6) NOT NULL,
-//     purachaseDate DATE NOT NULL,
-//     purchasePrice INT(10) UNSIGNED
-
-// )";
-
-// $sql = "ALTER TABLE owns
-// ADD FOREIGN KEY (plateNumber) REFERENCES Vehicle(plateNumber);";
-
-// $sql = "CREATE TABLE record(
-//         agencyCode VARCHAR(4) NOT NULL,
-//         licenseNumber VARCHAR(11) NOT NULL,
-//         registrationDate DATE NOT NULL,
-//         expiryDate DATE NOT NULL
-//         -- foreign key(agencyCode, licenseNumber) references LTO, driverLicense
+if ($conn->query($sql_AC) === TRUE) {
+    echo "OKS history 3";
     
-// )";
-
-// $sql = "ALTER TABLE record
-// ADD FOREIGN KEY (agencyCode) REFERENCES LTO(agencyCode);";
-
-// $sql = "ALTER TABLE record
-// ADD FOREIGN KEY (licenseNumber) REFERENCES driverLicense(licenseNumber);";
-
-
-// $sql = "CREATE TABLE applies(
-//         driverID VARCHAR(10) NOT NULL,
-//         licenseNumber VARCHAR(11) NOT NULL,
-//         applicationDate DATE NOT NULL,
-//         applicationType VARCHAR(70) NOT NULL
-//         -- foreign key(driverID, licenseNumber) references carDriver, driverLicense
-    
-// )";
-
-// $sql = "ALTER TABLE applies
-// ADD FOREIGN KEY (driverID) REFERENCES carDriver(driverID);";
-
-// $sql = "ALTER TABLE applies
-// ADD FOREIGN KEY (licenseNumber) REFERENCES driverLicense(licenseNumber);";
-
-// $sql = "CREATE TABLE registration(
-//     agencyCode VARCHAR(4) NOT NULL,
-//     plateNumber VARCHAR(6) NOT NULL,
-//     registrationDate DATE NOT NULL,
-//     expiryDate DATE NOT NULL
-//     -- foreign key(agencyCode, plateNumber) references LTO, Vehicle
-
-// )";
-
-// $sql = "ALTER TABLE registration
-// ADD FOREIGN KEY (agencyCode) REFERENCES LTO(agencyCode);";
-
-// $sql = "ALTER TABLE registration
-// ADD FOREIGN KEY (plateNumber) REFERENCES Vehicle(plateNumber);";
-
-
-// $sql = "CREATE TABLE drive(
-//     driverID VARCHAR(10) NOT NULL,
-//     plateNumber VARCHAR(6) NOT NULL
-
-
-// )";
-
-// $sql = "ALTER TABLE drive
-// ADD FOREIGN KEY (driverID) REFERENCES carDriver(driverID);";
-
-// $sql = "ALTER TABLE drive
-// ADD FOREIGN KEY (plateNumber) REFERENCES Vehicle(plateNumber);";
-
-
-
-
-
-
-
-
-
- if ($conn->query($sql) === TRUE) {
-    echo "OKS 8";
-    
-    } else {
+} else {
     echo "Error creating database: " . $conn->error;
-    }
-?>
+}
+
+
+
+

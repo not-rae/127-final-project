@@ -79,7 +79,6 @@
             <th>Blood Type</th>
             <th>Weight (kg)</th>
             <th>Height (cm)</th>
-            <th>No. of Vehicles Own</th>
             <th>Actions</th>
         </tr>
         <?php
@@ -93,7 +92,6 @@
                     while($rowOwner = $resultOwner->fetch_assoc()) {
 
                 echo 
-
                     "<tr>". 
                     "<td align = 'center' >".$rowOwner["ownerID"]."</td>". 
                     "<td align = 'center' >".$rowOwner["ownerName"]."</td>". 
@@ -105,7 +103,6 @@
                     "<td align = 'center' >".$rowOwner["bloodType"]."</td>".  
                     "<td align = 'center' >".$rowOwner["weightInKG"]."</td>".
                     "<td align = 'center' >".$rowOwner["heightInCM"]."</td>". 
-                    "<td align = 'center' >".$rowOwner["noOfVehiclesOwned"]."</td>". 
                     "<td align='center'>" .
                             "<form action='deleteOwner.php' method='post' style='display:inline;'>" .
                                 "<input type='hidden' name='ownerID' value='".$rowOwner['ownerID']."'>" .
@@ -113,6 +110,15 @@
                             "</form>" .
                             "<form action='editOwner.php' method='post' style='display:inline;'>" .
                                 "<input type='hidden' name='ownerID' value='".$rowOwner['ownerID']."'>" .
+                                "<input type='hidden' name='ownerName' value='".$rowOwner['ownerName']."'>" .
+                             
+                      
+                                "<input type='hidden' name='ownerAddress' value='".$rowOwner['ownerAddress']."'>" .
+                                "<input type='hidden' name='ownerContact' value='".$rowOwner['contactNumber']."'>" .
+                                "<input type='hidden' name='ownerNationality' value='".$rowOwner['nationality']."'>" .
+                               
+                                "<input type='hidden' name='ownerWeight' value='".$rowOwner['weightInKG']."'>" .
+                                "<input type='hidden' name='ownerHeight' value='".$rowOwner['heightInCM']."'>" .
                                 "<button type='submit'>Edit</button>" .
                             "</form>" .
                     "</td>" .

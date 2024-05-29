@@ -93,7 +93,7 @@
                 <th>Actions</th>
             </tr>
             </thead>
-            <tbody class="table-content">
+  
             <?php
             include 'DBConnector.php';
 
@@ -115,12 +115,19 @@
                         "<td align='center'>".$rowDriver["weightInKG"]."</td>". 
                         "<td align='center'>".$rowDriver["heightInCM"]."</td>". 
                         "<td align='center'>" .
-                            "<form action='deleteEmployee.php' method='post' style='display:inline;'>" .
+                            "<form action='deleteDriver.php' method='post' style='display:inline;'>" .
                                 "<input type='hidden' name='driverID' value='".$rowDriver['driverID']."'>" .
                                 "<button type='submit'>Delete</button>" .
                             "</form>" .
                             "<form action='editDriver.php' method='post' style='display:inline;'>" .
                                 "<input type='hidden' name='driverID' value='".$rowDriver['driverID']."'>" .
+                                "<input type='hidden' name='driverName' value='".$rowDriver['driverName']."'>" .
+                                "<input type='hidden' name='driverDateOfBirth' value='".$rowDriver['dateOfBirth']."'>" .
+                                "<input type='hidden' name='driverAddress' value='".$rowDriver['driverAddress']."'>" .
+                                "<input type='hidden' name='driverContact' value='".$rowDriver['contactNumber']."'>" .
+                                "<input type='hidden' name='driverNationality' value='".$rowDriver['nationality']."'>" .
+                                "<input type='hidden' name='driverWeight' value='".$rowDriver['weightInKG']."'>" .
+                                "<input type='hidden' name='driverHeight' value='".$rowDriver['heightInCM']."'>" .
                                 "<button type='submit'>Edit</button>" .
                             "</form>" .
                         "</td>" .
@@ -130,7 +137,7 @@
                 echo "<tr><td colspan='11'>0 results</td></tr>";
             }
             ?>
-            </tbody>
+        
         </table>
     </div>
     <div class="button-container">

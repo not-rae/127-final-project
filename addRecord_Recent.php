@@ -137,8 +137,8 @@ if(isset($_POST['SubmitRecord'])) {
     // History
     $no_Of_Violations = $_POST["noOfViolations"];
     $violationDate = $_POST["violationDate"];
-    $insertHistory = "INSERT INTO history (plateNumber, ownerNameH, driverNameH, licenseNumber, agencyCode, noOfViolations, recentViolationDate, DLCode) 
-    VALUES ('$vehiclePlateNumber', '$ownerName', '$driverName', '$licenseNumber', '$agencyCode', '$no_Of_Violations', '$violationDate', '$dlCode');"; 
+    $insertHistory = "INSERT INTO history (plateNumber, ownerID, ownerNameH, driverID, driverNameH, licenseNumber, agencyCode, noOfViolations, recentViolationDate, DLCode) 
+    VALUES ('$vehiclePlateNumber', '$ownerID', '$ownerName', '$driverID', '$driverName', '$licenseNumber', '$agencyCode', '$no_Of_Violations', '$violationDate', '$dlCode');"; 
 
     if ($conn->query($insertHistory) === TRUE) {
         echo "History added into the database.";

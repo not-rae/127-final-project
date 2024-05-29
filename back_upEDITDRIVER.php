@@ -106,7 +106,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo "Error updating carDriver information: " . $conn->error;
         }
 
-
     } else {
         echo "Error: All fields are required.";
     }
@@ -135,15 +134,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
             <div>
                 <label for="driverName">Name:</label>
-                <input type="text" id="driverName" name="driverName" value="<?php echo htmlspecialchars($driverName); ?>" required>
+                <input type="text" id="driverName" name="driverName" required>
             </div>
             <div>
                 <label for="driverDateOfBirth">Date of Birth:</label>
-                <input type="date" id="driverDateOfBirth" name="driverDateOfBirth"  required>
+                <input type="date" id="driverDateOfBirth" name="driverDateOfBirth" required>
             </div>
             <div>
                 <label for="driverSex">Sex:</label>
-                <select id="driverSex" name="driverSex"  required>
+                <select id="driverSex" name="driverSex" required>
                     <option value="" disabled selected>Select below</option>
                     <option value="M">Male</option>
                     <option value="F">Female</option>
@@ -152,7 +151,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
             <div>
                 <label for="driverBloodType">Blood Type:</label>
-                <select id="driverBloodType" name="driverBloodType"  required>
+                <select id="driverBloodType" name="driverBloodType" required>
                     <option value="" disabled selected>Select below</option>
                     <option value="AB+">AB+</option>
                     <option value="AB-">AB-</option>
@@ -167,27 +166,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
             <div>
                 <label for="driverContact">Contact Number:</label>
-                <input type="tel" id="driverContact" name="driverContact" value="<?php echo htmlspecialchars($driverContact); ?>"required>
+                <input type="tel" id="driverContact" name="driverContact" required>
             </div>
         </div>
 
         <div class="flex-container">
             <div>
                 <label for="driverNationality">Nationality:</label>
-                <input type="text" id="driverNationality" name="driverNationality" value="<?php echo htmlspecialchars($driverNationality); ?>"required>
+                <input type="text" id="driverNationality" name="driverNationality" required>
             </div>
             <div>
                 <label for="driverWeight">Weight (kg):</label>
-                <input type="number" id="driverWeight" name="driverWeight" value="<?php echo htmlspecialchars($driverWeight); ?>"required>
+                <input type="number" id="driverWeight" name="driverWeight" required>
             </div>
             <div>
                 <label for="driverHeight">Height (cm):</label>
-                <input type="number" id="driverHeight" name="driverHeight" value="<?php echo htmlspecialchars($driverHeight); ?>"required>
+                <input type="number" id="driverHeight" name="driverHeight" required>
             </div>
         </div>
 
         <label for="driverAddress">Address:</label>
-        <input type="text" id="driverAddress" name="driverAddress" value="<?php echo htmlspecialchars($driverAddress); ?>"required>
+        <input type="text" id="driverAddress" name="driverAddress" required>
 
         <button name ="submit" type="submit">Update Driver</button>
     </form>

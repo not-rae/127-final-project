@@ -1,3 +1,12 @@
+<!-- 
+    This is responsible for taking the values from the user which
+    handles all the necessary information needed by each table.
+    
+
+ -->
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -107,7 +116,10 @@
     
     <form class="add-data-form" action="addRecord_Recent.php" method="post">
     <div class="add-record-container">
+
+
         <!-- Owner Information -->
+
         <h2>Owner Information</h2>
             <div class="flex-container">
                 <div>
@@ -168,7 +180,9 @@
     </div>   
     
     <div class="add-record-container">
+    
         <!-- Driver Information -->
+
         <h2>Driver Information</h2>
         <div class="flex-container">
             <div>
@@ -231,6 +245,7 @@
     <div class="add-record-container">
 
         <!-- Driver License Information -->
+
         <h2>Driver License Information</h2>
         <div class="flex-container">
             <div>
@@ -300,6 +315,7 @@
     <div class="add-record-container">
 
         <!-- Vehicle Information -->
+
         <h2>Vehicle Information</h2>
         <div class="flex-container">
             <div>
@@ -350,6 +366,7 @@
     <div class="add-record-container">
 
         <!-- History Records -->
+
         <h2>History Records</h2>
         <div class="flex-container">
             <div>

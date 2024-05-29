@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $conn->begin_transaction();
 
-        // Update carDriver table
+        // Update driverLicense table
         $updateDL = "UPDATE driverLicense SET 
             driverID = '$driverID', 
             driverNameDL = '$driverName', 
@@ -63,6 +63,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     echo "Error: Invalid request method.";
 }
 ?>
+
+<!-- 
+    The Form which is used to update the driverLicense values.
+
+    All informations are already displayed in the box except for 
+    issue date, expiration date, conditon code, and DL code.
+    
+    All values cannot be updated except for the issue date, 
+    expiration date, conditon code, and DL code.
+
+ -->
+
 
 <!DOCTYPE html>
 <html lang="en">

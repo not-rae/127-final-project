@@ -1,3 +1,8 @@
+<!-- 
+    This is responsible for showing the values from the driverLicense table
+
+-->
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -73,7 +78,6 @@
             <th>Name</th>
             <th>License Number</th>
             <th>Agency Code</th>
-            <!-- <th>Application Type</th> -->
             <th>Issue Date</th>
             <th>Expiration Date</th>
             <th>Condition Code</th>
@@ -102,6 +106,9 @@
                     "<td align = 'center' >".$rowtDriverLicense["conditionCode"]."</td>".
                     "<td align = 'center' >".$rowtDriverLicense["DLCode"]."</td>".  
                     "<td align='center'>" .
+
+                    //returns the values from the table that will be used in the editDriver.php
+
                     "<form action='editDriverLicense.php' method='post' style='display:inline;'>" .
                     "<input type='hidden' name='driverID' value='".$rowtDriverLicense['driverID']."'>" .
                     "<input type='hidden' name='driverName' value='".$rowtDriverLicense['driverNameDL']."'>" .

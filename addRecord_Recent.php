@@ -60,10 +60,10 @@ if(isset($_POST['SubmitRecord'])) {
     $ownerHeight = $_POST["ownerHeight"];
     $ownerWeight = $_POST["ownerWeight"];
     $ownerAddress = $_POST["ownerAddress"];
-    $no_Of_Vehicles_Owned = $_POST["noOfVehiclesOwned"];
+  
 
-    $insertOwner = "INSERT INTO carowner (ownerID, ownerName, dateOfBirth, sex, bloodType, contactNumber, nationality, heightInCM, weightInKG, ownerAddress, noOfVehiclesOwned) 
-    VALUES('$ownerID', '$ownerName', '$ownerDateOfBirth', '$ownerSex', '$ownerBloodType', '$ownerContact', '$ownerNationality', '$ownerHeight', '$ownerWeight', '$ownerAddress','$no_Of_Vehicles_Owned');";
+    $insertOwner = "INSERT INTO carowner (ownerID, ownerName, dateOfBirth, sex, bloodType, contactNumber, nationality, heightInCM, weightInKG, ownerAddress) 
+    VALUES('$ownerID', '$ownerName', '$ownerDateOfBirth', '$ownerSex', '$ownerBloodType', '$ownerContact', '$ownerNationality', '$ownerHeight', '$ownerWeight', '$ownerAddress');";
 
     if ($conn->query($insertOwner) === TRUE) {
         echo "Owner added into the database.";
@@ -145,6 +145,8 @@ if(isset($_POST['SubmitRecord'])) {
     } else {
         echo "Error inserting history: " . $conn->error;
     }
+
+
 
 }
 ?>

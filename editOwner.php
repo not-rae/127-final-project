@@ -1,11 +1,18 @@
+<!-- 
+    This is responsible for updating the necessary information on the carowner table.
+    
+ -->
+
 <?php
-// Database connection
+
 include 'DBConnector.php';
 
-// Check if form was submitted
+
+
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    // Get the form data and sanitize it
+    // Get the form data and remove whitespaces
     $ownerID = isset($_POST["ownerID"]) ? trim($_POST["ownerID"]) : '';
     $ownerName = isset($_POST["ownerName"]) ? trim($_POST["ownerName"]) : '';
     $ownerDateOfBirth = isset($_POST["ownerDateOfBirth"]) ? trim($_POST["ownerDateOfBirth"]) : '';
@@ -20,10 +27,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Validate that all required fields are filled out
     if ($ownerID != "" && $ownerName != "" && $ownerDateOfBirth != "" && $ownerSex != "" && $ownerBloodType != "" && $ownerContact != "" && $ownerNationality != "" && $ownerHeight != "" && $ownerWeight != "" && $ownerAddress != "") {
 
-        // Start transaction
+       
         $conn->begin_transaction();
 
-        // Update carOwner table
+        // Update carowner table
         $updateOwner = "UPDATE carOwner SET 
             ownerName = '$ownerName', 
             dateOfBirth = '$ownerDateOfBirth', 
@@ -38,47 +45,53 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // Execute the query
         if ($conn->query($updateOwner) === TRUE) {
-            // Update vehicle records
+
+            //Update the vehicle table
             $updateOwnerV = "UPDATE Vehicle SET 
                 ownerNameV = '$ownerName'
                 WHERE ownerID = '$ownerID'";
 
+            // Execute the query
             if ($conn->query($updateOwnerV) === TRUE) {
-                // Update history records
-                $updateOwnerH = "UPDATE history SET 
-                    ownerNameH = '$ownerName'
-                    WHERE ownerID = '$ownerID'";
+                // Commit the transaction
+                $conn->commit();
+                header("Location: owner.php");
+                exit;
 
-                if ($conn->query($updateOwnerH) === TRUE) {
-                    // Commit the transaction
-                    $conn->commit();
-                    echo "Owner information updated successfully.";
-                    header("Location: owner.php");
-                    exit;
-                } else {
-                    // Rollback the transaction if there was an error
-                    $conn->rollback();
-                    echo "Error updating history information: " . $conn->error;
-                }
             } else {
                 // Rollback the transaction if there was an error
                 $conn->rollback();
-                echo "Error updating vehicle information: " . $conn->error;
+                error_log("Error updating Vehicle information: " . $conn->error);
+                echo "Error updating Vehicle information.";
             }
         } else {
             // Rollback the transaction if there was an error
             $conn->rollback();
-            echo "Error updating owner information: " . $conn->error;
+            error_log("Error updating carOwner information: " . $conn->error);
+            echo "Error updating carOwner information.";
         }
+
     } else {
         echo "Error: All fields are required.";
     }
 
     $conn->close();
+
 } else {
     echo "Error: Invalid request method.";
 }
 ?>
+
+<!-- 
+    The Form which is used to update the carowner values.
+
+    All informations are already displayed in the box except for 
+    date of birth, sex, and blood type.
+
+    The ownerID cannot be updated. 
+
+ -->
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -90,22 +103,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
     <h2>Update Owner Information</h2>
     <form action="editOwner.php" method="POST">
-        <div class="flex-container">
+    <div class="flex-container">
             <div>
                 <label for="ownerID">Owner ID:</label>
                 <input type="text" id="ownerID" name="ownerID" value="<?php echo htmlspecialchars($ownerID); ?>" readonly required>
             </div>
-            <div>
+                <div>
                 <label for="ownerName">Name:</label>
-                <input type="text" id="ownerName" name="ownerName" required>
-            </div>
+                <input type="text" id="ownerName" name="ownerName" value="<?php echo htmlspecialchars($ownerName); ?>"required>
+                </div>
             <div>
                 <label for="ownerDateOfBirth">Date of Birth:</label>
-                <input type="date" id="ownerDateOfBirth" name="ownerDateOfBirth" required>
+                <input type="date" id="ownerDateOfBirth" name="ownerDateOfBirth"  required>
             </div>
             <div>
                 <label for="ownerSex">Sex:</label>
-                <select id="ownerSex" name="ownerSex" required>
+                <select id="ownerSex" name="ownerSex"  required >
                     <option value="" disabled selected>Select below</option>
                     <option value="M">Male</option>
                     <option value="F">Female</option>
@@ -114,7 +127,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
             <div>
                 <label for="ownerBloodType">Blood Type:</label>
-                <select id="ownerBloodType" name="ownerBloodType" required>
+                <select id="ownerBloodType" name="ownerBloodType"  required>
                     <option value="" disabled selected>Select below</option>
                     <option value="AB+">AB+</option>
                     <option value="AB-">AB-</option>
@@ -129,33 +142,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
             <div>
                 <label for="ownerContact">Contact Number:</label>
-                <input type="tel" id="ownerContact" name="ownerContact" required>
+                <input type="tel" id="ownerContact" name="ownerContact" value="<?php echo htmlspecialchars($ownerContact); ?>" required>
             </div>
         </div>
 
         <div class="flex-container">
             <div>
                 <label for="ownerNationality">Nationality:</label>
-                <input type="text" id="ownerNationality" name="ownerNationality" required>
+                <input type="text" id="ownerNationality" name="ownerNationality" value="<?php echo htmlspecialchars($ownerNationality); ?>"required>
             </div>
             <div>
                 <label for="ownerWeight">Weight (kg):</label>
-                <input type="number" id="ownerWeight" name="ownerWeight" required>
+                <input type="number" id="ownerWeight" name="ownerWeight"  value="<?php echo htmlspecialchars($ownerWeight); ?>" required>
             </div>
             <div>
                 <label for="ownerHeight">Height (cm):</label>
-                <input type="number" id="ownerHeight" name="ownerHeight" required>
-            </div>
-            <div>
-                <label for="noOfVehiclesOwned">Number of Vehicles Owned:</label>
-                <input type="number" id="noOfVehiclesOwned" name="noOfVehiclesOwned" required>
+                <input type="number" id="ownerHeight" name="ownerHeight"  value="<?php echo htmlspecialchars($ownerHeight); ?>" required>
             </div>
         </div>
 
         <label for="ownerAddress">Address:</label>
-        <input type="text" id="ownerAddress" name="ownerAddress" required>
-        
-        <button name="submit" type="submit">Update Owner</button>
+        <input type="text" id="ownerAddress" name="ownerAddress" value="<?php echo htmlspecialchars($ownerAddress); ?>" required>
+    </div>   
+        <button name ="submit" type="submit">Update Owner</button>
     </form>
 </body>
 </html>

@@ -1,3 +1,10 @@
+<!-- 
+    This is responsible for showing the values from the lto table
+
+-->
+
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -5,30 +12,27 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            display: flex;
+            /* display: flex; */
             flex-direction: column;
             align-items: center;
             justify-content: center;
             height: 100vh;
             margin: 0;
             background-color: #f0f0f0;
+            margin-left: 10%;
         }
         h1 {
-            margin-bottom: 20px;
-        }
-        .table-container {
-            width: 95%; /* Adjust as needed */
-            max-height: 500px; /* Set a fixed height for the scrollable area */
-            overflow-y: auto; /* Enable vertical scrolling */
-            margin: 20px 0;
+            margin-bottom: 40px;
+            margin-left: 35%;
         }
         table {
             border-collapse: collapse;
-            width: 100%;
-            table-layout: fixed; /* Ensure table takes full width */
+            width: 80%;
+            margin: 20px 0;
         }
         table, th, td {
             border: 1px solid #ddd;
+            margin-bottom: 2%;
         }
         th, td {
             padding: 12px;
@@ -36,18 +40,12 @@
         }
         th {
             background-color: #f2f2f2;
-            position: sticky;
-            top: 0; /* Stick the header to the top */
-            z-index: 1; /* Ensure header is above the table body */
-        }
-
-        thead {
-            justify-content: center;
         }
         .button-container {
             display: flex;
             gap: 10px;
             margin-top: 20px;
+            margin-left: 40%;
         }
         .button-container button {
             padding: 10px 20px;
@@ -80,48 +78,54 @@
 </head>
 <body>
     <h1>LTO Records</h1>
-    <div class="table-container">
-        <table>
-            <thead>
-            <tr>
-                <th>Agency Code</th>
-                <th>Agency Name</th>
-                <th>Location</th>
-                <th>Email Address</th>
-                <th>Contact Number</th>
-                <th>Starting Hour</th>
-                <th>Ending Hour</th>
-                <th>No. of Drivers Registered</th>
-            </tr>
-            </thead>
-            <tbody class="table-content">
-            <?php
-            include 'DBConnector.php';
+    <table>
+        <tr>
+            <th>Agency Code</th>
+            <th>Agency Name</th>
+            <th>Location</th>
+            <th>Email Address</th>
+            <th>Contact Number</th>
+            <th>Starting Hour</th>
+            <th>Ending Hour</th>
+            <th>No. of Drivers Registered</th>
+            <th>Actions</th>
+        </tr>
+    <?php
+    include 'DBConnector.php';
 
-            $sqlLTO = "SELECT * FROM LTO";
-            $resultLTO = $conn->query($sqlLTO);
-            
-            if($resultLTO->num_rows > 0){
-                    while($rowLTO = $resultLTO->fetch_assoc()) {
-                        echo 
-                            "<tr>". 
-                            "<td align = 'center' >".$rowLTO["agencyCode"]."</td>". 
-                            "<td align = 'center' >".$rowLTO["agencyName"]."</td>". 
-                            "<td align = 'center' >".$rowLTO["LTOaddress"]."</td>". 
-                            "<td align = 'center' >".$rowLTO["emailAddress"]."</td>". 
-                            "<td align = 'center' >".$rowLTO["contactNumber"]."</td>". 
-                            "<td align = 'center' >".$rowLTO["startingHour"]."</td>". 
-                            "<td align = 'center' >".$rowLTO["endingHour"]."</td>". 
-                            "<td align = 'center' >".$rowLTO["noOfDriversRegistered"]."</td>". 
-                            "</tr>";       
-                    }
-            } else {
-                echo "0 results";
+    $sqlLTO = "SELECT * FROM LTO";
+    $resultLTO = $conn->query($sqlLTO);
+    
+    
+    if($resultLTO->num_rows > 0){
+            while($rowLTO = $resultLTO->fetch_assoc()) {
+    
+                echo 
+    
+                    "<tr>". 
+                    "<td align = 'center' >".$rowLTO["agencyCode"]."</td>". 
+                    "<td align = 'center' >".$rowLTO["agencyName"]."</td>". 
+                    "<td align = 'center' >".$rowLTO["LTOaddress"]."</td>". 
+                    "<td align = 'center' >".$rowLTO["emailAddress"]."</td>". 
+                    "<td align = 'center' >".$rowLTO["contactNumber"]."</td>". 
+                    "<td align = 'center' >".$rowLTO["startingHour"]."</td>". 
+                    "<td align = 'center' >".$rowLTO["endingHour"]."</td>". 
+                    "<td align = 'center' >".$rowLTO["noOfDriversRegistered"]."</td>". 
+       
+                    "</tr>";
+    
+
+                     
             }
-            ?>
-            </tbody>
-        </table>
-    </div>
+        }
+    
+        else {
+            echo "0 results";
+    
+        }
+
+    ?>
+    </table>
     <div class="button-container">
         <button onclick="window.location.href='index.php'">Back to Menu</button>
     </div>

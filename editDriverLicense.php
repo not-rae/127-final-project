@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $conn->begin_transaction();
 
-        // Update carDriver table
+        // Update driverLicense table
         $updateDL = "UPDATE driverLicense SET 
             driverID = '$driverID', 
             driverNameDL = '$driverName', 
@@ -56,16 +56,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
 
-    } else {
-        echo "Error: All fields are required.";
-    }
-
+    } 
     $conn->close();
 
 } else {
     echo "Error: Invalid request method.";
 }
 ?>
+
+<!-- 
+    The Form which is used to update the driverLicense values.
+
+    All informations are already displayed in the box except for 
+    issue date, expiration date, conditon code, and DL code.
+    
+    All values cannot be updated except for the issue date, 
+    expiration date, conditon code, and DL code.
+
+ -->
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -74,6 +83,104 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Update Driver License Information</title>
 </head>
+<style>
+        /* Body style */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+
+        /* Container style */
+        .container {
+            width: 70%;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Form style */
+        form {
+            width: 100%;
+            margin: 20px auto;
+        }
+
+        /* Title style */
+        h2 {
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        /* Label style */
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        /* Input style */
+        input[type="text"],
+        input[type="date"],
+        input[type="number"],
+        input[type="tel"],
+        select {
+            width: 95%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        /* Button style */
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Submit button style */
+        input[type="submit"] {
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin: 0 auto;
+            display: block;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #218838;
+        }
+
+        .flex-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .flex-container > div {
+            flex: 1;
+            min-width: 45%;
+            margin-bottom: 15px;
+        }
+
+        .button-container {
+            text-align: right;
+        }
+    </style>
 <body>
     <h2>Update Driver License Information</h2>
     <form action="editDriverLicense.php" method="POST">
@@ -134,8 +241,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <button name ="submit" type="submit">Update Driver License</button>
     </form>
 </body>
-<<<<<<< HEAD
 </html>
-=======
-</html>
->>>>>>> 69d7af889dbfece1d90ec5d682645e938b7e01c3

@@ -1,67 +1,53 @@
 <?php
+    include 'DBConnector.php';
 
-include 'DBConnector.php';
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $driverID = isset($_POST["driverID"]) ? trim($_POST["driverID"]) : '';
+        $driverName = isset($_POST["driverName"]) ? trim($_POST["driverName"]) : '';
+        $licenseNumber = isset($_POST["licenseNumber"]) ? trim($_POST["licenseNumber"]) : '';
+        $agencyCode = isset($_POST["agencyCode"]) ? trim($_POST["agencyCode"]) : '';
+        $issueDate = isset($_POST["issueDate"]) ? trim($_POST["issueDate"]) : '';
+        $expirationDate = isset($_POST["expirationDate"]) ? trim($_POST["expirationDate"]) : '';
+        $conditionCode = isset($_POST["conditionCode"]) ? trim($_POST["conditionCode"]) : '';
+        $dlCode = isset($_POST["dlCode"]) ? trim($_POST["dlCode"]) : '';
 
+        if ($driverID != "" && $driverName != "" && $licenseNumber != "" && $agencyCode != "" && $issueDate != "" && $expirationDate != "" && $conditionCode != "" && $dlCode != "" ) {
+        
+            $conn->begin_transaction();
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
-
-    $driverID = isset($_POST["driverID"]) ? trim($_POST["driverID"]) : '';
-    $driverName = isset($_POST["driverName"]) ? trim($_POST["driverName"]) : '';
-    $licenseNumber = isset($_POST["licenseNumber"]) ? trim($_POST["licenseNumber"]) : '';
-    $agencyCode = isset($_POST["agencyCode"]) ? trim($_POST["agencyCode"]) : '';
-    $issueDate = isset($_POST["issueDate"]) ? trim($_POST["issueDate"]) : '';
-    $expirationDate = isset($_POST["expirationDate"]) ? trim($_POST["expirationDate"]) : '';
-    $conditionCode = isset($_POST["conditionCode"]) ? trim($_POST["conditionCode"]) : '';
-    $dlCode = isset($_POST["dlCode"]) ? trim($_POST["dlCode"]) : '';
-
-
-    if ($driverID != "" && $driverName != "" && $licenseNumber != "" && $agencyCode != "" && $issueDate != "" && $expirationDate != "" && $conditionCode != "" && $dlCode != "" ) {
-
-
-        $conn->begin_transaction();
-
-        // Update driverLicense table
-        $updateDL = "UPDATE driverLicense SET 
-            driverID = '$driverID', 
-            driverNameDL = '$driverName', 
-            agencyCode = '$agencyCode', 
-            issueDate = '$issueDate', 
-            expirationDate = '$expirationDate', 
-            conditionCode = '$conditionCode', 
-            DLCode = '$dlCode'
-            WHERE licenseNumber = '$licenseNumber'";
-
-        // Execute the query
-        if ($conn->query($updateDL) === TRUE) {
-     
-            $updateHistoryDetail = "UPDATE history SET 
+            // Update driverLicense table
+            $updateDL = "UPDATE driverLicense SET 
+                driverID = '$driverID', 
+                driverNameDL = '$driverName', 
+                agencyCode = '$agencyCode', 
+                issueDate = '$issueDate', 
+                expirationDate = '$expirationDate', 
+                conditionCode = '$conditionCode', 
                 DLCode = '$dlCode'
                 WHERE licenseNumber = '$licenseNumber'";
 
-            if ($conn->query($updateHistoryDetail) === TRUE) {
-               
-                $conn->commit();
-                echo "Driver information updated successfully.";
-                header('Location: driverLicense.php');
+            // update history details
+            if ($conn->query($updateDL) === TRUE) {
+                $updateHistoryDetail = "UPDATE history SET 
+                    DLCode = '$dlCode'
+                    WHERE licenseNumber = '$licenseNumber'";
+                if ($conn->query($updateHistoryDetail) === TRUE) {
+                    $conn->commit();
+                    echo "Driver information updated successfully.";
+                    header('Location: driverLicense.php');
+                } else {
+                    $conn->rollback();
+                    echo "Error updating information: " . $conn->error;
+                }
             } else {
-                
                 $conn->rollback();
-                echo "Error updating driverlicense information: " . $conn->error;
+                echo "Error updating information: " . $conn->error;
             }
-        } else {
-           
-            $conn->rollback();
-            echo "Error updating driverLicense information: " . $conn->error;
-        }
-
-
-    } 
-    $conn->close();
-
-} else {
-    echo "Error: Invalid request method.";
-}
+        } 
+        $conn->close();
+    } else {
+        echo "Error: Invalid request method.";
+    }
 ?>
 
 <!-- 
@@ -75,7 +61,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
  -->
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -87,15 +72,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         /* Body style */
         body {
             font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
             margin: 0;
-            padding: 0;
-            background-color: #f0f0f0;
+            background-color: #ffffff;
         }
 
         /* Container style */
         .container {
-            width: 70%;
-            margin: 20px auto;
+            width: 50%;
+            height: 30%;
+            margin: 10px 55px;
             background-color: #fff;
             padding: 20px;
             border-radius: 5px;
@@ -110,8 +99,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         /* Title style */
         h2 {
-            color: #333;
-            margin-bottom: 15px;
+            font-size: 45px;
+            margin-bottom: 20px;
+
         }
 
         /* Label style */
@@ -120,13 +110,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             margin-bottom: 5px;
         }
 
-        /* Input style */
-        input[type="text"],
-        input[type="date"],
-        input[type="number"],
-        input[type="tel"],
+        #driverName,
+        #licenseNumber,
+        #agencyCode,
+        #driverID {
+            background-color: #c7f9cc;
+        }
+
+        input[type="text"] {
+            width: 83%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
         select {
-            width: 95%;
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        input[type="date"] {
+            width: 80%;
             padding: 10px;
             margin-bottom: 15px;
             border: 1px solid #ccc;
@@ -136,33 +142,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         /* Button style */
         button {
             padding: 10px 20px;
-            background-color: #007bff;
+            background-color: #28a745;
             color: #fff;
             border: none;
-            border-radius: 5px;
+            border-radius: 10px;
             cursor: pointer;
             transition: background-color 0.3s;
+            margin: 1rem 0 0 1rem;
         }
 
         button:hover {
-            background-color: #0056b3;
+            background-color: red;
         }
 
         /* Submit button style */
         input[type="submit"] {
-            padding: 10px 20px;
-            background-color: #28a745;
+            font-size: 18px;
+            padding: 18px 40px;
             color: #fff;
             border: none;
-            border-radius: 5px;
+            border-radius: 30px;
             cursor: pointer;
             transition: background-color 0.3s;
-            margin: 0 auto;
+            margin: 30px auto;
             display: block;
-        }
-
-        input[type="submit"]:hover {
-            background-color: #218838;
         }
 
         .flex-container {
@@ -170,27 +173,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             flex-wrap: wrap;
             justify-content: space-between;
         }
-
-        .flex-container > div {
-            flex: 1;
-            min-width: 45%;
-            margin-bottom: 15px;
-        }
-
-        .button-container {
-            text-align: right;
-        }
     </style>
 <body>
     <h2>Update Driver License Information</h2>
-    <form action="editDriverLicense.php" method="POST">
+    <form class="container" action="editDriverLicense.php" method="POST">
         <div class="flex-container">
             <div>
                 <label for="driverID">Driver ID:</label>
                 <input type="text" id="driverID" name="driverID" value="<?php echo htmlspecialchars($driverID); ?>" readonly required>
             </div>
             <div>
-                <label for="driverName">Name:</label>
+                <label for="driverName"> Driver Name:</label>
                 <input type="text" id="driverName" name="driverName" value="<?php echo htmlspecialchars($driverName); ?>" readonly required>
             </div>
             <div>
@@ -212,33 +205,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div>
             <label for="conditionCode">Condition Code:</label>
                 <select id="conditionCode" name="conditionCode" required>
-                    <option value="">Select Type</option>
-                    <option value="A/1">Condition A/1</option>
-                    <option value="B/2">Condition B/2</option>
-                    <option value="C/2">Condition C/2</option>
-                    <option value="3">Condition 3</option>
-                    <option value="D/4">Condition D/4</option>
-                    <option value="E/5">Condition E/5</option>
-                    <option value="None">None</option>
+                    <option value="" disabled>Select Type</option>
+                    <option value="A/1" <?php echo ($conditionCode == 'A/1') ? 'selected' : ''; ?>>Condition A/1</option>
+                    <option value="B/2" <?php echo ($conditionCode == 'B/2') ? 'selected' : ''; ?>>Condition B/2</option>
+                    <option value="C/2" <?php echo ($conditionCode == 'C/2') ? 'selected' : ''; ?>>Condition C/2</option>
+                    <option value="3" <?php echo ($conditionCode == '3') ? 'selected' : ''; ?>>Condition 3</option>
+                    <option value="D/4" <?php echo ($conditionCode == 'D/4') ? 'selected' : ''; ?>>Condition D/4</option>
+                    <option value="E/5" <?php echo ($conditionCode == 'E/5') ? 'selected' : ''; ?>>Condition E/5</option>
+                    <option value="None" <?php echo ($conditionCode == 'None') ? 'selected' : ''; ?>>None</option>
                 </select>
             </div>
             <div>
             <label for="DLCode">DL Code:</label>
                 <select id="dlCode" name="dlCode" required>
-                    <option value="">Select DL Code</option>
-                    <option value="R1">Motorbikes or motorized tricycles</option>
-                    <option value="R2">Motor vehicle up to 4500 kg GVW</option>
-                    <option value="R3">Motor vehicle above 4500 kg GVW</option>
-                    <option value="R4">Automatic transmission up to 4500 kg GVW</option>
-                    <option value="R5">Automatic transmission above 4500 kg GVW</option>
-                    <option value="R6">Articulated Vehicle 1600 kg GVW & below</option>
-                    <option value="R7">Articulated Vehicle 1601 kg up to 4500 kg GVW</option>
-                    <option value="R8">Articulated Vehicle 4501 kg & above GVW</option>
-
+                    <option value="" disabled>Select DL Code</option>
+                    <option value="R1" <?php echo ($dlCode == 'R1') ? 'selected' : ''; ?>>Motorbikes or motorized tricycles</option>
+                    <option value="R2" <?php echo ($dlCode == 'R2') ? 'selected' : ''; ?>>Motor vehicle up to 4500 kg GVW</option>
+                    <option value="R3" <?php echo ($dlCode == 'R3') ? 'selected' : ''; ?>>Motor vehicle above 4500 kg GVW</option>
+                    <option value="R4" <?php echo ($dlCode == 'R4') ? 'selected' : ''; ?>>Automatic transmission up to 4500 kg GVW</option>
+                    <option value="R5" <?php echo ($dlCode == 'R5') ? 'selected' : ''; ?>>Automatic transmission above 4500 kg GVW</option>
+                    <option value="R6" <?php echo ($dlCode == 'R6') ? 'selected' : ''; ?>>Articulated Vehicle 1600 kg GVW & below</option>
+                    <option value="R7" <?php echo ($dlCode == 'R7') ? 'selected' : ''; ?>>Articulated Vehicle 1601 kg up to 4500 kg GVW</option>
+                    <option value="R8" <?php echo ($dlCode == 'R8') ? 'selected' : ''; ?>>Articulated Vehicle 4501 kg & above GVW</option>
                 </select>
             </div>
         </div>
         <button name ="submit" type="submit">Update Driver License</button>
+        <button onclick="window.location.href='driverLicense.php'">Cancel</button>
     </form>
 </body>
 </html>

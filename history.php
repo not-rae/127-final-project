@@ -6,24 +6,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>DriVerify Records: History</title>
+    <title>DriVerify: History Records</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
             height: 100vh;
             margin: 0;
-            background-color: #f0f0f0;
+            background-color: #ffffff;
         }
         h1 {
+            font-size: 45px;
             margin-bottom: 20px;
         }
         table {
             border-collapse: collapse;
-            width: 90%;
+            width: 80%;
             margin: 20px 0;
         }
         table, th, td {
@@ -31,10 +31,10 @@
         }
         th, td {
             padding: 12px;
-            text-align: left;
+            text-align: center;
         }
         th {
-            background-color: #f2f2f2;
+            background-color: #ff7d00;
         }
         .button-container {
             display: flex;
@@ -42,36 +42,19 @@
             margin-top: 20px;
         }
         .button-container button {
+            background-color: #28a745;
+            color: #ffffff;
             padding: 10px 20px;
             font-size: 16px;
             cursor: pointer;
             border: none;
-            border-radius: 5px;
+            border-radius: 10px;
             transition: background-color 0.3s;
-        }
-        .add-record-container {
-            display: flex;
-            justify-content: center;
-            width: 100%;
-            margin-top: 20px;
-        }
-        .add-record-button {
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-            border: none;
-            border-radius: 5px;
-            background-color: green;
-            color: white;
-            transition: background-color 0.3s;
-        }
-        .add-record-button:hover {
-            background-color: darkgreen;
         }
     </style>
 </head>
 <body>
-    <h1>History</h1>
+    <h1>History Records</h1>
     <table>
         <tr>
             <th>Plate Number</th>
@@ -90,46 +73,40 @@
             $sqlHistory ="SELECT * FROM history";
             $resultHistory = $conn->query($sqlHistory);
 
-
             if($resultHistory->num_rows > 0){
-                    while($rowtHistory = $resultHistory->fetch_assoc()) {
+                 while($rowtHistory = $resultHistory->fetch_assoc()) {
+                    echo 
+                        "<tr>". 
+                        "<td align = 'center' >".$rowtHistory["plateNumber"]."</td>". 
+                        "<td align = 'center' >".$rowtHistory["ownerNameH"]."</td>". 
+                        "<td align = 'center' >".$rowtHistory["driverNameH"]."</td>". 
+                        "<td align = 'center' >".$rowtHistory["licenseNumber"]."</td>".
+                        "<td align = 'center' >".$rowtHistory["agencyCode"]."</td>". 
+                        "<td align = 'center' >".$rowtHistory["noOfViolations"]."</td>". 
+                        "<td align = 'center' >".$rowtHistory["recentViolationDate"]."</td>".
+                        "<td align = 'center' >".$rowtHistory["DLCode"]."</td>".  
+                        "<td align='center'>" .
+                            "<form action='editHistory.php' method='post' style='display:inline;'>" .
 
-                echo 
-                    "<tr>". 
-                    "<td align = 'center' >".$rowtHistory["plateNumber"]."</td>". 
-                    "<td align = 'center' >".$rowtHistory["ownerNameH"]."</td>". 
-                    "<td align = 'center' >".$rowtHistory["driverNameH"]."</td>". 
-                    "<td align = 'center' >".$rowtHistory["licenseNumber"]."</td>".
-                    "<td align = 'center' >".$rowtHistory["agencyCode"]."</td>". 
-                    "<td align = 'center' >".$rowtHistory["noOfViolations"]."</td>". 
-                    "<td align = 'center' >".$rowtHistory["recentViolationDate"]."</td>".
-                    "<td align = 'center' >".$rowtHistory["DLCode"]."</td>".  
-                    "<td align='center'>" .
-                        "<form action='editHistory.php' method='post' style='display:inline;'>" .
-                        
-                            //returns the values from the table that will be used in the editDriver.php
-                            "<input type='hidden' name='plateNumber' value='".$rowtHistory['plateNumber']."'>" .
-                            "<input type='hidden' name='ownerNameH' value='".$rowtHistory['ownerNameH']."'>" .
-                            "<input type='hidden' name='driverNameH' value='".$rowtHistory['driverNameH']."'>" .
-                            "<input type='hidden' name='licenseNumber' value='".$rowtHistory['licenseNumber']."'>" .
-                            "<input type='hidden' name='agencyCode' value='".$rowtHistory['agencyCode']."'>" .
-                            "<input type='hidden' name='noOfViolations' value='".$rowtHistory['noOfViolations']."'>" .
-                            "<input type='hidden' name='recentViolationDate' value='".$rowtHistory['recentViolationDate']."'>" .
-                            "<input type='hidden' name='DLCode' value='".$rowtHistory['DLCode']."'>" .
-                            "<button type='submit'>Edit</button>" .
-                        "</form>" .
-                    "</td>" .
-                    "</tr>";
+                                //returns the values from the table that will be used in the editDriver.php
 
-                    
+                                "<input type='hidden' name='plateNumber' value='".$rowtHistory['plateNumber']."'>" .
+                                "<input type='hidden' name='ownerNameH' value='".$rowtHistory['ownerNameH']."'>" .
+                                "<input type='hidden' name='driverNameH' value='".$rowtHistory['driverNameH']."'>" .
+                                "<input type='hidden' name='licenseNumber' value='".$rowtHistory['licenseNumber']."'>" .
+                                "<input type='hidden' name='agencyCode' value='".$rowtHistory['agencyCode']."'>" .
+                                "<input type='hidden' name='noOfViolations' value='".$rowtHistory['noOfViolations']."'>" .
+                                "<input type='hidden' name='recentViolationDate' value='".$rowtHistory['recentViolationDate']."'>" .
+                                "<input type='hidden' name='DLCode' value='".$rowtHistory['DLCode']."'>" .
+                                "<button type='submit'>Edit</button>" .
+                            "</form>" .
+                        "</td>" .
+                        "</tr>";       
+                }
+            } else {
+                echo "0 results";
             }
-        }
-
-        else {
-            echo "0 results";
-
-        }
-    ?>
+        ?>
     </table>
     <div class="button-container">
         <button onclick="window.location.href='index.php'">Back to Menu</button>

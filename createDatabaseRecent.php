@@ -40,8 +40,7 @@
             nationality CHAR(20) NOT NULL,
             heightInCM INT(5) UNSIGNED,
             weightInKG INT(3) UNSIGNED,  
-            ownerAddress VARCHAR(100) NOT NULL,
-            noOfVehiclesOwned INT(6) UNSIGNED NOT NULL
+            ownerAddress VARCHAR(100) NOT NULL
     )";
 
     if ($conn->query($sql_carOwner) === TRUE) {

@@ -49,8 +49,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo "Error updating driverLicense information: " . $conn->error;
         }
 
-    } else {
-        echo "Error: All fields are required.";
     }
 
     $conn->close();
@@ -77,9 +75,141 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Update History Information</title>
 </head>
+<style>
+                body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #ffffff;
+        }
+
+        /* Container style */
+        .container {
+            width: 50%;
+            height: auto;
+            margin: 10px 55px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Form style */
+        form {
+            width: 100%;
+            margin: 20px auto;
+        }
+
+        /* Title style */
+        h2 {
+            font-size: 45px;
+            margin-bottom: 20px;
+
+        }
+
+        /* Label style */
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        #ownername,
+        #driverName{
+            width: 95%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        #plateNumber,
+        #driverNameH,
+        #licenseNumber,
+        #agencyCode,
+        #DLCode,
+        #ownerNameH {
+            background-color: #c7f9cc;
+        }
+
+        input[type="text"] {
+            width: 83%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        input[type="date"] {
+            width: 80%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        input[type="number"] {
+            width: 83%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        input[type="tel"] {
+            width: 83%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        /* Button style */
+        button {
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin: 1rem 0 0 1rem;
+        }
+
+        button:hover {
+            background-color: red;
+        }
+
+        /* Submit button style */
+        input[type="submit"] {
+            font-size: 18px;
+            padding: 18px 40px;
+            color: #fff;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin: 30px auto;
+            display: block;
+        }
+
+        .flex-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+</style>
 <body>
     <h2>Update History Information</h2>
-    <form action="editHistory.php" method="POST">
+    <form class="container" action="editHistory.php" method="POST">
         <div class="flex-container">
             <div>
                 <label for="plateNumber">Plate Number:</label>
@@ -102,19 +232,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <input type="text" id="agencyCode" name="agencyCode" value="<?php echo htmlspecialchars($agencyCode); ?>" readonly required>
             </div>
             <div>
+                <label for="DLCode">DL Code:</label>
+                <input type="text" id="DLCode" name="DLCode" value="<?php echo htmlspecialchars($DLCode); ?>" readonly required>
+            </div>
+            <div>
                 <label for="noOfViolations">No. of Violation/s:</label>
                 <input type="number" id="noOfViolations" name="noOfViolations" value="<?php echo htmlspecialchars($noOfViolations); ?>" required>
             </div>
             <div>
                 <label for="violationDate">Recent Date of Violation/s:</label>
                 <input type="date" id="violationDate" name="violationDate" value="<?php echo htmlspecialchars($recentViolationDate); ?>" required>
-            </div>
-            <div>
-            <label for="DLCode">DL Code:</label>
-                <input type="text" id="DLCode" name="DLCode" value="<?php echo htmlspecialchars($DLCode); ?>" readonly required>
-            </div>
+            </div>  
         </div>
         <button name ="submit" type="submit">Update History</button>
+        <button onclick="window.location.href='history.php'">Cancel</button>
     </form>
 </body>
 </html>

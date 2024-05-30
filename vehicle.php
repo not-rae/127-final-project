@@ -77,7 +77,6 @@
             <th>Plate Number</th>
             <th>Registration Date</th>
             <th>Expiration Date</th>
-            <th>Owner ID</th>
             <th>Owner</th>
             <th>Driver ID</th>
             <th>Driver</th>
@@ -86,7 +85,7 @@
             <th>Manufacturer</th>
             <th>Year Produced</th>
             <th>Fuel</th>
-            <th>Actions</th>
+       
         </tr>
         <?php
         include 'DBConnector.php';
@@ -104,9 +103,7 @@
                     "<td align = 'center' >".$rowVehicle["plateNumber"]."</td>". 
                     "<td align = 'center' >".$rowVehicle["registrationDate"]."</td>". 
                     "<td align = 'center' >".$rowVehicle["expirationDate"]."</td>".
-                    "<td align = 'center' >".$rowVehicle["ownerID"]."</td>". 
                     "<td align = 'center' >".$rowVehicle["ownerNameV"]."</td>".
-                    "<td align = 'center' >".$rowVehicle["driverID"]."</td>". 
                     "<td align = 'center' >".$rowVehicle["driverNameV"]."</td>". 
                     "<td align = 'center' >".$rowVehicle["model"]."</td>". 
                     "<td align = 'center' >".$rowVehicle["color"]."</td>".

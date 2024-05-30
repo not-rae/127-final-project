@@ -6,19 +6,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>DriVerify Records: Vehicle</title>
+    <title>DriVerify: Vehicle Records</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
             height: 100vh;
             margin: 0;
-            background-color: #f0f0f0;
+            background-color: #ffffff;
         }
         h1 {
+            font-size: 45px;
             margin-bottom: 20px;
         }
         table {
@@ -31,10 +31,10 @@
         }
         th, td {
             padding: 12px;
-            text-align: left;
+            text-align: center;
         }
         th {
-            background-color: #f2f2f2;
+            background-color: #ff7d00;
         }
         .button-container {
             display: flex;
@@ -42,31 +42,14 @@
             margin-top: 20px;
         }
         .button-container button {
+            background-color: #28a745;
+            color: #ffffff;
             padding: 10px 20px;
             font-size: 16px;
             cursor: pointer;
             border: none;
-            border-radius: 5px;
+            border-radius: 10px;
             transition: background-color 0.3s;
-        }
-        .add-record-container {
-            display: flex;
-            justify-content: center;
-            width: 100%;
-            margin-top: 20px;
-        }
-        .add-record-button {
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-            border: none;
-            border-radius: 5px;
-            background-color: green;
-            color: white;
-            transition: background-color 0.3s;
-        }
-        .add-record-button:hover {
-            background-color: darkgreen;
         }
     </style>
 </head>
@@ -91,34 +74,26 @@
             $sqlVehicle ="SELECT * FROM Vehicle";
             $resultVehicle = $conn->query($sqlVehicle);
 
-
             if($resultVehicle->num_rows > 0){
-                    while($rowVehicle = $resultVehicle->fetch_assoc()) {
-
-                echo 
-
-                    "<tr>". 
-                    "<td align = 'center' >".$rowVehicle["plateNumber"]."</td>". 
-                    "<td align = 'center' >".$rowVehicle["registrationDate"]."</td>". 
-                    "<td align = 'center' >".$rowVehicle["expirationDate"]."</td>".
-                    "<td align = 'center' >".$rowVehicle["ownerNameV"]."</td>".
-                    "<td align = 'center' >".$rowVehicle["driverNameV"]."</td>". 
-                    "<td align = 'center' >".$rowVehicle["model"]."</td>". 
-                    "<td align = 'center' >".$rowVehicle["color"]."</td>".
-                    "<td align = 'center' >".$rowVehicle["manufacturer"]."</td>".  
-                    "<td align = 'center' >".$rowVehicle["yearProduced"]."</td>".
-                    "<td align = 'center' >".$rowVehicle["fuel"]."</td>". 
-                "</tr>";
-        
-
-                    
-            }
-        }
-        else {
+                while($rowVehicle = $resultVehicle->fetch_assoc()) {
+                    echo 
+                        "<tr>". 
+                        "<td align = 'center' >".$rowVehicle["plateNumber"]."</td>". 
+                        "<td align = 'center' >".$rowVehicle["registrationDate"]."</td>". 
+                        "<td align = 'center' >".$rowVehicle["expirationDate"]."</td>".
+                        "<td align = 'center' >".$rowVehicle["ownerNameV"]."</td>".
+                        "<td align = 'center' >".$rowVehicle["driverNameV"]."</td>". 
+                        "<td align = 'center' >".$rowVehicle["model"]."</td>". 
+                        "<td align = 'center' >".$rowVehicle["color"]."</td>".
+                        "<td align = 'center' >".$rowVehicle["manufacturer"]."</td>".  
+                        "<td align = 'center' >".$rowVehicle["yearProduced"]."</td>".
+                        "<td align = 'center' >".$rowVehicle["fuel"]."</td>". 
+                    "</tr>";       
+                }
+        } else {
             echo "0 results";
-
         }
-    ?>
+        ?>
     </table>
     <div class="button-container">
         <button onclick="window.location.href='index.php'">Back to Menu</button>

@@ -10,7 +10,7 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f0f0f0;
+            background-color: #fff;
             
         }
 
@@ -343,10 +343,10 @@
                     <label for="fuel">Fuel Type:</label>
                     <select id="fuel" name="fuel" required>
                         <option value="" disabled selected>Select below</option>
-                        <option value="petrol">Petrol</option>
-                        <option value="diesel">Diesel</option>
-                        <option value="electric">Electric</option>
-                        <option value="hybrid">Hybrid</option>
+                        <option value="Petrol">Petrol</option>
+                        <option value="Diesel">Diesel</option>
+                        <option value="Electric">Electric</option>
+                        <option value="Hybrid">Hybrid</option>
                         <option value="UKNWN">Unknown</option>
                     </select>
                 </div>

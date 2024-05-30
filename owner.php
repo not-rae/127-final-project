@@ -1,24 +1,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Owner Page</title>
+    <title>DriVerify: Owner Records</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
             height: 100vh;
             margin: 0;
-            background-color: #f0f0f0;
+            background-color: #ffffff;
         }
         h1 {
+            font-size: 45px;
             margin-bottom: 20px;
         }
         table {
             border-collapse: collapse;
-            width: 90%;
+            width: 80%;
             margin: 20px 0;
         }
         table, th, td {
@@ -26,10 +26,10 @@
         }
         th, td {
             padding: 12px;
-            text-align: left;
+            text-align: center;
         }
         th {
-            background-color: #f2f2f2;
+            background-color: #ff7d00;
         }
         .button-container {
             display: flex;
@@ -37,31 +37,14 @@
             margin-top: 20px;
         }
         .button-container button {
+            background-color: #28a745;
+            color: #ffffff;
             padding: 10px 20px;
             font-size: 16px;
             cursor: pointer;
             border: none;
-            border-radius: 5px;
+            border-radius: 10px;
             transition: background-color 0.3s;
-        }
-        .add-record-container {
-            display: flex;
-            justify-content: center;
-            width: 100%;
-            margin-top: 20px;
-        }
-        .add-record-button {
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-            border: none;
-            border-radius: 5px;
-            background-color: green;
-            color: white;
-            transition: background-color 0.3s;
-        }
-        .add-record-button:hover {
-            background-color: darkgreen;
         }
     </style>
 </head>
@@ -87,23 +70,21 @@
             $sqlOwner = "SELECT * FROM carOwner";
             $resultOwner = $conn->query($sqlOwner);
 
-
             if($resultOwner->num_rows > 0){
-                    while($rowOwner = $resultOwner->fetch_assoc()) {
-
-                echo 
-                    "<tr>". 
-                    "<td align = 'center' >".$rowOwner["ownerID"]."</td>". 
-                    "<td align = 'center' >".$rowOwner["ownerName"]."</td>". 
-                    "<td align = 'center' >".$rowOwner["sex"]."</td>". 
-                    "<td align = 'center' >".$rowOwner["dateOfBirth"]."</td>".
-                    "<td align = 'center' >".$rowOwner["ownerAddress"]."</td>". 
-                    "<td align = 'center' >".$rowOwner["contactNumber"]."</td>". 
-                    "<td align = 'center' >".$rowOwner["nationality"]."</td>".
-                    "<td align = 'center' >".$rowOwner["bloodType"]."</td>".  
-                    "<td align = 'center' >".$rowOwner["weightInKG"]."</td>".
-                    "<td align = 'center' >".$rowOwner["heightInCM"]."</td>". 
-                    "<td align='center'>" .
+                while($rowOwner = $resultOwner->fetch_assoc()) {
+                    echo 
+                        "<tr>". 
+                        "<td align = 'center' >".$rowOwner["ownerID"]."</td>". 
+                        "<td align = 'center' >".$rowOwner["ownerName"]."</td>". 
+                        "<td align = 'center' >".$rowOwner["sex"]."</td>". 
+                        "<td align = 'center' >".$rowOwner["dateOfBirth"]."</td>".
+                        "<td align = 'center' >".$rowOwner["ownerAddress"]."</td>". 
+                        "<td align = 'center' >".$rowOwner["contactNumber"]."</td>". 
+                        "<td align = 'center' >".$rowOwner["nationality"]."</td>".
+                        "<td align = 'center' >".$rowOwner["bloodType"]."</td>".  
+                        "<td align = 'center' >".$rowOwner["weightInKG"]."</td>".
+                        "<td align = 'center' >".$rowOwner["heightInCM"]."</td>". 
+                        "<td align='center'>" .
                             "<form action='deleteOwner.php' method='post' style='display:inline;'>" .
                                 "<input type='hidden' name='ownerID' value='".$rowOwner['ownerID']."'>" .
                                 "<button type='submit'>Delete</button>" .
@@ -111,28 +92,20 @@
                             "<form action='editOwner.php' method='post' style='display:inline;'>" .
                                 "<input type='hidden' name='ownerID' value='".$rowOwner['ownerID']."'>" .
                                 "<input type='hidden' name='ownerName' value='".$rowOwner['ownerName']."'>" .
-                             
-                      
                                 "<input type='hidden' name='ownerAddress' value='".$rowOwner['ownerAddress']."'>" .
                                 "<input type='hidden' name='ownerContact' value='".$rowOwner['contactNumber']."'>" .
-                                "<input type='hidden' name='ownerNationality' value='".$rowOwner['nationality']."'>" .
-                               
+                                "<input type='hidden' name='ownerNationality' value='".$rowOwner['nationality']."'>" . 
                                 "<input type='hidden' name='ownerWeight' value='".$rowOwner['weightInKG']."'>" .
                                 "<input type='hidden' name='ownerHeight' value='".$rowOwner['heightInCM']."'>" .
                                 "<button type='submit'>Edit</button>" .
                             "</form>" .
-                    "</td>" .
-                    "</tr>";
-
-                    
+                        "</td>" .
+                        "</tr>";
+                }
+            } else {
+                echo "0 results";
             }
-        }
-
-        else {
-            echo "0 results";
-
-        }
-    ?>
+        ?>
     </table>
     <div class="button-container">
         <button onclick="window.location.href='index.php'">Back to Menu</button>

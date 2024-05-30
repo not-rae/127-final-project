@@ -6,19 +6,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>DriVerify Records: Driver License</title>
+    <title>DriVerify: Driver License Records</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
             height: 100vh;
             margin: 0;
-            background-color: #f0f0f0;
+            background-color: #ffffff;
         }
         h1 {
+            font-size: 45px;
             margin-bottom: 20px;
         }
         table {
@@ -31,10 +31,10 @@
         }
         th, td {
             padding: 12px;
-            text-align: left;
+            text-align: center;
         }
         th {
-            background-color: #f2f2f2;
+            background-color: #ff7d00;
         }
         .button-container {
             display: flex;
@@ -42,40 +42,23 @@
             margin-top: 20px;
         }
         .button-container button {
+            background-color: #28a745;
+            color: #ffffff;
             padding: 10px 20px;
             font-size: 16px;
             cursor: pointer;
             border: none;
-            border-radius: 5px;
+            border-radius: 10px;
             transition: background-color 0.3s;
-        }
-        .add-record-container {
-            display: flex;
-            justify-content: center;
-            width: 100%;
-            margin-top: 20px;
-        }
-        .add-record-button {
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-            border: none;
-            border-radius: 5px;
-            background-color: green;
-            color: white;
-            transition: background-color 0.3s;
-        }
-        .add-record-button:hover {
-            background-color: darkgreen;
         }
     </style>
 </head>
 <body>
-    <h1>Driver License Record</h1>
+    <h1>Driver License Records</h1>
     <table>
         <tr>
             <th>Driver ID</th>
-            <th>Name</th>
+            <th>Driver Name</th>
             <th>License Number</th>
             <th>Agency Code</th>
             <th>Issue Date</th>
@@ -86,47 +69,40 @@
         </tr>
         <?php
         include 'DBConnector.php';
-
             $sqlDriverLicense ="SELECT * FROM driverLicense";
             $resultDriverLicense = $conn->query($sqlDriverLicense);
 
-
             if($resultDriverLicense->num_rows > 0){
-                    while($rowtDriverLicense = $resultDriverLicense->fetch_assoc()) {
+                while($rowtDriverLicense = $resultDriverLicense->fetch_assoc()) {
+                    echo 
+                        "<tr>". 
+                        "<td align = 'center' >".$rowtDriverLicense["driverID"]."</td>". 
+                        "<td align = 'center' >".$rowtDriverLicense["driverNameDL"]."</td>". 
+                        "<td align = 'center' >".$rowtDriverLicense["licenseNumber"]."</td>". 
+                        "<td align = 'center' >".$rowtDriverLicense["agencyCode"]."</td>".
+                        "<td align = 'center' >".$rowtDriverLicense["issueDate"]."</td>". 
+                        "<td align = 'center' >".$rowtDriverLicense["expirationDate"]."</td>". 
+                        "<td align = 'center' >".$rowtDriverLicense["conditionCode"]."</td>".
+                        "<td align = 'center' >".$rowtDriverLicense["DLCode"]."</td>".  
+                        "<td align='center'>" .
 
-                echo 
+                        //returns the values from the table that will be used in the editDriver.php
 
-                    "<tr>". 
-                    "<td align = 'center' >".$rowtDriverLicense["driverID"]."</td>". 
-                    "<td align = 'center' >".$rowtDriverLicense["driverNameDL"]."</td>". 
-                    "<td align = 'center' >".$rowtDriverLicense["licenseNumber"]."</td>". 
-                    "<td align = 'center' >".$rowtDriverLicense["agencyCode"]."</td>".
-                    "<td align = 'center' >".$rowtDriverLicense["issueDate"]."</td>". 
-                    "<td align = 'center' >".$rowtDriverLicense["expirationDate"]."</td>". 
-                    "<td align = 'center' >".$rowtDriverLicense["conditionCode"]."</td>".
-                    "<td align = 'center' >".$rowtDriverLicense["DLCode"]."</td>".  
-                    "<td align='center'>" .
-
-                    //returns the values from the table that will be used in the editDriver.php
-
-                    "<form action='editDriverLicense.php' method='post' style='display:inline;'>" .
-                    "<input type='hidden' name='driverID' value='".$rowtDriverLicense['driverID']."'>" .
-                    "<input type='hidden' name='driverName' value='".$rowtDriverLicense['driverNameDL']."'>" .
-                      "<input type='hidden' name='licenseNumber' value='".$rowtDriverLicense['licenseNumber']."'>" .
-                    "<input type='hidden' name='agencyCode' value='".$rowtDriverLicense['agencyCode']."'>" .
-                  
-                    "<button type='submit'>Edit</button>" .
-                    "</form>" .
-                    "</td>" .
-                    "</tr>";
+                        "<form action='editDriverLicense.php' method='post' style='display:inline;'>" .
+                            "<input type='hidden' name='driverID' value='".$rowtDriverLicense['driverID']."'>" .
+                            "<input type='hidden' name='driverName' value='".$rowtDriverLicense['driverNameDL']."'>" .
+                            "<input type='hidden' name='licenseNumber' value='".$rowtDriverLicense['licenseNumber']."'>" .
+                            "<input type='hidden' name='agencyCode' value='".$rowtDriverLicense['agencyCode']."'>" .
+                        
+                            "<button type='submit'>Edit</button>" .
+                        "</form>" .
+                        "</td>" .
+                        "</tr>";
+                    }
+            } else {
+                echo "0 results";
             }
-        }
-
-        else {
-            echo "0 results";
-
-        }
-    ?>
+        ?>
     </table>
     <div class="button-container">
         <button onclick="window.location.href='index.php'">Back to Menu</button>

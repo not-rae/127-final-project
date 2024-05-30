@@ -11,7 +11,6 @@
             margin: 0;
             padding: 0;
             background-color: #fff;
-            
         }
 
         /* Container style */
@@ -109,7 +108,6 @@
             margin: 1rem 0 0 1rem; /* 1rem top, 1rem left */
         }
 
-
         button:hover {
             background-color: #0056b3;
         }
@@ -186,7 +184,7 @@
                     </div>
                 </div>
                 <div class="flex-container">
-                    
+
                     <div>
                         <label for="ownerNationality">Nationality:</label>
                         <input type="text" id="ownerNationality" name="ownerNationality" required>

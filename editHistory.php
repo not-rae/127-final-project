@@ -2,10 +2,10 @@
 
 include 'DBConnector.php';
 
-// Check if form was submitted
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    // Get the form data and sanitize it
+
     $plateNumber = isset($_POST["plateNumber"]) ? trim($_POST["plateNumber"]) : '';
     $ownerNameH = isset($_POST["ownerNameH"]) ? trim($_POST["ownerNameH"]) : '';
     $driverNameH = isset($_POST["driverNameH"]) ? trim($_POST["driverNameH"]) : '';
@@ -16,13 +16,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $DLCode = isset($_POST["DLCode"]) ? trim($_POST["DLCode"]) : '';
     
 
-    // Validate that all required fields are filled out
+  
     if ($plateNumber != "" && $ownerNameH != "" && $driverNameH != "" && $licenseNumber != "" && $agencyCode != "" && $noOfViolations != "" && $recentViolationDate != "" && $DLCode != "") {
 
-        // Start transaction
+
         $conn->begin_transaction();
 
-        // Update carDriver table
+        // Update history table
         $updateHistory = "UPDATE history SET 
             plateNumber = '$plateNumber', 
             ownerNameH = '$ownerNameH', 
@@ -40,7 +40,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                
             $conn->commit();
             echo "History information updated successfully.";
-            header('Location: history.php');
+            header('Location: history.php'); // go back to history.php
+            exit;
      
         } else {
            
@@ -58,6 +59,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     echo "Error: Invalid request method.";
 }
 ?>
+<!-- 
+    The Form which is used to update the history values.
+
+    All informations are already displayed in the box except for 
+    recent violation date
+    
+    All values cannot be updated except for the number of violations
+    and recent violation date. 
+
+ -->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -92,11 +103,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
             <div>
                 <label for="noOfViolations">No. of Violation/s:</label>
-                <input type="number" id="noOfViolations" name="noOfViolations" required>
+                <input type="number" id="noOfViolations" name="noOfViolations" value="<?php echo htmlspecialchars($noOfViolations); ?>" required>
             </div>
             <div>
                 <label for="violationDate">Recent Date of Violation/s:</label>
-                <input type="date" id="violationDate" name="violationDate" required>
+                <input type="date" id="violationDate" name="violationDate" value="<?php echo htmlspecialchars($recentViolationDate); ?>" required>
             </div>
             <div>
             <label for="DLCode">DL Code:</label>

@@ -1,3 +1,8 @@
+<!-- 
+    This is responsible for showing the values from the history table
+
+-->
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -90,7 +95,6 @@
                     while($rowtHistory = $resultHistory->fetch_assoc()) {
 
                 echo 
-
                     "<tr>". 
                     "<td align = 'center' >".$rowtHistory["plateNumber"]."</td>". 
                     "<td align = 'center' >".$rowtHistory["ownerNameH"]."</td>". 
@@ -101,17 +105,16 @@
                     "<td align = 'center' >".$rowtHistory["recentViolationDate"]."</td>".
                     "<td align = 'center' >".$rowtHistory["DLCode"]."</td>".  
                     "<td align='center'>" .
-                        "<form action='deleteHistory.php' method='post' style='display:inline;'>" .
-                            "<input type='hidden' name='licenseNumber' value='".$rowtHistory['licenseNumber']."'>" .
-                            "<button type='submit'>Delete</button>" .
-                        "</form>" .
                         "<form action='editHistory.php' method='post' style='display:inline;'>" .
                         
+                            //returns the values from the table that will be used in the editDriver.php
                             "<input type='hidden' name='plateNumber' value='".$rowtHistory['plateNumber']."'>" .
                             "<input type='hidden' name='ownerNameH' value='".$rowtHistory['ownerNameH']."'>" .
                             "<input type='hidden' name='driverNameH' value='".$rowtHistory['driverNameH']."'>" .
                             "<input type='hidden' name='licenseNumber' value='".$rowtHistory['licenseNumber']."'>" .
                             "<input type='hidden' name='agencyCode' value='".$rowtHistory['agencyCode']."'>" .
+                            "<input type='hidden' name='noOfViolations' value='".$rowtHistory['noOfViolations']."'>" .
+                            "<input type='hidden' name='recentViolationDate' value='".$rowtHistory['recentViolationDate']."'>" .
                             "<input type='hidden' name='DLCode' value='".$rowtHistory['DLCode']."'>" .
                             "<button type='submit'>Edit</button>" .
                         "</form>" .

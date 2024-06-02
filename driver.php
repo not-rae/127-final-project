@@ -67,18 +67,18 @@
             <?php
             include 'DBConnector.php';
 
-            $sqlDriver = "SELECT * FROM carDriver";
+            $sqlDriver = "SELECT * FROM User WHERE userRole IN ('driver', 'both')";
             $resultDriver = $conn->query($sqlDriver);
             
             if($resultDriver->num_rows > 0){
                 while($rowDriver = $resultDriver->fetch_assoc()) {
                     echo 
                         "<tr>". 
-                        "<td align= 'center' >".$rowDriver["driverID"]."</td>". 
-                        "<td align= 'center' >".$rowDriver["driverName"]."</td>". 
+                        "<td align= 'center' >".$rowDriver["userID"]."</td>". 
+                        "<td align= 'center' >".$rowDriver["userName"]."</td>". 
                         "<td align= 'center' >".$rowDriver["sex"]."</td>". 
                         "<td align= 'center' >".$rowDriver["dateOfBirth"]."</td>".
-                        "<td align= 'center' >".$rowDriver["driverAddress"]."</td>". 
+                        "<td align= 'center' >".$rowDriver["userAddress"]."</td>". 
                         "<td align= 'center' >".$rowDriver["contactNumber"]."</td>". 
                         "<td align= 'center' >".$rowDriver["nationality"]."</td>".
                         "<td align= 'center' >".$rowDriver["bloodType"]."</td>".  
@@ -86,14 +86,14 @@
                         "<td align= 'center' >".$rowDriver["heightInCM"]."</td>". 
                         "<td align= 'center' >" .
                             "<form action='deleteDriver.php' method='post' style='display:inline;'>" .
-                                "<input type='hidden' name='driverID' value='".$rowDriver['driverID']."'>" .
+                                "<input type='hidden' name='userID' value='".$rowDriver['userID']."'>" .
                                 "<button type='submit'>Delete</button>" .
                             "</form>" .
                             "<form action='editDriver.php' method='post' style='display:inline;'>" .
-                                "<input type='hidden' name='driverID' value='".$rowDriver['driverID']."'>" .
-                                "<input type='hidden' name='driverName' value='".$rowDriver['driverName']."'>" .
+                                "<input type='hidden' name='driverID' value='".$rowDriver['userID']."'>" .
+                                "<input type='hidden' name='driverName' value='".$rowDriver['userName']."'>" .
                                 "<input type='hidden' name='driverDateOfBirth' value='".$rowDriver['dateOfBirth']."'>" .
-                                "<input type='hidden' name='driverAddress' value='".$rowDriver['driverAddress']."'>" .
+                                "<input type='hidden' name='driverAddress' value='".$rowDriver['userAddress']."'>" .
                                 "<input type='hidden' name='driverContact' value='".$rowDriver['contactNumber']."'>" .
                                 "<input type='hidden' name='driverNationality' value='".$rowDriver['nationality']."'>" .
                                 "<input type='hidden' name='driverWeight' value='".$rowDriver['weightInKG']."'>" .

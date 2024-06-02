@@ -76,8 +76,8 @@
                 while($rowtDriverLicense = $resultDriverLicense->fetch_assoc()) {
                     echo 
                         "<tr>". 
-                        "<td align = 'center' >".$rowtDriverLicense["driverID"]."</td>". 
-                        "<td align = 'center' >".$rowtDriverLicense["driverNameDL"]."</td>". 
+                        "<td align = 'center' >".$rowtDriverLicense["userID"]."</td>". 
+                        "<td align = 'center' >".$rowtDriverLicense["driverName"]."</td>". 
                         "<td align = 'center' >".$rowtDriverLicense["licenseNumber"]."</td>". 
                         "<td align = 'center' >".$rowtDriverLicense["agencyCode"]."</td>".
                         "<td align = 'center' >".$rowtDriverLicense["issueDate"]."</td>". 
@@ -89,8 +89,8 @@
                         //returns the values from the table that will be used in the editDriver.php
 
                         "<form action='editDriverLicense.php' method='post' style='display:inline;'>" .
-                            "<input type='hidden' name='driverID' value='".$rowtDriverLicense['driverID']."'>" .
-                            "<input type='hidden' name='driverName' value='".$rowtDriverLicense['driverNameDL']."'>" .
+                            "<input type='hidden' name='driverID' value='".$rowtDriverLicense['userID']."'>" .
+                            "<input type='hidden' name='driverName' value='".$rowtDriverLicense['driverName']."'>" .
                             "<input type='hidden' name='licenseNumber' value='".$rowtDriverLicense['licenseNumber']."'>" .
                             "<input type='hidden' name='agencyCode' value='".$rowtDriverLicense['agencyCode']."'>" .
                         

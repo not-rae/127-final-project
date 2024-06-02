@@ -61,7 +61,6 @@
             <th>Registration Date</th>
             <th>Expiration Date</th>
             <th>Owner</th>
-            <th>Driver</th>
             <th>Model</th>
             <th>Color</th>
             <th>Manufacturer</th>
@@ -81,8 +80,7 @@
                         "<td align = 'center' >".$rowVehicle["plateNumber"]."</td>". 
                         "<td align = 'center' >".$rowVehicle["registrationDate"]."</td>". 
                         "<td align = 'center' >".$rowVehicle["expirationDate"]."</td>".
-                        "<td align = 'center' >".$rowVehicle["ownerNameV"]."</td>".
-                        "<td align = 'center' >".$rowVehicle["driverNameV"]."</td>". 
+                        "<td align = 'center' >".$rowVehicle["ownerName"]."</td>".
                         "<td align = 'center' >".$rowVehicle["model"]."</td>". 
                         "<td align = 'center' >".$rowVehicle["color"]."</td>".
                         "<td align = 'center' >".$rowVehicle["manufacturer"]."</td>".  

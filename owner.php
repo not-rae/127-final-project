@@ -67,18 +67,18 @@
         <?php
         include 'DBConnector.php';
 
-            $sqlOwner = "SELECT * FROM carOwner";
-            $resultOwner = $conn->query($sqlOwner);
+        $sqlOwner = "SELECT * FROM User WHERE userRole IN ('owner', 'both')";
+        $resultOwner = $conn->query($sqlOwner);
 
             if($resultOwner->num_rows > 0){
                 while($rowOwner = $resultOwner->fetch_assoc()) {
                     echo 
                         "<tr>". 
-                        "<td align = 'center' >".$rowOwner["ownerID"]."</td>". 
-                        "<td align = 'center' >".$rowOwner["ownerName"]."</td>". 
+                        "<td align = 'center' >".$rowOwner["userID"]."</td>". 
+                        "<td align = 'center' >".$rowOwner["userName"]."</td>". 
                         "<td align = 'center' >".$rowOwner["sex"]."</td>". 
                         "<td align = 'center' >".$rowOwner["dateOfBirth"]."</td>".
-                        "<td align = 'center' >".$rowOwner["ownerAddress"]."</td>". 
+                        "<td align = 'center' >".$rowOwner["userAddress"]."</td>". 
                         "<td align = 'center' >".$rowOwner["contactNumber"]."</td>". 
                         "<td align = 'center' >".$rowOwner["nationality"]."</td>".
                         "<td align = 'center' >".$rowOwner["bloodType"]."</td>".  
@@ -86,13 +86,13 @@
                         "<td align = 'center' >".$rowOwner["heightInCM"]."</td>". 
                         "<td align='center'>" .
                             "<form action='deleteOwner.php' method='post' style='display:inline;'>" .
-                                "<input type='hidden' name='ownerID' value='".$rowOwner['ownerID']."'>" .
+                                "<input type='hidden' name='userID' value='".$rowOwner['userID']."'>" .
                                 "<button type='submit'>Delete</button>" .
                             "</form>" .
                             "<form action='editOwner.php' method='post' style='display:inline;'>" .
-                                "<input type='hidden' name='ownerID' value='".$rowOwner['ownerID']."'>" .
-                                "<input type='hidden' name='ownerName' value='".$rowOwner['ownerName']."'>" .
-                                "<input type='hidden' name='ownerAddress' value='".$rowOwner['ownerAddress']."'>" .
+                                "<input type='hidden' name='ownerID' value='".$rowOwner['userID']."'>" .
+                                "<input type='hidden' name='ownerName' value='".$rowOwner['userName']."'>" .
+                                "<input type='hidden' name='ownerAddress' value='".$rowOwner['userAddress']."'>" .
                                 "<input type='hidden' name='ownerContact' value='".$rowOwner['contactNumber']."'>" .
                                 "<input type='hidden' name='ownerNationality' value='".$rowOwner['nationality']."'>" . 
                                 "<input type='hidden' name='ownerWeight' value='".$rowOwner['weightInKG']."'>" .

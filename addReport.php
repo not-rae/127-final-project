@@ -60,4 +60,6 @@ if(isset($_POST['SubmitReport'])) {
         echo "Error inserting history: " . $conn->error . "<br>";
     }
 }
+    header("Location: index.php");
+    exit;
 ?>

@@ -101,8 +101,8 @@ if(isset($_POST['SubmitRecord'])) {
             echo "Error inserting vehicle: " . $conn->error . "<br>";
         }
     }
-
-  
 }
+    header("Location: index.php");
+    exit;
 
 ?>

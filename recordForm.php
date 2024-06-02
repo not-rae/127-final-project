@@ -374,21 +374,6 @@
                     <label for="yearProduced">Year Produced:</label>
                     <input type="number" id="yearProduced" name="yearProduced">
                 </div>
-
-                <div>
-                    <label for="violation">Violation/s:</label>
-                    <select id="violation" name="violation">
-                        <option value="" disabled selected>Select below</option>
-                        <option value="V001">Smoke Belching</option>
-                        <option value="V002">Driving While Intoxicated/Drugged</option>
-                        <option value="V003">Disregarding Traffic Signs</option>
-                        <option value="V004">Jallosies</option>
-                        <option value="V05">Reckless Driving</option>
-                    </select>
-                <div>
-                    <label for="violationDate">Recent Date of Violation/s:</label>
-                    <input type="date" id="violationDate" name="violationDate">
-                </div>
             </div>        
         </div>
 

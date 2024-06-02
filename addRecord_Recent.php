@@ -50,7 +50,7 @@ if(isset($_POST['SubmitRecord'])) {
     }
 
     // User
-    $userID = $_POST["userID"];
+    $userID = floor(rand(100000, 999999));
     $userName = $_POST["userName"];
     $dateOfBirth = $_POST["dateOfBirth"];
     $sex = $_POST["sex"];

@@ -15,7 +15,7 @@
 
         /* Container style */
         .add-record-container {
-            width: 40%;
+            width: 100%;
             margin: 10px 55px;
             background-color: #fff;
             padding: 20px;
@@ -49,9 +49,9 @@
             margin-bottom: 5px;
         }
 
-        #ownerName,
+        #userName,
         #driverName,
-        #ownerAddress,
+        #userAddress,
         #driverAddress,
         #licenseNumber {
             width: 95%;
@@ -133,7 +133,59 @@
         input[type="submit"]:hover {
             background-color: #218838;
         }
+
+        /* Hidden section style */
+        .hidden-section {
+            display: none;
+            width: 100%;
+            margin: 10px 0;
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
     </style>
+    <script>
+        function toggleRequiredFields(sectionId, isRequired) {
+            var section = document.getElementById(sectionId);
+            var inputs = section.querySelectorAll('input, select');
+            inputs.forEach(function(input) {
+                if (isRequired) {
+                    input.setAttribute('required', 'required');
+                } else {
+                    input.removeAttribute('required');
+                }
+            });
+        }
+
+        function showSection() {
+            var driverLicense = document.getElementById("driverLicense");
+            var vehicleSection = document.getElementById("vehicleSection");
+            driverLicense.style.display = "none";
+            vehicleSection.style.display = "none";
+            toggleRequiredFields("driverLicense", false);
+            toggleRequiredFields("vehicleSection", false);
+
+            var userRole = document.querySelector('input[name="userRole"]:checked').value;
+
+            if (userRole === "Driver") {
+                driverLicense.style.display = "block";
+                toggleRequiredFields("driverLicense", true);
+            } else if (userRole === "Owner") {
+                vehicleSection.style.display = "block";
+                toggleRequiredFields("vehicleSection", true);
+            } else if (userRole === "Both") {
+                driverLicense.style.display = "block";
+                vehicleSection.style.display = "block";
+                toggleRequiredFields("driverLicense", true);
+                toggleRequiredFields("vehicleSection", true);
+            }
+        }
+
+        window.onload = function() {
+            showSection();
+        };
+    </script>
 </head>
 <body>
     <div class="button-container">
@@ -141,89 +193,30 @@
     </div>
     
     <form class="add-data-form" action="addRecord_Recent.php" method="post">
-
-        <!-- Owner Information -->
+        <!-- Personal Information -->
         <div class="add-record-container">
-            <h2>Owner Information</h2>
-            <label for="ownerName">Name:</label>
-            <input type="text" id="ownerName" name="ownerName" required>
-            <label for="ownerAddress">Address:</label>
-            <input type="text" id="ownerAddress" name="ownerAddress" required>  
-                <div class="flex-container">
-                    <div>
-                        <label for="ownerDateOfBirth">Date of Birth:</label>
-                        <input type="date" id="ownerDateOfBirth" name="ownerDateOfBirth" required>
-                    </div>
-                    <div>
-                        <label for="ownerSex">Sex:</label>
-                        <select id="ownerSex" name="ownerSex" required>
-                            <option value="" disabled selected>Select below</option>
-                            <option value="M">Male</option>
-                            <option value="F">Female</option>
-                            <option value="UKWN">Unknown</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label for="ownerBloodType">Blood Type:</label>
-                        <select id="ownerBloodType" name="ownerBloodType" required>
-                            <option value="" disabled selected>Select below</option>
-                            <option value="AB+">AB+</option>
-                            <option value="AB-">AB-</option>
-                            <option value="A+">A+</option>
-                            <option value="A-">A-</option>
-                            <option value="O+">O+</option>
-                            <option value="O-">O-</option>
-                            <option value="B+">B+</option>
-                            <option value="B-">B-</option>
-                            <option value="UKNWN">Unknown</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label for="ownerContact">Contact Number:</label>
-                        <input type="tel" id="ownerContact" name="ownerContact" required>
-                    </div>
-                </div>
-                <div class="flex-container">
-
-                    <div>
-                        <label for="ownerNationality">Nationality:</label>
-                        <input type="text" id="ownerNationality" name="ownerNationality" required>
-                    </div>
-                    <div>
-                        <label for="ownerWeight">Weight (kg):</label>
-                        <input type="number" id="ownerWeight" name="ownerWeight" required>
-                    </div>
-                    <div>
-                        <label for="ownerHeight">Height (cm):</label>
-                        <input type="number" id="ownerHeight" name="ownerHeight" required>
-                    </div>
-                </div>
-        </div>   
-    
-        <!-- Driver Information -->
-        <div class="add-record-container">
-            <h2>Driver Information</h2>
-            <label for="driverName">Name:</label>
-            <input type="text" id="driverName" name="driverName" required>
-            <label for="driverAddress">Address:</label>
-            <input type="text" id="driverAddress" name="driverAddress" required>
+            <h2>Personal Information</h2>
+            <label for="userName">Name:</label>
+            <input type="text" id="userName" name="userName" required>
+            <label for="userAddress">Address:</label>
+            <input type="text" id="userAddress" name="userAddress" required>  
             <div class="flex-container">
                 <div>
-                    <label for="driverDateOfBirth">Date of Birth:</label>
-                    <input type="date" id="driverDateOfBirth" name="driverDateOfBirth" required>
+                    <label for="dateOfBirth">Date of Birth:</label>
+                    <input type="date" id="dateOfBirth" name="dateOfBirth" required>
                 </div>
                 <div>
-                    <label for="driverSex">Sex:</label>
-                    <select id="driverSex" name="driverSex" required>
-                        <option value="" disabled selected>Select below</option>
-                        <option value="M">Male</option>
-                        <option value="F">Female</option>
-                        <option value="UKWN">Unknown</option>
-                    </select>
+                    <label for="sex">Sex:</label><br>
+                    <input type="radio" id="male" name="sex" value="M">
+                    <label for="male">Male</label><br>
+                    <input type="radio" id="female" name="sex" value="F">
+                    <label for="female">Female</label><br>
+                    <input type="radio" id="unknown" name="sex" value="UKWN">
+                    <label for="unknown">Unknown</label>
                 </div>
                 <div>
-                    <label for="driverBloodType">Blood Type:</label>
-                    <select id="driverBloodType" name="driverBloodType" required>
+                    <label for="bloodType">Blood Type:</label>
+                    <select id="bloodType" name="bloodType" required>
                         <option value="" disabled selected>Select below</option>
                         <option value="AB+">AB+</option>
                         <option value="AB-">AB-</option>
@@ -237,35 +230,50 @@
                     </select>
                 </div>
                 <div>
-                    <label for="driverContact">Contact Number:</label>
-                    <input type="tel" id="driverContact" name="driverContact" required>
+                    <label for="contact">Contact Number:</label>
+                    <input type="tel" id="contact" name="contact" required>
                 </div>
             </div>
             <div class="flex-container">
                 <div>
-                    <label for="driverNationality">Nationality:</label>
-                    <input type="text" id="driverNationality" name="driverNationality" required>
+                    <label for="nationality">Nationality:</label>
+                    <input type="text" id="nationality" name="nationality" required>
                 </div>
                 <div>
-                    <label for="driverWeight">Weight (kg):</label>
-                    <input type="number" id="driverWeight" name="driverWeight" required>
+                    <label for="weight">Weight (kg):</label>
+                    <input type="number" id="weight" name="weight" required>
                 </div>
                 <div>
-                    <label for="driverHeight">Height (cm):</label>
-                    <input type="number" id="driverHeight" name="driverHeight" required>
+                    <label for="height">Height (cm):</label>
+                    <input type="number" id="height" name="height" required>
+                </div>
+                <div>
+                    <label for="userRole">Role:</label><br>
+                    <input type="radio" id="driver" name="userRole" value="Driver" onclick="showSection()">
+                    <label for="driver">Driver</label><br>
+                    <input type="radio" id="owner" name="userRole" value="Owner" onclick="showSection()">
+                    <label for="owner">Owner</label><br>
+                    <input type="radio" id="both" name="userRole" value="Both" onclick="showSection()">
+                    <label for="both">Owner & Driver</label>
                 </div>
             </div>
         </div>
 
-        <!-- Driver License Information -->
-        <div class="add-record-container">
+        <div class="button-container">
+            <!-- Submit Record Button -->
+            <input type="submit" value="Submit" name="SubmitRecord" class="submitRecord">
+        </div>
+
+
+        <!-- Driver License Section -->
+        <div id="driverLicense" class="hidden-section">
             <h2>Driver License Information</h2>
             <label for="licenseNumber">License Number:</label>
-            <input type="text" id="licenseNumber" name="licenseNumber" required>
+            <input type="text" id="licenseNumber" name="licenseNumber">
             <div class="flex-container">
                 <div>
                     <label for="agencyCode">Agency Code:</label>
-                    <select id="agencyCode" name="agencyCode" required>
+                    <select id="agencyCode" name="agencyCode">
                         <option value="">Select Agency Code</option>
                         <option value="0100">0100</option>
                         <option value="0200">0200</option>
@@ -279,7 +287,7 @@
                         <option value="0900">0900</option>
                         <option value="1000">1000</option>
                         <option value="1100">1100</option>
-                        <option value="1200">1200</option>
+                        <option value="1200">1200</option>                 
                         <option value="1300">1300</option>
                         <option value="1400">1400</option>
                         <option value="1500">1500</option>
@@ -287,15 +295,15 @@
                 </div>
                 <div>
                     <label for="issueDate">Issue Date:</label>
-                    <input type="date" id="issueDate" name="issueDate" required>
+                    <input type="date" id="issueDate" name="issueDate">
                 </div>
                 <div>
                     <label for="expirationDate">Expiration Date:</label>
-                    <input type="date" id="expirationDate" name="expirationDate" required>
+                    <input type="date" id="expirationDate" name="expirationDate">
                 </div>
                 <div>
-                <label for="conditionCode">Condition Code:</label>
-                    <select id="conditionCode" name="conditionCode" required>
+                    <label for="conditionCode">Condition Code:</label>
+                    <select id="conditionCode" name="conditionCode">
                         <option value="">Select Type</option>
                         <option value="A/1">Condition A/1</option>
                         <option value="B/2">Condition B/2</option>
@@ -308,7 +316,7 @@
                 </div>
                 <div>
                     <label for="DLCode">DL Code:</label>
-                    <select id="dlCode" name="dlCode" required>
+                    <select id="dlCode" name="dlCode">
                         <option value="">Select DL Code</option>
                         <option value="R1">Motorbikes or motorized tricycles</option>
                         <option value="R2">Motor vehicle up to 4500 kg GVW</option>
@@ -320,26 +328,26 @@
                         <option value="R8">Articulated Vehicle 4501 kg & above GVW</option>
                     </select>
                 </div>
-            </div>
+            </div>        
         </div>
 
-        <!-- Vehicle Information -->
-        <div class="add-record-container">
-            <h2>Vehicle Information & History Records</h2>
+        <!-- Vehicle Section -->
+        <div id="vehicleSection" class="hidden-section">
+            <h2>Vehicle Information</h2>
             <label for="vehiclePlateNumber">Plate Number:</label>
-            <input type="text" id="vehiclePlateNumber" name="vehiclePlateNumber" required>
+            <input type="text" id="vehiclePlateNumber" name="vehiclePlateNumber">
             <div class="flex-container">
                 <div>
                     <label for="registrationDateV">Registration Date:</label>
-                    <input type="date" id="registrationDateV" name="registrationDateV" required>
+                    <input type="date" id="registrationDateV" name="registrationDateV">
                 </div>
                 <div>
                     <label for="expirationDateV">Expiration Date:</label>
-                    <input type="date" id="expirationDateV" name="expirationDateV" required>
+                    <input type="date" id="expirationDateV" name="expirationDateV">
                 </div>
                 <div>
                     <label for="fuel">Fuel Type:</label>
-                    <select id="fuel" name="fuel" required>
+                    <select id="fuel" name="fuel">
                         <option value="" disabled selected>Select below</option>
                         <option value="Petrol">Petrol</option>
                         <option value="Diesel">Diesel</option>
@@ -352,37 +360,38 @@
             <div class="flex-container">
                 <div>
                     <label for="model">Vehicle Model:</label>
-                    <input type="text" id="model" name="model" required>
+                    <input type="text" id="model" name="model">
                 </div>
                 <div>
                     <label for="color">Vehicle Color:</label>
-                    <input type="text" id="color" name="color" required>
+                    <input type="text" id="color" name="color">
                 </div>
                 <div>
                     <label for="manufacturer">Vehicle Manufacturer:</label>
-                    <input type="text" id="manufacturer" name="manufacturer" required>
+                    <input type="text" id="manufacturer" name="manufacturer">
                 </div>
                 <div>
                     <label for="yearProduced">Year Produced:</label>
-                    <input type="number" id="yearProduced" name="yearProduced" required>
+                    <input type="number" id="yearProduced" name="yearProduced">
                 </div>
+
                 <div>
-                    <label for="noOfViolations">No. of Violation/s:</label>
-                    <input type="number" id="noOfViolations" name="noOfViolations" required>
-                </div>
+                    <label for="violation">Violation/s:</label>
+                    <select id="violation" name="violation">
+                        <option value="" disabled selected>Select below</option>
+                        <option value="V001">Smoke Belching</option>
+                        <option value="V002">Driving While Intoxicated/Drugged</option>
+                        <option value="V003">Disregarding Traffic Signs</option>
+                        <option value="V004">Jallosies</option>
+                        <option value="V05">Reckless Driving</option>
+                    </select>
                 <div>
                     <label for="violationDate">Recent Date of Violation/s:</label>
-                    <input type="date" id="violationDate" name="violationDate" required>
+                    <input type="date" id="violationDate" name="violationDate">
                 </div>
-            </div>
+            </div>        
         </div>
-        <div class="button-container">
-            <!-- Submit Record Button -->
-            <input type="submit" value="Submit Record" name ="SubmitRecord" class="submitRecord">
-        </div>
+
     </form>
-
-    
-
 </body>
 </html>

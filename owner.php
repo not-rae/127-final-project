@@ -92,9 +92,12 @@
                             "<form action='editOwner.php' method='post' style='display:inline;'>" .
                                 "<input type='hidden' name='ownerID' value='".$rowOwner['userID']."'>" .
                                 "<input type='hidden' name='ownerName' value='".$rowOwner['userName']."'>" .
+                                "<input type='hidden' name='ownerSex' value='".$rowOwner['sex']."'>" .
+                                "<input type='hidden' name='ownerDateOfBirth' value='".$rowOwner['dateOfBirth']."'>" .
                                 "<input type='hidden' name='ownerAddress' value='".$rowOwner['userAddress']."'>" .
                                 "<input type='hidden' name='ownerContact' value='".$rowOwner['contactNumber']."'>" .
-                                "<input type='hidden' name='ownerNationality' value='".$rowOwner['nationality']."'>" . 
+                                "<input type='hidden' name='ownerNationality' value='".$rowOwner['nationality']."'>" .
+                                "<input type='hidden' name='ownerBloodType' value='".$rowOwner['bloodType']."'>" .                                 
                                 "<input type='hidden' name='ownerWeight' value='".$rowOwner['weightInKG']."'>" .
                                 "<input type='hidden' name='ownerHeight' value='".$rowOwner['heightInCM']."'>" .
                                 "<button type='submit'>Edit</button>" .

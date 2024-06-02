@@ -4,7 +4,7 @@ include 'DBConnector.php';
 
 if(isset($_POST['SubmitRecord'])) {
 
-   // Insert LTO records into the database
+    // Insert LTO records into the database
     $insertLTOs = [
         "INSERT IGNORE INTO lto (agencyCode, agencyName, LTOAddress, emailAddress, contactNumber, startingHour, endingHour, noOfDriversRegistered)
         VALUES('0100', 'LTO REGIONAL OFFICE I (SAN FERNANDO, LA UNION)', 'AGUILA ROAD, CITY OF SAN FERNANDO, LA UNION', 'LTOR1OPERDIV@GMAIL.COM', '072-6070465', '8:00 AM', '5:00 PM', '0')",
@@ -41,10 +41,7 @@ if(isset($_POST['SubmitRecord'])) {
     ];
 
     foreach ($insertLTOs as $insertLTO) {
-        if ($conn->query($insertLTO) === TRUE) {
-            echo "LTO record added into the database.";
-            header('Location: index.php');
-        } else {
+        if ($conn->query($insertLTO) !== TRUE) {
             echo "Error inserting LTO record: " . $conn->error;
         }
     }
@@ -61,131 +58,51 @@ if(isset($_POST['SubmitRecord'])) {
     $weight = $_POST["weight"];
     $address = $_POST["userAddress"];
     $role = $_POST["userRole"];
-  
 
-    $insertUser = "INSERT INTO user (userID, userName, dateOfBirth, sex, bloodType, contactNumber, nationality, heightInCM, weightInKG, usnerAddress, userRole) 
-    VALUES('$userID', '$userName', '$dateOfBirth', '$sex', '$bloodType', '$contact', '$nationality', '$height', '$weight', '$address', '$role');";
+    $insertUser = "INSERT INTO user (userID, userName, dateOfBirth, sex, bloodType, contactNumber, nationality, heightInCM, weightInKG, userAddress, userRole) 
+                   VALUES('$userID', '$userName', '$dateOfBirth', '$sex', '$bloodType', '$contact', '$nationality', '$height', '$weight', '$address', '$role')";
 
-    if ($conn->query($insertOwner) === TRUE) {
-        echo "Owner added into the database.";
-    } else {
-        echo "Error inserting owner: " . $conn->error;
+    if ($conn->query($insertUser) !== TRUE) {
+        echo "Error inserting user: " . $conn->error . "<br>";
     }
-
 
     // Driver License
-    $licenseNumber = $_POST["licenseNumber"];
-    $agencyCode = $_POST["agencyCode"];
-    $issueDate = $_POST["issueDate"];
-    $expirationDate = $_POST["expirationDate"];
-    $conditionCode = $_POST["conditionCode"];
-    $dlCode = $_POST["dlCode"];
 
-    if($role === "driver" OR $role === "both"){
+    if($role === "Driver" || $role === "Both"){
+        $licenseNumber = $_POST["licenseNumber"];
+        $agencyCode = $_POST["agencyCode"];
+        $issueDate = $_POST["issueDate"];
+        $expirationDate = $_POST["expirationDate"];
+        $conditionCode = $_POST["conditionCode"];
+        $dlCode = $_POST["dlCode"];
         $insertDriverLicense = "INSERT INTO driverLicense (userID, driverName, licenseNumber, agencyCode, issueDate, expirationDate, conditionCode, DLCode)
-        VALUES ('$userID', '$userName', '$licenseNumber', '$agencyCode', '$issueDate', '$expirationDate', '$conditionCode', '$dlCode');";
+                                VALUES ('$userID', '$userName', '$licenseNumber', '$agencyCode', '$issueDate', '$expirationDate', '$conditionCode', '$dlCode')";
 
-        if ($conn->query($insertDriverLicense) === TRUE) {
-            echo "Driver License added into the database.";
-
-        } else {
-            echo "Error inserting driver license: " . $conn->error;
+        if ($conn->query($insertDriverLicense) !== TRUE) {
+            echo "Error inserting driver license: " . $conn->error . "<br>";
         }
-    }
-    else{
-        echo "Error is not driver: " . $conn->error;
     }
 
     // Vehicle
-    $vehiclePlateNumber = $_POST["vehiclePlateNumber"];
-    $registrationDateV = $_POST["registrationDateV"];
-    $expirationDateV = $_POST["expirationDateV"];
-    $model = $_POST["model"];
-    $color = $_POST["color"];
-    $manufacturer = $_POST["manufacturer"];
-    $yearProduced = $_POST["yearProduced"];
-    $fuel = $_POST["fuel"];
 
-
-    if($role === "owner" OR $role === "both"){
+    if($role === "Owner" || $role === "Both"){
+        $vehiclePlateNumber = $_POST["vehiclePlateNumber"];
+        $registrationDateV = $_POST["registrationDateV"];
+        $expirationDateV = $_POST["expirationDateV"];
+        $model = $_POST["model"];
+        $color = $_POST["color"];
+        $manufacturer = $_POST["manufacturer"];
+        $yearProduced = $_POST["yearProduced"];
+        $fuel = $_POST["fuel"];
         $insertVehicle = "INSERT INTO vehicle (plateNumber, userID, ownerName, registrationDate, expirationDate, manufacturer, model, color, yearProduced, fuel)
-        VALUES ('$vehiclePlateNumber', '$userID', '$userName', '$registrationDateV', '$expirationDateV', '$manufacturer', '$model', '$color', '$yearProduced', '$fuel');";
+                          VALUES ('$vehiclePlateNumber', '$userID', '$userName', '$registrationDateV', '$expirationDateV', '$manufacturer', '$model', '$color', '$yearProduced', '$fuel')";
         
-        if ($conn->query($insertVehicle) === TRUE) {
-            echo "Vehicle added into the database.";
-        } else {
-            echo "Error inserting vehicle: " . $conn->error;
-        }
-    }
-    else{
-        echo "Error: is not owner";
-    }
-
-    // Different Form:
-
-    // violations
-
-    $insertViolations = [
-        "INSERT IGNORE INTO violations (violationID, violationName)
-        VALUES('V001', 'Smoke Belching')",
-        "INSERT IGNORE INTO violations (violationID, violationName)
-        VALUES('V002', 'Driving While Intoxicated/Drugged')",
-        "INSERT IGNORE INTO violations (violationID, violationName)
-        VALUES('V003', 'Disregarding Traffic Signs')",
-        "INSERT IGNORE INTO violations (violationID, violationName)
-        VALUES('V004', 'Jallosies')",
-        "INSERT IGNORE INTO violations (violationID, violationName)
-        VALUES('V005', 'Reckless Driving')",
-    ];
-
-    foreach ($insertViolationS as $insertViolations) {
-        if ($conn->query($insertViolations) === TRUE) {
-            echo "Violation record added into the database.";
-            header('Location: index.php');
-        } else {
-            echo "Error inserting Violation record: " . $conn->error;
+        if ($conn->query($insertVehicle) !== TRUE) {
+            echo "Error inserting vehicle: " . $conn->error . "<br>";
         }
     }
 
+  
+}
 
-    // report
-    function generatereportID($length = 10, $abc = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"){
-    return substr(str_shuffle($abc), 0, $length);
-    }
-
-    $reportID = generatereportID();
-    $violationDate = $_POST["violationDate"];
-    $violationID = $_POST["violationID"];
-    $ownerIDR = "SELECT userID FROM Vehicle WHERE vehicle.userID = $userID";
-    $licenseNumberR = "SELECT licenseNumber FROM driverLicense WHERE driverLicense.userID = $userID";
-    $plateNumberR = "SELECT plateNumber FROM vehicle WHERE vehicle.userID = $userID";
-    $insertReport = "INSERT INTO report (reportID, userID, plateNumber, licenseNumber, violationID, violationDate) 
-    VALUES ('$vehiclePlateNumber', '$reportID', '$ownerIDR', '$licenseNumberR', '$plateNumberR', '$licenseNumberR', '$violationID', '$violationDate');"; 
-
-    if ($conn->query($insertReport) === TRUE) {
-        echo "Report added into the database.";
-    } else {
-        echo "Error inserting history: " . $conn->error;
-    }
-
-    // rep_vio
-    $insertReport = "INSERT INTO rep_vio (reportID, violationID)
-    VALUES('$reportID', '$violationID);"; 
-
-    // History
-    $no_Of_Violations = $_POST["noOfViolations"];
-    $violationDate = $_POST["violationDate"];
-    $ownerNameH = "SELECT ownerName FROM vehicle WHERE vehicle.userID = user.userID ";
-    $driverNameH = "SELECT driverName FROM driverLicense WHERE driverLicense.userID = $userID";
-    $violationIDRV = "SELECT violationID FROM rep_vio WHERE rep_vio.violationID = $violationID";
-    $violatonDateR = "SELECT violationDate FROM report WHERE report.reportID = rep_vio.reportID";
-    $insertHistory = "INSERT INTO history (plateNumber, userID, ownerNameH, licenseNumber, driverNameH,  agencyCode, reportID, violationID, violationDate, DLCode) 
-    VALUES ('$vehiclePlateNumber', '$userID', '$ownerNameH', '$licenseNumber', '$userName', '$licenseNumber', '$agencyCode', '$violationIDRV', '$violationDateR', '$dlCode');"; 
-
-    if ($conn->query($insertHistory) === TRUE) {
-        echo "History added into the database.";
-    } else {
-        echo "Error inserting history: " . $conn->error;
-    }
-    }
 ?>

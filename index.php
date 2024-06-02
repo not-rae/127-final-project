@@ -113,6 +113,12 @@
             color: white;
         }
 
+        .add-record-container button.fileReport {
+            background-color: #E40221;
+            color: white;
+        }
+
+
         .add-record-container button:hover {
             opacity: 0.8;
             transform: scale(0.9);
@@ -166,6 +172,12 @@
             <button class="insertRecord" onclick="window.location.href='recordForm.php'">
                 <i class='bx bxs-file-plus'></i>
                 <span>Add Record</span>
+            </button>
+        </div>
+        <div>
+            <button class="fileReport" onclick="window.location.href='fileReport.php'">
+                <i class='bx bxs-file-plus'></i>
+                <span>File Report</span>
             </button>
         </div>
     </div>

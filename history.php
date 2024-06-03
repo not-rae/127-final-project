@@ -61,11 +61,11 @@
             <th>Owner</th>
             <th>Driver</th>
             <th>License Number</th>
+            <th>DL Code</th>
             <th>Agency Code</th>
             <th>Report ID</th>
             <th>Violation ID</th>
             <th>Recent Date of Violation</th>
-            <th>DL Code</th>
             <th>Action</th>
 
         </tr>
@@ -83,11 +83,11 @@
                         "<td align = 'center' >".$rowtHistory["ownerNameH"]."</td>". 
                         "<td align = 'center' >".$rowtHistory["driverNameH"]."</td>". 
                         "<td align = 'center' >".$rowtHistory["licenseNumber"]."</td>".
+                        "<td align = 'center' >".$rowtHistory["DLCode"]."</td>".  
                         "<td align = 'center' >".$rowtHistory["agencyCode"]."</td>". 
                         "<td align = 'center' >".$rowtHistory["reportID"]."</td>".
                         "<td align = 'center' >".$rowtHistory["violationID"]."</td>". 
                         "<td align = 'center' >".$rowtHistory["violationDate"]."</td>".
-                        "<td align = 'center' >".$rowtHistory["DLCode"]."</td>".  
                         "<td align = 'center' >".
                         "<form action='editHistory.php' method='post' style='display:inline;'>" .
                         "<input type='hidden' name='reportID' value='".$rowtHistory['reportID']."'>" .

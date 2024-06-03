@@ -1,26 +1,35 @@
 <?php
-// Database connection
 include 'DBConnector.php';
 
-// Check if form was submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $driverID = $_POST['driverID'];
 
-    // Get the form data and sanitize it
-    $driverID = isset($_POST["driverID"]) ? trim($_POST["driverID"]) : '';
-    $driverName = isset($_POST["driverName"]) ? trim($_POST["driverName"]) : '';
-    $driverDOB = isset($_POST["driverDateOfBirth"]) ? trim($_POST["driverDateOfBirth"]) : '';
-    $driverSex = isset($_POST["driverSex"]) ? trim($_POST["driverSex"]) : '';
-    $driverBloodType = isset($_POST["driverBloodType"]) ? trim($_POST["driverBloodType"]) : '';
-    $driverContact = isset($_POST["driverContact"]) ? trim($_POST["driverContact"]) : '';
-    $driverNationality = isset($_POST["driverNationality"]) ? trim($_POST["driverNationality"]) : '';
-    $driverWeight = isset($_POST["driverWeight"]) ? trim($_POST["driverWeight"]) : '';
-    $driverHeight = isset($_POST["driverHeight"]) ? trim($_POST["driverHeight"]) : '';
-    $driverAddress = isset($_POST["driverAddress"]) ? trim($_POST["driverAddress"]) : '';
+    $sql = "SELECT * FROM User WHERE userID = '$driverID'";
+    $result = $conn->query($sql);
 
-        // Start transaction
+    if ($result->num_rows > 0) {
+        $driver = $result->fetch_assoc();
+    } else {
+        echo "Driver not found.";
+        exit;
+    }
+}
+
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update'])) {
+    $driverID = trim($_POST["driverID"]);
+    $driverName = trim($_POST["driverName"]);
+    $driverDOB = trim($_POST["driverDateOfBirth"]);
+    $driverSex = trim($_POST["driverSex"]);
+    $driverBloodType = trim($_POST["driverBloodType"]);
+    $driverContact = trim($_POST["driverContact"]);
+    $driverNationality = trim($_POST["driverNationality"]);
+    $driverHeight = trim($_POST["driverHeight"]);
+    $driverWeight = trim($_POST["driverWeight"]);
+    $driverAddress = trim($_POST["driverAddress"]);
+
+    if ($driverID != "" && $driverName != "" && $driverDOB != "" && $driverSex != "" && $driverBloodType != "" && $driverContact != "" && $driverNationality != "" && $driverHeight != "" && $driverWeight != "" && $driverAddress != "") {
         $conn->begin_transaction();
 
-        // Update carDriver table
         $updateDriver = "UPDATE User SET 
             userName = '$driverName', 
             dateOfBirth = '$driverDOB', 
@@ -33,56 +42,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             userAddress = '$driverAddress'
             WHERE userID = '$driverID'";
 
-        // Execute the query
-        // Update driverLicense table
         if ($conn->query($updateDriver) === TRUE) {
             $updateDriverDL = "UPDATE driverLicense SET 
                 driverName = '$driverName'
                 WHERE userID = '$driverID'";
 
-            // Execute the query
-            if ($conn->query($updateDriverDL) === TRUE) {
-                // Commit the transaction
-                $conn->commit();
-                echo "Driver information updated successfully.";
-            } else {
-                // Rollback the transaction if there was an error
-                $conn->rollback();
-                echo "Error updating driverlicense information: " . $conn->error;
-            }
-        } else {
-            // Rollback the transaction if there was an error
-            $conn->rollback();
-            echo "Error updating carDriver information: " . $conn->error;
-        }
-
-        // Execute the query
-        // update histoy records
-        if ($conn->query($updateDriver) === TRUE) {
             $updateDriverH = "UPDATE history SET 
                 driverNameH = '$driverName'
                 WHERE userID = '$driverID'";
 
-            // Execute the query
-            if ($conn->query($updateDriverH) === TRUE) {
-                // Commit the transaction
+            if ($conn->query($updateDriverDL) === TRUE && $conn->query($updateDriverH) === TRUE) {
                 $conn->commit();
                 echo "Driver information updated successfully.";
-                // header("Location: driver.php");
-                // exit;
+                header('Location: driver.php'); 
+             
+                exit;
+          
             } else {
-                // Rollback the transaction if there was an error
                 $conn->rollback();
-                echo "Error updating driverlicense information: " . $conn->error;
+                echo "Error updating driver license or history information: " . $conn->error;
             }
         } else {
-            // Rollback the transaction if there was an error
             $conn->rollback();
-            echo "Error updating carDriver information: " . $conn->error;
+            echo "Error updating driver information: " . $conn->error;
         }
+    }
 
-} else {
-    echo "Error: Invalid request method.";
+    $conn->close();
 }
 ?>
 
@@ -92,9 +78,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Update Driver Information</title>
-</head>
-<style>
-            body {
+    <style>
+        body {
             font-family: Arial, sans-serif;
             display: flex;
             flex-direction: column;
@@ -103,190 +88,120 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             margin: 0;
             background-color: #ffffff;
         }
-
-        /* Container style */
         .container {
             width: 50%;
-            height: auto;
             margin: 10px 55px;
             background-color: #fff;
             padding: 20px;
             border-radius: 5px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-
-        /* Form style */
         form {
             width: 100%;
             margin: 20px auto;
         }
-
-        /* Title style */
         h2 {
             font-size: 45px;
             margin-bottom: 20px;
-
         }
-
-        /* Label style */
         label {
             display: block;
             margin-bottom: 5px;
         }
-
-        #driverID {
-            width: 95%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            background-color: #c7f9cc;
-        }
-        
-        #driverName,
-        #driverAddress {
-            width: 95%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        input[type="text"] {
-            width: 83%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
+        input[type="text"],
+        input[type="date"],
+        input[type="number"],
+        input[type="tel"],
         select {
-            width: 100%;
+            width: 95%;
             padding: 10px;
             margin-bottom: 15px;
             border: 1px solid #ccc;
             border-radius: 5px;
         }
-        input[type="date"] {
-            width: 80%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        input[type="number"] {
-            width: 83%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        input[type="tel"] {
-            width: 83%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        /* Button style */
         button {
             padding: 10px 20px;
             background-color: #28a745;
             color: #fff;
             border: none;
-            border-radius: 10px;
+            border-radius: 5px;
             cursor: pointer;
-            transition: background-color 0.3s;
-            margin: 1rem 0 0 1rem;
         }
-
         button:hover {
-            background-color: red;
+            background-color: #218838;
         }
-
-        /* Submit button style */
-        input[type="submit"] {
-            font-size: 18px;
-            padding: 18px 40px;
-            color: #fff;
-            border: none;
-            border-radius: 30px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            margin: 30px auto;
-            display: block;
-        }
-
-        .flex-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-        }
-</style>
+    </style>
+</head>
 <body>
-    <h2>Update Driver Information</h2>
-    <form  class="container" action="editDriver.php" method="POST">
-        <label for="driverID">Driver ID:</label>
-        <input type="text" id="driverID" name="driverID" value="<?php echo htmlspecialchars($driverID); ?>" readonly required>
-        <label for="driverName">Driver Name:</label>
-        <input type="text" id="driverName" name="driverName" value="<?php echo htmlspecialchars($driverName); ?>" required>
-        <label for="driverAddress">Address:</label>
-        <input type="text" id="driverAddress" name="driverAddress" value="<?php echo htmlspecialchars($driverAddress); ?>"required>
-        <div class="flex-container">
+    <div class="container">
+        <h2>Update Driver Information</h2>
+
+        <form class = "container" method="post">
+        <div class = "flex-container">
             <div>
-                <label for="driverDateOfBirth">Date of Birth:</label>
-                <input type="date" id="driverDateOfBirth" name="driverDateOfBirth" value="<?php echo htmlspecialchars($driverDOB); ?>" required>
+            <input type="hidden" name="driverID" value="<?php echo htmlspecialchars($driver['userID']); ?>">
             </div>
             <div>
-                <label for="driverSex">Sex:</label>
-                <select id="driverSex" name="driverSex" required>
+            <label for="driverName">Driver Name</label>
+            <input type="text" name="driverName" value="<?php echo htmlspecialchars($driver['userName']); ?>" required>
+            </div>
+            <div>
+            <label for="driverDateOfBirth">Date of Birth</label>
+            <input type="date" name="driverDateOfBirth" value="<?php echo htmlspecialchars($driver['dateOfBirth']); ?>" required>
+            </div>
+            <div>
+            <label for="driverSex">Sex</label>
+            <select name="driverSex" required>
                 <option value="" disabled>Select below</option>
-                    <option value="M" <?php echo ($driverSex == 'M') ? 'selected' : ''; ?>>Male</option>
-                    <option value="F" <?php echo ($driverSex == 'F') ? 'selected' : ''; ?>>Female</option>
-                </select>
+                <option value="M" <?php echo ($driver['sex'] == 'M') ? 'selected' : ''; ?>>Male</option>
+                <option value="F" <?php echo ($driver['sex'] == 'F') ? 'selected' : ''; ?>>Female</option>
+                <option value="UKWN" <?php echo ($driver['sex'] == 'UKWN') ? 'selected' : ''; ?>>Unknown</option>
+            </select>
             </div>
             <div>
-                <label for="driverBloodType">Blood Type:</label>
-                <select id="driverBloodType" name="driverBloodType" required>
+            <label for="driverBloodType">Blood Type</label>
+            <select name="driverBloodType" required>
                 <option value="" disabled>Select below</option>
-                    <option value="AB+" <?php echo ($driverBloodType == 'AB+') ? 'selected' : ''; ?>>AB+</option>
-                    <option value="AB-" <?php echo ($driverBloodType == 'AB-') ? 'selected' : ''; ?>>AB-</option>
-                    <option value="A+" <?php echo ($driverBloodType== 'A+') ? 'selected' : ''; ?>>A+</option>
-                    <option value="A-" <?php echo ($driverBloodType== 'A-') ? 'selected' : ''; ?>>A-</option>
-                    <option value="O+" <?php echo ($driverBloodType== 'O+') ? 'selected' : ''; ?>>O+</option>
-                    <option value="O-" <?php echo ($driverBloodType== 'O-') ? 'selected' : ''; ?>>O-</option>
-                    <option value="B+" <?php echo ($driverBloodType== 'B+') ? 'selected' : ''; ?>>B+</option>
-                    <option value="B-" <?php echo ($driverBloodType== 'B-') ? 'selected' : ''; ?>>B-</option>
-                    <option value="UKNWN" <?php echo ($driverBloodType == 'UKNWN') ? 'selected' : ''; ?>>Unknown</option>
-                </select>
+                <option value="AB+" <?php echo ($driver['bloodType'] == 'AB+') ? 'selected' : ''; ?>>AB+</option>
+                <option value="AB-" <?php echo ($driver['bloodType'] == 'AB-') ? 'selected' : ''; ?>>AB-</option>
+                <option value="A+" <?php echo ($driver['bloodType'] == 'A+') ? 'selected' : ''; ?>>A+</option>
+                <option value="A-" <?php echo ($driver['bloodType'] == 'A-') ? 'selected' : ''; ?>>A-</option>
+                <option value="O+" <?php echo ($driver['bloodType'] == 'O+') ? 'selected' : ''; ?>>O+</option>
+                <option value="O-" <?php echo ($driver['bloodType'] == 'O-') ? 'selected' : ''; ?>>O-</option>
+                <option value="B+" <?php echo ($driver['bloodType'] == 'B+') ? 'selected' : ''; ?>>B+</option>
+                <option value="B-" <?php echo ($driver['bloodType'] == 'B-') ? 'selected' : ''; ?>>B-</option>
+                <option value="UKNWN" <?php echo ($driver['bloodType'] == 'UKNWN') ? 'selected' : ''; ?>>Unknown</option>
+            </select>
             </div>
             <div>
-                <label for="driverContact">Contact Number:</label>
-                <input type="tel" id="driverContact" name="driverContact" value="<?php echo htmlspecialchars($driverContact); ?>"required>
-            </div>
-        </div>
-
-        <div class="flex-container">
-            <div>
-                <label for="driverNationality">Nationality:</label>
-                <input type="text" id="driverNationality" name="driverNationality" value="<?php echo htmlspecialchars($driverNationality); ?>"required>
+            <label for="driverContact">Contact Number</label>
+            <input type="tel" name="driverContact" value="<?php echo htmlspecialchars($driver['contactNumber']); ?>" required>
             </div>
             <div>
-                <label for="driverWeight">Weight (kg):</label>
-                <input type="number" id="driverWeight" name="driverWeight" value="<?php echo htmlspecialchars($driverWeight); ?>"required>
+            <label for="driverNationality">Nationality</label>
+            <input type="text" name="driverNationality" value="<?php echo htmlspecialchars($driver['nationality']); ?>" required>
             </div>
             <div>
-                <label for="driverHeight">Height (cm):</label>
-                <input type="number" id="driverHeight" name="driverHeight" value="<?php echo htmlspecialchars($driverHeight); ?>"required>
+            <label for="driverWeight">Weight (kg)</label>
+            <input type="number" name="driverWeight" value="<?php echo htmlspecialchars($driver['weightInKG']); ?>" required>
             </div>
-        </div>
+            <div>
+            <label for="driverHeight">Height (cm)</label>
+            <input type="number" name="driverHeight" value="<?php echo htmlspecialchars($driver['heightInCM']); ?>" required>
+            </div>
+            <div>
+            <label for="driverAddress">Address</label>
+            <input type="text" name="driverAddress" value="<?php echo htmlspecialchars($driver['userAddress']); ?>" required>
+            </div>
 
 
-        <button name ="submit" type="submit">Update Driver</button>
-        <button onclick="window.location.href='driver.php'">Cancel</button>
+            </div>
+           <div class="button-container">
+                <button type="submit" name="update">Update Driver</button>
+                <button type="button" onclick="window.location.href='driver.php'">Cancel</button>
+            </div>
+       
+        </form>
 
-    </form>
 </body>
 </html>

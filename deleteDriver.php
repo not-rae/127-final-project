@@ -1,6 +1,6 @@
 <!-- 
     This is responsible for deleting all the values that matches with 
-    the driver id.
+    the user id.
     
  -->
 
@@ -8,52 +8,42 @@
 include 'DBConnector.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $delDriver = intval($_POST['driverID']);
+    $delDriver = $_POST['userID'];
+
+    $checkRoleQuery = "SELECT userRole FROM user WHERE userID = '$delDriver'";
+    $roleResult = $conn->query($checkRoleQuery);
 
     $conn->begin_transaction();
 
+    // Error-catch:
     try {
-        // deletes first the values from the driverLicense table where the driverID is a foreign key
-        $sqldel2 = $conn->prepare("DELETE FROM driverLicense WHERE driverID = ?"); 
-        $sqldel2->bind_param("i", $delDriver);
-        $sqldel2->execute();
+        if ($roleResult->num_rows > 0) {
+            $row = $roleResult->fetch_assoc();
+            $userRole = $row['userRole'];
 
+            if ($userRole == 'Driver' || $userRole == "Both") {
 
-
-        $conn->commit();
-
-
-    } catch (mysqli_sql_exception $exception) {
     
-        $conn->rollback();
+                $conn->query("DELETE FROM rep_vio WHERE reportID IN (SELECT reportID FROM report WHERE userID = '$delDriver')");
+                $conn->query("DELETE FROM report WHERE userID = '$delDriver'");
+                $conn->query("DELETE FROM driverLicense WHERE userID = '$delDriver'");
+            }
 
       
-        echo "Error deleting Driver in driverLicense: " . $exception->getMessage();
-    }
-    try {
+            $conn->query("DELETE FROM user WHERE userID = '$delDriver'");
 
-        // Then deletes the values in the carDriver
-        $sqldel3 = $conn->prepare("DELETE FROM carDriver WHERE driverID = ?");
-        $sqldel3->bind_param("i", $delDriver);
-        $sqldel3->execute();
+            $conn->commit();
 
-
-        $conn->commit();
-        header('Location: driver.php');
-        exit(); 
-
-
+            header('Location: driver.php'); 
+            exit(); 
+        }
     } catch (mysqli_sql_exception $exception) {
-    
-        $conn->rollback();
-
-      
-        echo "Error deleting Driver in driver: " . $exception->getMessage();
+        $conn->rollback(); 
+        echo "Error deleting values: " . $exception->getMessage();
     }
-    
-    $sqldel2->close();
-    $sqldel3->close();
 }
 
 $conn->close();
+
+
 ?>

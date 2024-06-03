@@ -67,47 +67,42 @@
         <?php
         include 'DBConnector.php';
 
-        $sqlOwner = "SELECT * FROM User WHERE userRole IN ('owner', 'both')";
+        $sqlOwner = "SELECT * FROM User WHERE userRole IN ('Owner', 'Both')";
+        
         $resultOwner = $conn->query($sqlOwner);
 
-            if($resultOwner->num_rows > 0){
-                while($rowOwner = $resultOwner->fetch_assoc()) {
-                    echo 
-                        "<tr>". 
-                        "<td align = 'center' >".$rowOwner["userID"]."</td>". 
-                        "<td align = 'center' >".$rowOwner["userName"]."</td>". 
-                        "<td align = 'center' >".$rowOwner["sex"]."</td>". 
-                        "<td align = 'center' >".$rowOwner["dateOfBirth"]."</td>".
-                        "<td align = 'center' >".$rowOwner["userAddress"]."</td>". 
-                        "<td align = 'center' >".$rowOwner["contactNumber"]."</td>". 
-                        "<td align = 'center' >".$rowOwner["nationality"]."</td>".
-                        "<td align = 'center' >".$rowOwner["bloodType"]."</td>".  
-                        "<td align = 'center' >".$rowOwner["weightInKG"]."</td>".
-                        "<td align = 'center' >".$rowOwner["heightInCM"]."</td>". 
-                        "<td align='center'>" .
-                            "<form action='deleteOwner.php' method='post' style='display:inline;'>" .
-                                "<input type='hidden' name='userID' value='".$rowOwner['userID']."'>" .
-                                "<button type='submit'>Delete</button>" .
-                            "</form>" .
-                            "<form action='editOwner.php' method='post' style='display:inline;'>" .
-                                "<input type='hidden' name='ownerID' value='".$rowOwner['userID']."'>" .
-                                "<input type='hidden' name='ownerName' value='".$rowOwner['userName']."'>" .
-                                "<input type='hidden' name='ownerSex' value='".$rowOwner['sex']."'>" .
-                                "<input type='hidden' name='ownerDateOfBirth' value='".$rowOwner['dateOfBirth']."'>" .
-                                "<input type='hidden' name='ownerAddress' value='".$rowOwner['userAddress']."'>" .
-                                "<input type='hidden' name='ownerContact' value='".$rowOwner['contactNumber']."'>" .
-                                "<input type='hidden' name='ownerNationality' value='".$rowOwner['nationality']."'>" .
-                                "<input type='hidden' name='ownerBloodType' value='".$rowOwner['bloodType']."'>" .                                 
-                                "<input type='hidden' name='ownerWeight' value='".$rowOwner['weightInKG']."'>" .
-                                "<input type='hidden' name='ownerHeight' value='".$rowOwner['heightInCM']."'>" .
-                                "<button type='submit'>Edit</button>" .
-                            "</form>" .
-                        "</td>" .
-                        "</tr>";
-                }
-            } else {
-                echo "0 results";
+
+       
+
+        if ($resultOwner->num_rows > 0 ) {
+            while ($rowOwner = $resultOwner->fetch_assoc() ) {
+                
+                echo "<tr>";
+                echo "<td align='center'>".$rowOwner["userID"]."</td>";
+                echo "<td align='center'>".$rowOwner["userName"]."</td>";
+                echo "<td align='center'>".$rowOwner["sex"]."</td>";
+                echo "<td align='center'>".$rowOwner["dateOfBirth"]."</td>";
+                echo "<td align='center'>".$rowOwner["userAddress"]."</td>";
+                echo "<td align='center'>".$rowOwner["contactNumber"]."</td>";
+                echo "<td align='center'>".$rowOwner["nationality"]."</td>";
+                echo "<td align='center'>".$rowOwner["bloodType"]."</td>";
+                echo "<td align='center'>".$rowOwner["weightInKG"]."</td>";
+                echo "<td align='center'>".$rowOwner["heightInCM"]."</td>";
+                echo "<td align='center'>";
+                echo "<form action='deleteOwner.php' method='post' style='display:inline;'>";
+                echo "<input type='hidden' name='userID' value='".$rowOwner['userID']."'>";
+                echo "<button type='submit'>Delete</button>";
+                echo "</form>";
+                echo "<form action='editOwner.php' method='post' style='display:inline;'>";
+                echo "<input type='hidden' name='ownerID' value='".$rowOwner['userID']."'>";
+                echo "<button type='submit'>Edit</button>";
+                echo "</form>";
+                echo "</td>";
+                echo "</tr>";
             }
+        } else {
+            echo "<tr><td colspan='11'>0 results</td></tr>";
+        }
         ?>
     </table>
     <div class="button-container">

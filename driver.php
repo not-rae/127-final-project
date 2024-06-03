@@ -91,15 +91,6 @@
                             "</form>" .
                             "<form action='editDriver.php' method='post' style='display:inline;'>" .
                                 "<input type='hidden' name='driverID' value='".$rowDriver['userID']."'>" .
-                                "<input type='hidden' name='driverName' value='".$rowDriver['userName']."'>" .
-                                "<input type='hidden' name='driverSex' value='".$rowDriver['sex']."'>" .
-                                "<input type='hidden' name='driverDateOfBirth' value='".$rowDriver['dateOfBirth']."'>" .
-                                "<input type='hidden' name='driverAddress' value='".$rowDriver['userAddress']."'>" .
-                                "<input type='hidden' name='driverContact' value='".$rowDriver['contactNumber']."'>" .
-                                "<input type='hidden' name='driverNationality' value='".$rowDriver['nationality']."'>" .
-                                "<input type='hidden' name='driverBloodType' value='".$rowDriver['bloodType']."'>" .
-                                "<input type='hidden' name='driverWeight' value='".$rowDriver['weightInKG']."'>" .
-                                "<input type='hidden' name='driverHeight' value='".$rowDriver['heightInCM']."'>" .
                                 "<button type='submit'>Edit</button>" .
                             "</form>" .
                         "</td>" .

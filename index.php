@@ -93,6 +93,11 @@
             color: white;
         }
 
+        .button-container button.violation {
+            background-color: green;
+            color: white;
+        }
+
         .button-container button:hover {
             opacity: 0.8;
             transform: scale(0.9);
@@ -146,6 +151,12 @@
             <button class="driver" onclick="window.location.href='driver.php'">
                 <i class='bx bxs-tachometer'></i>
                 <span>Driver Records</span>
+            </button>
+        </div>
+        <div>
+            <button class="violation" onclick="window.location.href='violation.php'">
+                <i class='bx bxs-tachometer'></i>
+                <span>Violation Records</span>
             </button>
         </div>
         <div>

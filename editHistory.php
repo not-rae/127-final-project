@@ -3,60 +3,71 @@
 include 'DBConnector.php';
 
 
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $reportID = $_POST['reportID'];
 
 
-    $plateNumber = isset($_POST["plateNumber"]) ? trim($_POST["plateNumber"]) : '';
-    $ownerNameH = isset($_POST["ownerNameH"]) ? trim($_POST["ownerNameH"]) : '';
-    $driverNameH = isset($_POST["driverNameH"]) ? trim($_POST["driverNameH"]) : '';
-    $licenseNumber = isset($_POST["licenseNumber"]) ? trim($_POST["licenseNumber"]) : '';
-    $agencyCode = isset($_POST["agencyCode"]) ? trim($_POST["agencyCode"]) : '';
-    $noOfViolations = isset($_POST["noOfViolations"]) ? trim($_POST["noOfViolations"]) : '';
-    $recentViolationDate = isset($_POST["violationDate"]) ? trim($_POST["violationDate"]) : '';
-    $DLCode = isset($_POST["DLCode"]) ? trim($_POST["DLCode"]) : '';
-    
+    $sql = "SELECT h.plateNumber, h.ownerNameH, h.driverNameH, h.licenseNumber, h.agencyCode, h.DLCode, rv.violationID, r.violationDate 
+            FROM history h 
+            JOIN rep_vio rv ON h.reportID = rv.reportID
+            JOIN report r ON h.reportID = r.reportID
+            WHERE h.reportID = '$reportID'";
+    $result = $conn->query($sql);
 
-  
-    if ($plateNumber != "" && $ownerNameH != "" && $driverNameH != "" && $licenseNumber != "" && $agencyCode != "" && $noOfViolations != "" && $recentViolationDate != "" && $DLCode != "") {
+    if ($result->num_rows > 0) {
+        $history = $result->fetch_assoc();
+    } else {
+        echo "Cannot edit history. User does not exist.";
+        exit;
+    }
+}
 
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update'])) {
+
+    $reportID = isset($_POST["reportID"]) ? trim($_POST["reportID"]) : '';
+    $violationID = isset($_POST["violationID"]) ? trim($_POST["violationID"]) : '';
+    $violationDate = isset($_POST["violationDate"]) ? trim($_POST["violationDate"]) : '';
+
+    if ($reportID != "" && $violationID != "" && $violationDate != "") {
 
         $conn->begin_transaction();
 
-        // Update history table
         $updateHistory = "UPDATE history SET 
-            plateNumber = '$plateNumber', 
-            ownerNameH = '$ownerNameH', 
-            driverNameH = '$driverNameH', 
-            agencyCode = '$agencyCode', 
-            noOfViolations = '$noOfViolations', 
-            recentViolationDate = '$recentViolationDate', 
-            DLCode = '$DLCode'
-            WHERE licenseNumber = '$licenseNumber'";
-        
-      
+            violationID = '$violationID', 
+            violationDate = '$violationDate'
+            WHERE reportID = '$reportID'";
+
         if ($conn->query($updateHistory) === TRUE) {
-     
 
-               
-            $conn->commit();
-            echo "History information updated successfully.";
-            header('Location: history.php'); // go back to history.php
-            exit;
-     
+            $update_rep_vio = "UPDATE rep_vio SET
+             violationID = '$violationID'
+             WHERE reportID = '$reportID'";
+
+            $updateReport = "UPDATE report SET
+             violationID = '$violationID',
+             violationDate = '$violationDate'
+             WHERE reportID = '$reportID'";
+
+            if ($conn->query($update_rep_vio) === TRUE && $conn->query($updateReport) === TRUE) {
+                $conn->commit();
+                header("Location: history.php");
+                exit;
+                
+            } else {
+                $conn->rollback();
+                echo "Error updating information: " . $conn->error;
+            }
         } else {
-           
             $conn->rollback();
-            echo "Error updating driverLicense information: " . $conn->error;
+            echo "Error updating history: " . $conn->error;
         }
-
-    }
+    } 
 
     $conn->close();
-
-} else {
-    echo "Error: Invalid request method.";
 }
 ?>
+
 <!-- 
     The Form which is used to update the history values.
 
@@ -76,7 +87,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <title>Update History Information</title>
 </head>
 <style>
-                body {
+            body {
             font-family: Arial, sans-serif;
             display: flex;
             flex-direction: column;
@@ -209,42 +220,54 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </style>
 <body>
     <h2>Update History Information</h2>
-    <form class="container" action="editHistory.php" method="POST">
+    <form class="container" method="POST">
         <div class="flex-container">
             <div>
                 <label for="plateNumber">Plate Number:</label>
-                <input type="text" id="plateNumber" name="plateNumber" value="<?php echo htmlspecialchars($plateNumber); ?>" readonly required>
+                <input type="text" id="plateNumber" name="plateNumber" value="<?php echo htmlspecialchars($history['plateNumber']); ?>" readonly required>
             </div>
             <div>
                 <label for="ownerNameH">Owner Name:</label>
-                <input type="text" id="ownerNameH" name="ownerNameH" value="<?php echo htmlspecialchars($ownerNameH); ?>" readonly required>
+                <input type="text" id="ownerNameH" name="ownerNameH" value="<?php echo htmlspecialchars($history['ownerNameH']); ?>" readonly required>
             </div>
             <div>
                 <label for="driverNameH">Driver Name:</label>
-                <input type="text" id="driverNameH" name="driverNameH" value="<?php echo htmlspecialchars($driverNameH); ?>" readonly required>
+                <input type="text" id="driverNameH" name="driverNameH" value="<?php echo htmlspecialchars($history['driverNameH']); ?>" readonly required>
             </div>
             <div>
                 <label for="licenseNumber">License Number:</label>
-                <input type="text" id="licenseNumber" name="licenseNumber" value="<?php echo htmlspecialchars($licenseNumber); ?>" readonly required>
+                <input type="text" id="licenseNumber" name="licenseNumber" value="<?php echo htmlspecialchars($history['licenseNumber']); ?>" readonly required>
             </div>
             <div>
             <label for="agencyCode">Agency Code:</label>
-                <input type="text" id="agencyCode" name="agencyCode" value="<?php echo htmlspecialchars($agencyCode); ?>" readonly required>
+                <input type="text" id="agencyCode" name="agencyCode" value="<?php echo htmlspecialchars($history['agencyCode']); ?>" readonly required>
+            </div>
+            <div>
+                <label for="reportID">Report ID:</label>
+                <input type="text" id="reportID" name="reportID" value="<?php echo htmlspecialchars($reportID); ?>" readonly required>
             </div>
             <div>
                 <label for="DLCode">DL Code:</label>
-                <input type="text" id="DLCode" name="DLCode" value="<?php echo htmlspecialchars($DLCode); ?>" readonly required>
+                <input type="text" id="DLCode" name="DLCode" value="<?php echo htmlspecialchars($history['DLCode']); ?>" readonly required>
             </div>
+
             <div>
-                <label for="noOfViolations">No. of Violation/s:</label>
-                <input type="number" id="noOfViolations" name="noOfViolations" value="<?php echo htmlspecialchars($noOfViolations); ?>" required>
+                <label for="violationID">Violation/s:</label>
+                <select id="violationID" name="violationID" required>
+                    <option value="" disabled selected>Select below</option>
+                    <option value="V001" <?php echo ($history['violationID'] == 'V001') ? 'selected' : ''; ?>>Smoke Belching</option>
+                    <option value="V002" <?php echo ($history['violationID'] == 'V002') ? 'selected' : ''; ?>>Driving While Intoxicated/Drugged</option>
+                    <option value="V003" <?php echo ($history['violationID'] == 'V003') ? 'selected' : ''; ?>>Disregarding Traffic Signs</option>
+                    <option value="V004" <?php echo ($history['violationID'] == 'V004') ? 'selected' : ''; ?>>Jalouses</option>
+                    <option value="V005" <?php echo ($history['violationID'] == 'V005') ? 'selected' : ''; ?>>Reckless Driving</option>
+                </select>
             </div>
             <div>
                 <label for="violationDate">Recent Date of Violation/s:</label>
-                <input type="date" id="violationDate" name="violationDate" value="<?php echo htmlspecialchars($recentViolationDate); ?>" required>
+                <input type="date" id="violationDate" name="violationDate" value="<?php echo htmlspecialchars($history['violationDate']); ?>" required>
             </div>  
         </div>
-        <button name ="submit" type="submit">Update History</button>
+        <button type="submit" name="update">Update History</button>
         <button onclick="window.location.href='history.php'">Cancel</button>
     </form>
 </body>

@@ -76,67 +76,73 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update'])) {
     <title>Update Owner Information</title>
 </head>
 <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #ffffff;
-        }
-        .container {
-            width: 50%;
-            margin: 10px 55px;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        form {
-            width: 100%;
-            margin: 20px auto;
-        }
-        h2 {
-            font-size: 45px;
-            margin-bottom: 20px;
-        }
-        label {
-            display: block;
-            margin-bottom: 5px;
-        }
-        input[type="text"],
-        input[type="date"],
-        input[type="number"],
-        input[type="tel"],
-        select {
-            width: 95%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        button {
-            padding: 10px 20px;
-            background-color: #28a745;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #218838;
-        }
-    </style>
+    body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background-color: #ffffff;
+    }
+    .container {
+        width: 40%;
+        align-items: center;
+        background-color: #fff;
+        padding: 25px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+    }
+    h2 {
+        font-size: 45px;
+        margin-bottom: 20px;
+    }
+    label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+    input[type="text"],
+    input[type="date"],
+    input[type="number"],
+    input[type="tel"] {
+        width: 97%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+    select {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+    button {
+        padding: 10px 20px;
+        background-color: #28a745;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    button:hover {
+        background-color: #218838;
+    }
+</style>
 <body>
     <div class="container">
-        <h2>Update Driver Information</h2>
+        <h2>Update Owner Information</h2>
         <form method="post">
             <input type="hidden" name="ownerID" value="<?php echo htmlspecialchars($owner['userID']); ?>">
             <label for="ownerName">Driver Name</label>
             <input type="text" name="ownerName" value="<?php echo htmlspecialchars($owner['userName']); ?>" required>
             <label for="ownerDateOfBirth">Date of Birth</label>
             <input type="date" name="ownerDateOfBirth" value="<?php echo htmlspecialchars($owner['dateOfBirth']); ?>" required>
+            <label for="ownerAddress">Address</label>
+            <input type="text" name="ownerAddress" value="<?php echo htmlspecialchars($owner['userAddress']); ?>" required>
             <label for="ownerSex">Sex</label>
             <select name="ownerSex" required>
                 <option value="" disabled>Select below</option>
@@ -165,12 +171,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update'])) {
             <input type="number" name="ownerWeight" value="<?php echo htmlspecialchars($owner['weightInKG']); ?>" required>
             <label for="ownerHeight">Height (cm)</label>
             <input type="number" name="ownerHeight" value="<?php echo htmlspecialchars($owner['heightInCM']); ?>" required>
-            <label for="ownerAddress">Address</label>
-            <input type="text" name="ownerAddress" value="<?php echo htmlspecialchars($owner['userAddress']); ?>" required>
-
-
-
-           <div class="button-container">
+            <div class="button-container">
                 <button type="submit" name="update">Update Owner</button>
                 <button type="button" onclick="window.location.href='owner.php'">Cancel</button>
             </div>

@@ -26,9 +26,9 @@
         }
 
         .button-container {
-            display: flex; /* Change from grid to flex */
+            display: flex; 
             flex-wrap: wrap;
-            justify-content: center; /* Center align the buttons */
+            justify-content: center; 
             gap: 2rem;
         }
 
@@ -93,11 +93,6 @@
             color: white;
         }
 
-        .button-container button.violation {
-            background-color: green;
-            color: white;
-        }
-
         .button-container button:hover {
             opacity: 0.8;
             transform: scale(0.9);
@@ -105,6 +100,10 @@
 
         .add-record-container button.history {
             background-color: #FF9800;
+            color: white;
+        }
+        .add-record-container button.violation {
+            background-color: #2F2963;
             color: white;
         }
 
@@ -119,7 +118,7 @@
         }
 
         .add-record-container button.fileReport {
-            background-color: #E40221;
+            background-color: #642CA9;
             color: white;
         }
 
@@ -154,12 +153,6 @@
             </button>
         </div>
         <div>
-            <button class="violation" onclick="window.location.href='violation.php'">
-                <i class='bx bxs-tachometer'></i>
-                <span>Violation Records</span>
-            </button>
-        </div>
-        <div>
             <button class="driver-license" onclick="window.location.href='driverLicense.php'">
                 <i class='bx bxs-id-card'></i>
                 <span>Driver License Records</sapn>
@@ -171,6 +164,12 @@
             <button class="history" onclick="window.location.href='history.php'">
                 <i class='bx bx-history'></i>
                 <span>History Records<span>
+            </button>
+        </div>
+        <div>
+            <button class="violation" onclick="window.location.href='violation.php'">
+                <i class='bx bxs-error-circle'></i>
+                <span>Violation Records</span>
             </button>
         </div>
         <div>
@@ -187,7 +186,7 @@
         </div>
         <div>
             <button class="fileReport" onclick="window.location.href='fileReport.php'">
-                <i class='bx bxs-file-plus'></i>
+                <i class='bx bxs-report'></i>
                 <span>File Report</span>
             </button>
         </div>

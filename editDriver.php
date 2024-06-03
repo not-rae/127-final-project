@@ -78,78 +78,75 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Update Driver Information</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #ffffff;
-        }
-        .container {
-            width: 50%;
-            margin: 10px 55px;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        form {
-            width: 100%;
-            margin: 20px auto;
-        }
-        h2 {
-            font-size: 45px;
-            margin-bottom: 20px;
-        }
-        label {
-            display: block;
-            margin-bottom: 5px;
-        }
-        input[type="text"],
-        input[type="date"],
-        input[type="number"],
-        input[type="tel"],
-        select {
-            width: 95%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        button {
-            padding: 10px 20px;
-            background-color: #28a745;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #218838;
-        }
-    </style>
 </head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background-color: #ffffff;
+    }
+    .container {
+        width: 40%;
+        align-items: center;
+        background-color: #fff;
+        padding: 25px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+    }
+    h2 {
+        font-size: 45px;
+        margin-bottom: 20px;
+    }
+    label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+    input[type="text"],
+    input[type="date"],
+    input[type="number"],
+    input[type="tel"] {
+        width: 97%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+    select {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+    button {
+        padding: 10px 20px;
+        background-color: #28a745;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    button:hover {
+        background-color: #218838;
+    }
+</style>
 <body>
     <div class="container">
         <h2>Update Driver Information</h2>
-
-        <form class = "container" method="post">
-        <div class = "flex-container">
-            <div>
+        <form method="post">
             <input type="hidden" name="driverID" value="<?php echo htmlspecialchars($driver['userID']); ?>">
-            </div>
-            <div>
             <label for="driverName">Driver Name</label>
             <input type="text" name="driverName" value="<?php echo htmlspecialchars($driver['userName']); ?>" required>
-            </div>
-            <div>
+            <label for="driverAddress">Address</label>
+            <input type="text" name="driverAddress" value="<?php echo htmlspecialchars($driver['userAddress']); ?>" required>
             <label for="driverDateOfBirth">Date of Birth</label>
             <input type="date" name="driverDateOfBirth" value="<?php echo htmlspecialchars($driver['dateOfBirth']); ?>" required>
-            </div>
-            <div>
             <label for="driverSex">Sex</label>
             <select name="driverSex" required>
                 <option value="" disabled>Select below</option>
@@ -157,8 +154,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update'])) {
                 <option value="F" <?php echo ($driver['sex'] == 'F') ? 'selected' : ''; ?>>Female</option>
                 <option value="UKWN" <?php echo ($driver['sex'] == 'UKWN') ? 'selected' : ''; ?>>Unknown</option>
             </select>
-            </div>
-            <div>
             <label for="driverBloodType">Blood Type</label>
             <select name="driverBloodType" required>
                 <option value="" disabled>Select below</option>
@@ -172,36 +167,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update'])) {
                 <option value="B-" <?php echo ($driver['bloodType'] == 'B-') ? 'selected' : ''; ?>>B-</option>
                 <option value="UKNWN" <?php echo ($driver['bloodType'] == 'UKNWN') ? 'selected' : ''; ?>>Unknown</option>
             </select>
-            </div>
-            <div>
             <label for="driverContact">Contact Number</label>
             <input type="tel" name="driverContact" value="<?php echo htmlspecialchars($driver['contactNumber']); ?>" required>
-            </div>
-            <div>
             <label for="driverNationality">Nationality</label>
             <input type="text" name="driverNationality" value="<?php echo htmlspecialchars($driver['nationality']); ?>" required>
-            </div>
-            <div>
             <label for="driverWeight">Weight (kg)</label>
             <input type="number" name="driverWeight" value="<?php echo htmlspecialchars($driver['weightInKG']); ?>" required>
-            </div>
-            <div>
             <label for="driverHeight">Height (cm)</label>
             <input type="number" name="driverHeight" value="<?php echo htmlspecialchars($driver['heightInCM']); ?>" required>
-            </div>
-            <div>
-            <label for="driverAddress">Address</label>
-            <input type="text" name="driverAddress" value="<?php echo htmlspecialchars($driver['userAddress']); ?>" required>
-            </div>
-
-
-            </div>
-           <div class="button-container">
+            <div class="button-container">
                 <button type="submit" name="update">Update Driver</button>
                 <button type="button" onclick="window.location.href='driver.php'">Cancel</button>
-            </div>
-       
+            </div> 
         </form>
-
+    </div>
 </body>
 </html>

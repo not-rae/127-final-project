@@ -11,23 +11,23 @@
     // }
 
     // create LTO table
-    // $sql_LTO = "CREATE TABLE LTO(
-    //     agencyCode VARCHAR(4) NOT NULL UNIQUE PRIMARY KEY,
-    //     agencyName VARCHAR(100) NOT NULL,
-    //     LTOaddress VARCHAR(1000) NOT NULL,
-    //     emailAddress VARCHAR(60),
-    //     contactNumber VARCHAR(20) UNIQUE, 
-    //     startingHour VARCHAR(20) NOT NULL,
-    //     endingHour VARCHAR(20) NOT NULL,
-    //     noOfDriversRegistered BIGINT UNSIGNED
-    // )";
+    $sql_LTO = "CREATE TABLE LTO(
+        agencyCode VARCHAR(4) NOT NULL UNIQUE PRIMARY KEY,
+        agencyName VARCHAR(100) NOT NULL,
+        LTOaddress VARCHAR(1000) NOT NULL,
+        emailAddress VARCHAR(60),
+        contactNumber VARCHAR(20) UNIQUE, 
+        startingHour VARCHAR(20) NOT NULL,
+        endingHour VARCHAR(20) NOT NULL,
+        noOfDriversRegistered BIGINT UNSIGNED
+    )";
 
-    // if ($conn->query($sql_LTO) === TRUE) {
-    //     echo "OKS LTO ";
+    if ($conn->query($sql_LTO) === TRUE) {
+        echo "OKS LTO ";
         
-    // } else {
-    //     echo "Error creating database: " . $conn->error;
-    // }
+    } else {
+        echo "Error creating database: " . $conn->error;
+    }
 
         
     // create user table

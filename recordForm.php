@@ -5,15 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DriVerify: Add Record</title>
     <style>
-        /* Body style */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
             background-color: #fff;
+            color: #000;
         }
-
-        /* Container style */
+        h2 {
+            font-size: 45px;
+            margin-bottom: 20px;
+        }
         .add-record-container {
             width: 100%;
             margin: 10px 55px;
@@ -22,33 +24,22 @@
             border-radius: 5px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-
-        /* Form style */
         .add-data-form {
-            width: 100%;
+            width: 70%;
             margin: 20px auto;
-            display: flex; /* Set display to flex */
+            display: flex; 
             flex-wrap: wrap;
         }
-
         .flex-container {
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;
         }
-
-        /* Title style */
-        h2 {
-            color: #333;
-            margin-bottom: 15px;
-        }
-
-        /* Label style */
         label {
             display: block;
             margin-bottom: 5px;
+            font-weight: bold;
         }
-
         #userName,
         #driverName,
         #userAddress,
@@ -60,8 +51,6 @@
             border: 1px solid #ccc;
             border-radius: 5px;
         }
-
-        /* Input style */
         input[type="text"],
         input[type="tel"] {
             width: 83%;
@@ -70,7 +59,6 @@
             border: 1px solid #ccc;
             border-radius: 5px;
         }
-
         select {
             width: 100%;
             padding: 10px;
@@ -78,7 +66,6 @@
             border: 1px solid #ccc;
             border-radius: 5px;
         }
-
         input[type="date"] {
             width: 80%;
             padding: 10px;
@@ -86,7 +73,6 @@
             border: 1px solid #ccc;
             border-radius: 5px;
         }
-
         input[type="number"] {
             width: 83%;
             padding: 10px;
@@ -94,9 +80,6 @@
             border: 1px solid #ccc;
             border-radius: 5px;
         }
-
-        /* Button style */
-        
         button {
             padding: 15px 23px;
             background-color: #007bff;
@@ -107,16 +90,12 @@
             transition: background-color 0.3s;
             margin: 1rem 0 0 1rem; /* 1rem top, 1rem left */
         }
-
         button:hover {
             background-color: #0056b3;
         }
-
         .button-container {
             width: 100%;
         }
-
-        /* Submit button style */
         input[type="submit"] {
             font-size: 18px;
             padding: 18px 40px;
@@ -129,23 +108,36 @@
             margin: 30px auto;
             display: block;
         }
-
         input[type="submit"]:hover {
             background-color: #218838;
         }
-
-        /* Hidden section style */
         .hidden-section {
-            display: none;
             width: 100%;
-            margin: 10px 0;
-            background-color: #f9f9f9;
+            margin: 10px 55px;
             padding: 20px;
             border-radius: 5px;
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+        }
+        #driverLicense {
+            background-color: #449DD1;
+        }
+        #vehicleSection {
+            background-color: #FFD166;
+        }
+        .radio-container {
+            display: flex;
+            flex-direction: column;
+        }
+        .radio-group {
+            display: flex;
+            align-items: center;
+        }
+        .radio-group label {
+            margin-right: 10px;
         }
     </style>
-    <script>
+<script>
         function toggleRequiredFields(sectionId, isRequired) {
             var section = document.getElementById(sectionId);
             var inputs = section.querySelectorAll('input, select');
@@ -185,7 +177,7 @@
         window.onload = function() {
             showSection();
         };
-    </script>
+</script>
 </head>
 <body>
     <div class="button-container">
@@ -205,14 +197,16 @@
                     <label for="dateOfBirth">Date of Birth:</label>
                     <input type="date" id="dateOfBirth" name="dateOfBirth" required>
                 </div>
-                <div>
-                    <label for="sex">Sex:</label><br>
-                    <input type="radio" id="male" name="sex" value="M">
-                    <label for="male">Male</label><br>
-                    <input type="radio" id="female" name="sex" value="F">
-                    <label for="female">Female</label><br>
-                    <input type="radio" id="unknown" name="sex" value="UKWN">
-                    <label for="unknown">Unknown</label>
+                <div class="radio-container">
+                    <label for="sex">Sex:</label>
+                    <div class="radio-group">
+                        <input type="radio" id="male" name="sex" value="M">
+                        <label for="male">Male</label><br>
+                        <input type="radio" id="female" name="sex" value="F">
+                        <label for="female">Female</label><br>
+                        <input type="radio" id="unknown" name="sex" value="UKWN">
+                        <label for="unknown">Unknown</label>
+                    </div>
                 </div>
                 <div>
                     <label for="bloodType">Blood Type:</label>
@@ -247,14 +241,16 @@
                     <label for="height">Height (cm):</label>
                     <input type="number" id="height" name="height" required>
                 </div>
-                <div>
-                    <label for="userRole">Role:</label><br>
-                    <input type="radio" id="driver" name="userRole" value="Driver" onclick="showSection()">
-                    <label for="driver">Driver</label><br>
-                    <input type="radio" id="owner" name="userRole" value="Owner" onclick="showSection()">
-                    <label for="owner">Owner</label><br>
-                    <input type="radio" id="both" name="userRole" value="Both" onclick="showSection()">
-                    <label for="both">Owner & Driver</label>
+                <div class="radio-container">
+                    <label for="userRole">Role:</label>
+                    <div class="radio-group">
+                        <input type="radio" id="driver" name="userRole" value="Driver" onclick="showSection()">
+                        <label for="driver">Driver</label><br>
+                        <input type="radio" id="owner" name="userRole" value="Owner" onclick="showSection()">
+                        <label for="owner">Owner</label><br>
+                        <input type="radio" id="both" name="userRole" value="Both" onclick="showSection()">
+                        <label for="both">Owner & Driver</label>
+                    </div>
                 </div>
             </div>
         </div>
@@ -334,9 +330,11 @@
         <!-- Vehicle Section -->
         <div id="vehicleSection" class="hidden-section">
             <h2>Vehicle Information</h2>
-            <label for="vehiclePlateNumber">Plate Number:</label>
-            <input type="text" id="vehiclePlateNumber" name="vehiclePlateNumber">
             <div class="flex-container">
+                <div>
+                    <label for="vehiclePlateNumber">Plate Number:</label>
+                    <input type="text" id="vehiclePlateNumber" name="vehiclePlateNumber">
+                </div>
                 <div>
                     <label for="registrationDateV">Registration Date:</label>
                     <input type="date" id="registrationDateV" name="registrationDateV">

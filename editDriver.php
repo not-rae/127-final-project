@@ -17,15 +17,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $driverHeight = isset($_POST["driverHeight"]) ? trim($_POST["driverHeight"]) : '';
     $driverAddress = isset($_POST["driverAddress"]) ? trim($_POST["driverAddress"]) : '';
 
-    // Validate that all required fields are filled out
-    if ($driverID != "" && $driverName != "" && $driverDOB != "" && $driverSex != "" && $driverBloodType != "" && $driverContact != "" && $driverNationality != "" && $driverWeight != "" && $driverHeight != "" && $driverAddress != "") {
-
         // Start transaction
         $conn->begin_transaction();
 
         // Update carDriver table
-        $updateDriver = "UPDATE carDriver SET 
-            driverName = '$driverName', 
+        $updateDriver = "UPDATE User SET 
+            userName = '$driverName', 
             dateOfBirth = '$driverDOB', 
             sex = '$driverSex', 
             bloodType = '$driverBloodType', 
@@ -33,15 +30,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             nationality = '$driverNationality', 
             heightInCM = '$driverHeight', 
             weightInKG = '$driverWeight', 
-            driverAddress = '$driverAddress'
-            WHERE driverID = '$driverID'";
+            userAddress = '$driverAddress'
+            WHERE userID = '$driverID'";
 
         // Execute the query
         // Update driverLicense table
         if ($conn->query($updateDriver) === TRUE) {
-            $updateDriverDL = "UPDATE driverlicense SET 
-                driverNameDL = '$driverName'
-                WHERE driverID = '$driverID'";
+            $updateDriverDL = "UPDATE driverLicense SET 
+                driverName = '$driverName'
+                WHERE userID = '$driverID'";
 
             // Execute the query
             if ($conn->query($updateDriverDL) === TRUE) {
@@ -60,41 +57,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         // Execute the query
-        // update vehicle records
-        if ($conn->query($updateDriver) === TRUE) {
-            $updateDriverV = "UPDATE Vehicle SET 
-                driverNameV = '$driverName'
-                WHERE driverID = '$driverID'";
-
-            // Execute the query
-            if ($conn->query($updateDriverV) === TRUE) {
-                // Commit the transaction
-                $conn->commit();
-                echo "Driver information updated successfully.";
-            } else {
-                // Rollback the transaction if there was an error
-                $conn->rollback();
-                echo "Error updating driverlicense information: " . $conn->error;
-            }
-        } else {
-            // Rollback the transaction if there was an error
-            $conn->rollback();
-            echo "Error updating carDriver information: " . $conn->error;
-        }
-
         // update histoy records
         if ($conn->query($updateDriver) === TRUE) {
             $updateDriverH = "UPDATE history SET 
                 driverNameH = '$driverName'
-                WHERE driverID = '$driverID'";
+                WHERE userID = '$driverID'";
 
             // Execute the query
             if ($conn->query($updateDriverH) === TRUE) {
                 // Commit the transaction
                 $conn->commit();
                 echo "Driver information updated successfully.";
-                header("Location: driver.php");
-                exit;
+                // header("Location: driver.php");
+                // exit;
             } else {
                 // Rollback the transaction if there was an error
                 $conn->rollback();
@@ -105,11 +80,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $conn->rollback();
             echo "Error updating carDriver information: " . $conn->error;
         }
-
-
-    }
-
-    $conn->close();
 
 } else {
     echo "Error: Invalid request method.";
@@ -267,11 +237,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <div class="flex-container">
             <div>
                 <label for="driverDateOfBirth">Date of Birth:</label>
-                <input type="date" id="driverDateOfBirth" name="driverDateOfBirth"  required>
+                <input type="date" id="driverDateOfBirth" name="driverDateOfBirth" value="<?php echo htmlspecialchars($driverDOB); ?>" required>
             </div>
             <div>
                 <label for="driverSex">Sex:</label>
-                <select id="driverSex" name="driverSex"  required>
+                <select id="driverSex" name="driverSex" required>
                 <option value="" disabled>Select below</option>
                     <option value="M" <?php echo ($driverSex == 'M') ? 'selected' : ''; ?>>Male</option>
                     <option value="F" <?php echo ($driverSex == 'F') ? 'selected' : ''; ?>>Female</option>
@@ -279,7 +249,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
             <div>
                 <label for="driverBloodType">Blood Type:</label>
-                <select id="driverBloodType" name="driverBloodType"  required>
+                <select id="driverBloodType" name="driverBloodType" required>
                 <option value="" disabled>Select below</option>
                     <option value="AB+" <?php echo ($driverBloodType == 'AB+') ? 'selected' : ''; ?>>AB+</option>
                     <option value="AB-" <?php echo ($driverBloodType == 'AB-') ? 'selected' : ''; ?>>AB-</option>

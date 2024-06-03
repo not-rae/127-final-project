@@ -92,8 +92,11 @@
                             "<input type='hidden' name='driverID' value='".$rowtDriverLicense['userID']."'>" .
                             "<input type='hidden' name='driverName' value='".$rowtDriverLicense['driverName']."'>" .
                             "<input type='hidden' name='licenseNumber' value='".$rowtDriverLicense['licenseNumber']."'>" .
+                            "<input type='hidden' name='expirationDate' value='".$rowtDriverLicense['expirationDate']."'>" .
+                            "<input type='hidden' name='issueDate' value='".$rowtDriverLicense['issueDate']."'>" .
                             "<input type='hidden' name='agencyCode' value='".$rowtDriverLicense['agencyCode']."'>" .
-                        
+                            "<input type='hidden' name='dlCode' value='".$rowtDriverLicense['DLCode']."'>" .     
+                            "<input type='hidden' name='conditionCode' value='".$rowtDriverLicense['conditionCode']."'>" .                   
                             "<button type='submit'>Edit</button>" .
                         "</form>" .
                         "</td>" .

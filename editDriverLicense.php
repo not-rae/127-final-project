@@ -17,8 +17,8 @@
 
             // Update driverLicense table
             $updateDL = "UPDATE driverLicense SET 
-                driverID = '$driverID', 
-                driverNameDL = '$driverName', 
+                userID = '$driverID', 
+                driverName = '$driverName', 
                 agencyCode = '$agencyCode', 
                 issueDate = '$issueDate', 
                 expirationDate = '$expirationDate', 
@@ -34,7 +34,7 @@
                 if ($conn->query($updateHistoryDetail) === TRUE) {
                     $conn->commit();
                     echo "Driver information updated successfully.";
-                    header('Location: driverLicense.php');
+                    // header('Location: driverLicense.php');
                 } else {
                     $conn->rollback();
                     echo "Error updating information: " . $conn->error;
@@ -196,11 +196,11 @@
             </div>
             <div>
                 <label for="issueDate">Issue Date:</label>
-                <input type="date" id="issueDate" name="issueDate" required>
+                <input type="date" id="issueDate" name="issueDate" value="<?php echo htmlspecialchars($issueDate); ?>" required>
             </div>
             <div>
                 <label for="expirationDate">Expiration Date:</label>
-                <input type="date" id="expirationDate" name="expirationDate" required>
+                <input type="date" id="expirationDate" name="expirationDate" value="<?php echo htmlspecialchars($expirationDate); ?>" required>
             </div>
             <div>
             <label for="conditionCode">Condition Code:</label>
@@ -231,7 +231,7 @@
             </div>
         </div>
         <button name ="submit" type="submit">Update Driver License</button>
-        <button onclick="window.location.href='driverLicense.php'">Cancel</button>
+        <button  type="button" onclick="window.location.href='driverLicense.php'">Cancel</button>
     </form>
 </body>
 </html>

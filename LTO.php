@@ -1,10 +1,3 @@
-<!-- 
-    This is responsible for showing the values from the lto table
-
--->
-
-
-
 <!DOCTYPE html>
 <html>
 <head>

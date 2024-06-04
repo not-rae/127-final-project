@@ -1,8 +1,3 @@
-<!-- 
-    This is responsible for showing the values from the history table
-
--->
-
 <!DOCTYPE html>
 <html>
 <head>

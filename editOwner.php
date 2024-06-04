@@ -50,7 +50,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update'])) {
                 ownerNameH = '$ownerName'
                 WHERE userID = '$ownerID'";
 
-            if ($conn->query($updateOwnerV) === TRUE && $conn->query($updateOwnerH) === TRUE) {
+            $updateOwnerDL = "UPDATE driverLicense SET 
+            driverName = '$ownerName'
+            WHERE userID = '$ownerID'";
+
+
+            if ($conn->query($updateOwnerV) === TRUE && $conn->query($updateOwnerH) === TRUE && $conn->query($updateOwnerDL)) {
                 $conn->commit();
                 header("Location: owner.php");
                 exit();

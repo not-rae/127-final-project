@@ -1,8 +1,3 @@
-<!-- 
-    This is responsible for deleting all the values that matches with 
-    the user id.
-    
- -->
 
 <?php
 include 'DBConnector.php';
@@ -15,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $conn->begin_transaction();
 
-    // Error-catch:
+
     try {
         if ($roleResult->num_rows > 0) {
             $row = $roleResult->fetch_assoc();

@@ -4,11 +4,16 @@ include 'DBConnector.php';
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $driverID = $_POST['driverID'];
 
+
     $sql = "SELECT * FROM User WHERE userID = '$driverID'";
     $result = $conn->query($sql);
 
-    if ($result->num_rows > 0) {
+    $sql1 = "SELECT licenseNumber FROM driverLicense WHERE userID = '$driverID'";
+    $result1 = $conn->query($sql1);
+
+    if ($result->num_rows > 0 && $result1->num_rows > 0 )  {
         $driver = $result->fetch_assoc();
+        $license = $result1->fetch_assoc();
     } else {
         echo "Driver not found.";
         exit;
@@ -49,7 +54,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update'])) {
 
             $updateDriverH = "UPDATE history SET 
                 driverNameH = '$driverName'
-                WHERE userID = '$driverID'";
+                WHERE licenseNumber = '$license[licenseNumber]'";
 
             if ($conn->query($updateDriverDL) === TRUE && $conn->query($updateDriverH) === TRUE) {
                 $conn->commit();

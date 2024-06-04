@@ -71,17 +71,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update'])) {
 } 
 ?>
 
-<!-- 
-    The Form which is used to update the driverLicense values.
-
-    All informations are already displayed in the box except for 
-    issue date, expiration date, conditon code, and DL code.
-    
-    All values cannot be updated except for the issue date, 
-    expiration date, conditon code, and DL code.
-
- -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>

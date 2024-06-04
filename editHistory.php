@@ -62,16 +62,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update'])) {
 }
 ?>
 
-<!-- 
-    The Form which is used to update the history values.
-
-    All informations are already displayed in the box except for 
-    recent violation date
-    
-    All values cannot be updated except for the number of violations
-    and recent violation date. 
-
- -->
 
 <!DOCTYPE html>
 <html lang="en">

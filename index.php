@@ -33,9 +33,9 @@
         }
 
         .add-record-container {
-            display: flex; /* Change from grid to flex */
-            flex-wrap: wrap; /* Allow wrapping */
-            justify-content: center; /* Center align the buttons */
+            display: flex; 
+            flex-wrap: wrap;
+            justify-content: center; 
             gap: 2rem;
         }
         
@@ -48,20 +48,20 @@
             border-radius: 5px;
             transition: background-color 0.3s;
             transition: transform 0.3s, opacity 0.3s;
-            flex-direction: column; /* Display icon and text in a column */
-            align-items: center; /* Center align icon and text horizontally */
+            flex-direction: column; 
+            align-items: center;
             display: flex;
         }
 
         .add-record-container button .bx {
-            font-size: 40px; /* Adjust the icon size */
-            margin-bottom: 10px; /* Add space between icon and text */
+            font-size: 40px; 
+            margin-bottom: 10px; 
         }
         
         .button-container button {
             display: flex;
-            flex-direction: column; /* Display icon and text in a column */
-            align-items: center; /* Center align icon and text horizontally */
+            flex-direction: column; 
+            align-items: center; 
             padding: 20px;
             font-size: 16px;
             cursor: pointer;
@@ -72,8 +72,8 @@
         }
 
         .button-container button .bx {
-            font-size: 40px; /* Adjust the icon size */
-            margin-bottom: 10px; /* Add space between icon and text */
+            font-size: 40px;
+            margin-bottom: 10px; 
         }
 
         .button-container button.vehicle {
